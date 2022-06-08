@@ -40,6 +40,18 @@
         <servlet-name>ServiceManagementController</servlet-name>
         <servlet-class>controller.ServiceManagementController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewAllAccountController</servlet-name>
+        <servlet-class>controller.ViewAllAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateAccountController</servlet-name>
+        <servlet-class>controller.UpdateAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddAccountController</servlet-name>
+        <servlet-class>controller.AddAccountController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -67,6 +79,18 @@
     <servlet-mapping>
         <servlet-name>ServiceManagementController</servlet-name>
         <url-pattern>/ServiceManagementController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewAllAccountController</servlet-name>
+        <url-pattern>/ViewAllAccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateAccountController</servlet-name>
+        <url-pattern>/UpdateAccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddAccountController</servlet-name>
+        <url-pattern>/AddAccountController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
