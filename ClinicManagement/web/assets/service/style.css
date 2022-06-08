@@ -1,0 +1,178 @@
+#service-container {
+    margin: 0 0;
+    max-width: 100%;
+    padding: 0;
+}
+
+#add-btn {
+    background-color: #fff;
+    border: none;
+    box-shadow: none !important;
+}
+
+.btn-only-ic {
+    background-color: #fff !important;
+    border-color: transparent;
+    padding: 0 0;
+    max-height: 20px;
+}
+
+/* Header */
+.navbar {
+    border: 1px solid #adb5bd;
+    background-color: #fff !important;
+}
+
+.nav-link {
+    border-radius: 5px;
+    border: 1px solid #ebebeb;
+    margin-right: 10px;
+    transition: all 0.3s ease-in-out;
+    font-weight: bold;
+    padding: .75rem 1rem;
+    max-width: 150px;
+    text-align: center;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background-color: #8AB9FF;
+}
+
+.avatar {
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    border-radius: 50%;
+}
+
+.avatar > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Title */
+#title {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+/* Wrapper */
+.wrapper {
+    width: 100vh;
+    margin: auto;
+}
+
+#table-services > * > * > th{
+    text-align: center;
+}
+
+tr > td.service-desc {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 508px;
+}
+
+td > .action {
+    text-align: center;
+}
+
+td > .action > i {
+    cursor: pointer;
+}
+
+/* Pagination */
+.pagi-wrapper {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.non-block {
+    width: 20px;
+    height: 20px;
+}
+
+/* Modal */
+.modal-service {
+    max-width: 850px;
+}
+
+.modal-delete {
+    max-width: 300px;
+}
+
+.modal-doctor {
+    max-width: 373px;
+}
+
+.btn-close {
+    margin: 0 0 !important;
+}
+
+.desc-text {
+    overflow-wrap: anywhere;
+}
+
+.list-doctors {
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    height: 224px;
+    width: 340px;
+    padding: 10px;
+    margin-bottom: 50px;
+}
+
+.list-doctors-scroll {
+    height: 202px;
+    overflow-y: scroll;
+}
+
+.doctor-card {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #ced4da;
+    height: 62px;
+}   
+
+.doctor-card:not(:last-child) {
+    margin-bottom: 8px;
+}
+
+.doctor-card > .img-cover {
+    min-width: 60px;
+    height: 100%;
+}
+
+.doctor-card > .img-cover > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.doctor-card  > .btn-checked {
+    color: #36AE36;
+    background-color: #fff !important;
+    border-color: transparent;
+    padding: 0 0;
+    width: 29px;
+    font-size: 25px;
+}
+
+.btn-checked > i {
+    display: none;
+}
+
+.doctor-card.active {
+    border-color: #36AE36;
+}
+
+.doctor-card.active > .btn-checked > i{
+    display: block;
+}

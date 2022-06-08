@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/ADMIN/OneDrive/Desktop/ClinicSystemaaaa/ClinicManagement/src/java/controller/DeleteAccountController.java</file>
+            <file>file:/C:/Users/ADMIN/OneDrive/Desktop/ClinicSystemaaaa/ClinicManagement/web/jsp/viewAllAccount.jsp</file>
+            <file>file:/C:/Users/ADMIN/OneDrive/Desktop/ClinicSystemaaaa/ClinicManagement/src/java/controller/HomeController.java</file>
+            <file>file:/C:/Users/ADMIN/OneDrive/Desktop/ClinicSystemaaaa/ClinicManagement/src/java/controller/ForgotPasswordController.java</file>
+            <file>file:/C:/Users/ADMIN/OneDrive/Desktop/ClinicSystemaaaa/ClinicManagement/src/java/dao/AccountDAO.java</file>
+            <file>file:/C:/Users/ADMIN/OneDrive/Desktop/ClinicSystemaaaa/ClinicManagement/src/java/util/Utils.java</file>
+            <file>file:/C:/Users/ADMIN/OneDrive/Desktop/ClinicSystemaaaa/ClinicManagement/src/java/filter/PermissionFilter.java</file>
+            <file>file:/C:/Users/ADMIN/OneDrive/Desktop/ClinicSystemaaaa/ClinicManagement/src/java/dao/impl/AccountDAOImpl.java</file>
+            <file>file:/C:/Users/ADMIN/OneDrive/Desktop/ClinicSystemaaaa/ClinicManagement/src/java/config/Configuration.java</file>
+        </group>
+    </open-files>
+</project-private>

@@ -1,0 +1,52 @@
+.main{
+    min-height: calc(100vh - 377px);
+}
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+.header a.nav-link {
+    border: 1px solid #fff;
+    border-radius: 5px;
+    margin: 7px;
+    padding: 1px;
+}
+.main .nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+    background-color: #198754;
+}
+.main .nav-link{
+    color: #333;
+}
+.main .page-item.active .page-link{
+    background-color: #198754;
+    border-color: #198754;
+}
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+#gallerydetail .carousel-indicators {
+    position: initial;
+    margin: 0;
+    overflow: hidden;
+    overflow-x: auto;
+}
+#gallerydetail .carousel-indicators [data-bs-target] {
+    width: 100px;
+    height: auto
+}
+#gallerydetail .carousel-control-next, .carousel-control-prev{
+    bottom: 77px;
+}
+/* P0064 */
+.login-card {
+    border-top: 4px solid #198754;
+}
+.active a{
+    color: #FFF !important;
+    background-color: #000FFF !important;
+}
