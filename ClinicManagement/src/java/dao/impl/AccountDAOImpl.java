@@ -1,12 +1,4 @@
-/*
- * Copyright(C) 2022, FPT University
- * CMS
- * CLINIC MANAGEMENT SYSTEM
- *
- * Record of change:
- * DATE            Version          AUTHOR           DESCRIPTION
- * 2022-02-08      1.0              HuongHTT         First Implement 
- */
+
 package dao.impl;
 
 import context.DBContext;
@@ -343,13 +335,14 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
             if(rs.next()){
                 Accounts a=new Accounts();
                 a.setId(rs.getInt("ID"));
-                a.setEmail(rs.getString("Email"));
                 a.setFirstname(rs.getString("FirstName"));
                 a.setLastname(rs.getString("LastName"));
                 a.setDob(rs.getDate("DoB"));
                 a.setGender(rs.getBoolean("Gender"));
                 a.setPhone(rs.getString("Phone"));
                 a.setUsername(rs.getString("UserName"));
+                a.setEmail(rs.getString("Email"));
+                a.setPassword("Password");
                 a.setStreet(rs.getString("Street"));
                 a.setCity(rs.getString("City"));
                 a.setCountry(rs.getString("Country"));
@@ -381,5 +374,32 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
             }
         }
         return null;
+    }
+
+    @Override
+    public void updatePassword(String username, String password) {
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try {
+            connecion = getConnection();
+            // Get data
+            preparedStatement = connecion.prepareStatement("UPDATE [dbo].[Accounts]\n"
+                    + "   SET \n"
+                    + "      [Password] = ?\n"
+                    + "      \n"
+                    + " WHERE UserName = ?");
+
+            preparedStatement.setString(1, password);
+            preparedStatement.setString(2, username);
+
+            preparedStatement.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
     }
 }
