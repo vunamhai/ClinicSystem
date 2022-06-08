@@ -13,6 +13,7 @@ package dao;
 
 import entity.Account;
 import entity.Account1;
+import entity.Accounts;
 import java.util.List;
 
 /**
@@ -26,5 +27,11 @@ public interface AccountDAO {
 
     Account1 login(String username, String password);
     void createAccount(Account account);
-
+    public List<Accounts> getAllAccounts();
+    public void addAccounts(Accounts a);
+    public void deleteAccounts(int id);
+    public void updateAccounts(Accounts a);
+    public Accounts getAccountById(int id);
+    public Accounts getAccountByUsername(String username);
+    public Accounts getAccountByEmail(String email);
 }
