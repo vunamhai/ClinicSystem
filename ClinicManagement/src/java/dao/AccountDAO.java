@@ -31,6 +31,7 @@ public interface AccountDAO {
     public void addAccounts(Accounts a);
     public void deleteAccounts(int id);
     public void updateAccounts(Accounts a);
+    void updatePassword(String username, String password);
     public Accounts getAccountById(int id);
     public Accounts getAccountByUsername(String username);
     public Accounts getAccountByEmail(String email);
