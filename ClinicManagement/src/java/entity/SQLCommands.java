@@ -17,4 +17,5 @@ public class SQLCommands {
     public static String GET_ACCOUNT_BY_USERNAME="select * from Accounts where UserName= ?";
     public static String UPDATE_ACCOUNT_BY_ID="update Accounts set UserName=?, FirstName=?, LastName=?, Email=?, Street=?, City=?, Country=?, Phone=?, DoB=?, Gender=? where ID=?";
     public static String ADD_ACCOUNT="insert into Accounts(UserName,FirstName,LastName,Email,Street,City,Country,Phone,DoB,Gender,[Password]) values (?,?,?,?,?,?,?,?,?,?,?)";
+    public static String UPDATE_PASSWORD_BY_ID="update Accounts set [Password]=? where ID=?";
 }

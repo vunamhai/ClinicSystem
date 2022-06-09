@@ -60,6 +60,10 @@
         <servlet-name>AddServiceController</servlet-name>
         <servlet-class>controller.AddServiceController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <servlet-class>controller.ChangePasswordController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -107,6 +111,10 @@
     <servlet-mapping>
         <servlet-name>AddServiceController</servlet-name>
         <url-pattern>/AddServiceController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <url-pattern>/ChangePasswordController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
