@@ -5,7 +5,7 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-08     1.0                 TrangCT          Service  Implement
+ * 2022-05-26     1.0                 UYENNP          Service  Implement
  */
 package entity;
 
@@ -15,9 +15,9 @@ package entity;
  * <p>
  *
  *
- * @author TrangCT
+ * @author UYENNP
  * @version 1.0
- * @since 2022-02-08
+ * @since 2022-05-26
  */
 public class Service {
 
@@ -33,9 +33,20 @@ public class Service {
     public Service() {
     }
 
+    public Service(int serviceId, String serviceName, String serviceDescription) {
+        this.serviceId = serviceId;
+        this.serviceName = serviceName;
+        this.serviceDescription = serviceDescription;
+    }
+
     public Service(int serviceId, String serviceName) {
         this.serviceId = serviceId;
         this.serviceName = serviceName;
+    }
+
+    public Service(String serviceName, String serviceDescription) {
+        this.serviceName = serviceName;
+        this.serviceDescription = serviceDescription;
     }
 
     public Service(String serviceName) {
