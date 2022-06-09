@@ -5,7 +5,7 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-08      1.0                 tungnt           First Implement 
+ * 2022-05-26      1.0                 Nam Ngo           First Implement 
  */
 package context;
 
@@ -21,7 +21,7 @@ import javax.naming.NamingException;
 
 /**
  *
- * @author Thanh Tung
+ * @author Nam Ngo
  */
 public class DBContext {
 
