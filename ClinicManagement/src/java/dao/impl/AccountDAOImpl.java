@@ -264,7 +264,57 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
 
     @Override
     public Accounts getAccountById(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       DBContext db=new DBContext();
+        Connection conn= null;
+        PreparedStatement pre= null;
+        ResultSet rs = null;
+        try {
+            conn=db.getConnection();
+            pre=conn.prepareStatement(SQLCommands.GET_ACCOUNT_BY_ID);
+            pre.setInt(1, id);
+            rs=pre.executeQuery();
+            if(rs.next()){
+                Accounts a=new Accounts();
+                a.setId(rs.getInt("ID"));
+                a.setEmail(rs.getString("Email"));
+                a.setFirstname(rs.getString("FirstName"));
+                a.setLastname(rs.getString("LastName"));
+                a.setDob(rs.getDate("DoB"));
+                a.setGender(rs.getBoolean("Gender"));
+                a.setPhone(rs.getString("Phone"));
+                a.setUsername(rs.getString("UserName"));
+                a.setPassword(rs.getString("Password"));
+                a.setStreet(rs.getString("Street"));
+                a.setCity(rs.getString("City"));
+                a.setCountry(rs.getString("Country"));
+                return a;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(rs!=null){
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(pre!=null){
+                try {
+                    pre.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(conn!=null){
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return null;
     }
 
     @Override
@@ -401,5 +451,37 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
             closePreparedStatement(preparedStatement);
             closeConnection(connecion);
         }
+    }
+
+    public int updatePasswordById(int id, String pass) {
+       DBContext db=new DBContext();
+        Connection conn= null;
+        PreparedStatement pre= null;
+        try {
+            conn=db.getConnection();
+            pre=conn.prepareStatement(SQLCommands.UPDATE_PASSWORD_BY_ID);
+            pre.setString(1, pass);
+            pre.setInt(2, id);
+            return pre.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(pre!=null){
+                try {
+                    pre.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(conn!=null){
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return 0;
     }
 }
