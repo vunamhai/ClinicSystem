@@ -85,7 +85,8 @@ public class UpdateAccountController extends HttpServlet {
         if(update){
             ad.updateAccounts(a);
         }
-        response.sendRedirect("ViewAllAccountController");
+        int page= Integer.parseInt(request.getParameter("page"));
+        response.sendRedirect("ViewAllAccountController?page="+page);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

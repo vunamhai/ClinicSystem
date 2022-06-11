@@ -217,6 +217,7 @@
                     <form action="UpdateAccountController" method="POST">
                         <div hidden>
                             <input name="id" value="${a.id}">
+                            <input name="page" value="${currentPage}">
                         </div>
                         <div class="modal-content">
                             <div class="modal-header">
