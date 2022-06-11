@@ -484,4 +484,64 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
         }
         return 0;
     }
+
+    @Override
+    public List<Accounts> getAccountsByPage(int page, int size) {
+        DBContext db=new DBContext();
+        Connection conn= null;
+        PreparedStatement pre= null;
+        ResultSet rs = null;
+        try {
+            List<Accounts> accountsList= new ArrayList<>();
+            conn=db.getConnection();
+            pre=conn.prepareStatement(SQLCommands.GET_ALL_ACCOUNTS_BY_PAGE);
+            pre.setInt(1, page);
+            pre.setInt(2, size);
+            pre.setInt(3, size);
+            pre.setInt(4, page);
+            pre.setInt(5, size);
+            rs=pre.executeQuery();
+            while(rs.next()){
+                Accounts a=new Accounts();
+                a.setId(rs.getInt("ID"));
+                a.setEmail(rs.getString("Email"));
+                a.setFirstname(rs.getString("FirstName"));
+                a.setLastname(rs.getString("LastName"));
+                a.setDob(rs.getDate("DoB"));
+                a.setGender(rs.getBoolean("Gender"));
+                a.setPhone(rs.getString("Phone"));
+                a.setUsername(rs.getString("UserName"));
+                a.setStreet(rs.getString("Street"));
+                a.setCity(rs.getString("City"));
+                a.setCountry(rs.getString("Country"));
+                accountsList.add(a);
+            }
+            return accountsList;
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(rs!=null){
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(pre!=null){
+                try {
+                    pre.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(conn!=null){
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return null;
+    }
 }

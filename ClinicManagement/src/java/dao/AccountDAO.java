@@ -28,6 +28,7 @@ public interface AccountDAO {
     Account1 login(String username, String password);
     void createAccount(Account account);
     public List<Accounts> getAllAccounts();
+    public List<Accounts> getAccountsByPage(int page, int size);
     public void addAccounts(Accounts a);
     public void deleteAccounts(int id);
     public void updateAccounts(Accounts a);
