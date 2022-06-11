@@ -73,9 +73,31 @@
                         </c:forEach>
 
                     </table>
-                    
+                    <nav aria-label="Page navigation example">
+                        <c:if test="${totalPage > 1}">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <ul>
+                                        <c:if test="${currentPage > 1}">
+                                            <a class="btn btn-light" href="ViewAllAccountController?page=${currentPage-1}">Trang trước</a>
+                                        </c:if>
+                                        <c:forEach var="pageNumber" begin="1" end="${totalPage}" step="1">
+                                            <c:if test="${currentPage == pageNumber}">
+                                                <a class="btn btn-success" href="#">${pageNumber}</a>
+                                            </c:if>
+                                            <c:if test="${currentPage != pageNumber}">
+                                                <a class="btn btn-light" href="ViewAllAccountController?page=${pageNumber}">${pageNumber}</a>
+                                            </c:if>
+                                        </c:forEach>
+                                        <c:if test="${currentPage < totalPage}">
+                                            <a class="btn btn-light" href="ViewAllAccountController?page=${currentPage+1}">Trang sau</a>
+                                        </c:if>
+                                    </ul>
+                                </div>
+                            </div>
+                        </c:if>
+                    </nav>
                 </div>
-
             </div>
         </div>
 

@@ -33,9 +33,21 @@ public class ViewAllAccountController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        int page= Integer.parseInt(request.getParameter("page"));
         AccountDAOImpl ad=new AccountDAOImpl();
         List<Accounts> listAcc=ad.getAllAccounts();
-        request.setAttribute("listAcc", listAcc);
+        int size=10;
+        int totalPage;
+        if(listAcc.size()%size==0){
+            totalPage=listAcc.size()/size;
+        }
+        else{
+            totalPage= (listAcc.size()/size)+1;
+        }
+        List<Accounts> listAccounts=ad.getAccountsByPage(page, size);
+        request.setAttribute("listAcc", listAccounts);
+        request.setAttribute("totalPage", totalPage);
+        request.setAttribute("currentPage", page);
         request.getRequestDispatcher("./jsp/viewAllAccount.jsp").forward(request, response);
     }
 

@@ -85,11 +85,7 @@ public class UpdateAccountController extends HttpServlet {
         if(update){
             ad.updateAccounts(a);
         }
-        ViewAllAccountController viewAllAccountController=new ViewAllAccountController();
-        if(update==false){
-            request.setAttribute("message", "Update failed");
-        }
-        viewAllAccountController.processRequest(request, response);
+        response.sendRedirect("ViewAllAccountController");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
