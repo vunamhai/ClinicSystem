@@ -55,7 +55,7 @@ public class HomeController extends HttpServlet {
   
               
                 if (user.getRole_id()== 1) {
-                    request.getRequestDispatcher("GetAllAccountController").forward(request, response);
+                    response.sendRedirect("ViewAllAccountController?page=1");
                 } else if (user.getRole_id() == 2) {
                     request.getRequestDispatcher("ServiceManagementController").forward(request, response);
                 } else if (user.getRole_id()== 3) {
