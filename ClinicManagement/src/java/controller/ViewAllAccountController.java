@@ -7,6 +7,7 @@ package controller;
 
 import dao.impl.AccountDAOImpl;
 import entity.Accounts;
+import entity.Role;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -45,9 +46,11 @@ public class ViewAllAccountController extends HttpServlet {
             totalPage= (listAcc.size()/size)+1;
         }
         List<Accounts> listAccounts=ad.getAccountsByPage(page, size);
+        List<Role> listRole=ad.getAllRoles();
         request.setAttribute("listAcc", listAccounts);
         request.setAttribute("totalPage", totalPage);
         request.setAttribute("currentPage", page);
+        request.setAttribute("listRole", listRole);
         request.getRequestDispatcher("./jsp/viewAllAccount.jsp").forward(request, response);
     }
 

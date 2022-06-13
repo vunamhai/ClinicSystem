@@ -34,6 +34,7 @@ public class UpdateAccountController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         boolean update=true;
+        int roleId= Integer.parseInt(request.getParameter("roleId"));
         int id= Integer.parseInt(request.getParameter("id"));
         String username=request.getParameter("username");
         String firstname=request.getParameter("firstname");
@@ -46,6 +47,7 @@ public class UpdateAccountController extends HttpServlet {
         int gender = Integer.parseInt(request.getParameter("gender"));
         Date dob=Date.valueOf(request.getParameter("dob"));
         Accounts a=new Accounts();
+        a.setRoleID(roleId);
         a.setId(id);
         a.setUsername(username);
         a.setFirstname(firstname);
