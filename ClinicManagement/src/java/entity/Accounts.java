@@ -18,6 +18,8 @@ public class Accounts {
     private String email;
     private String firstname;
     private String lastname;
+    private int roleID;
+    private String roleName;
     private Date dob;
     private boolean gender;
     private String street;
@@ -122,6 +124,22 @@ public class Accounts {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public int getRoleID() {
+        return roleID;
+    }
+
+    public void setRoleID(int roleID) {
+        this.roleID = roleID;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
     
 }
