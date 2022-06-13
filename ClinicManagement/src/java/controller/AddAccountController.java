@@ -33,6 +33,7 @@ public class AddAccountController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        int roleId= Integer.parseInt(request.getParameter("roleId"));
         String username=request.getParameter("username");
         String firstname=request.getParameter("firstname");
         String lastname=request.getParameter("lastname");
@@ -45,6 +46,7 @@ public class AddAccountController extends HttpServlet {
         int gender = Integer.parseInt(request.getParameter("gender"));
         Date dob=Date.valueOf(request.getParameter("dob"));
         Accounts a=new Accounts();
+        a.setRoleID(roleId);
         a.setUsername(username);
         a.setFirstname(firstname);
         a.setLastname(lastname);
@@ -65,14 +67,10 @@ public class AddAccountController extends HttpServlet {
         AccountDAOImpl ad=new AccountDAOImpl();
         Accounts acc1=ad.getAccountByEmail(email);
         Accounts acc2=ad.getAccountByUsername(username);
-        if(acc1!=null||acc2!=null){
-            request.setAttribute("message", "Add failed");
-        }
-        else{
+        if(acc1==null&&acc2==null){
             ad.addAccounts(a);
         }
-        ViewAllAccountController viewAllAccountController=new ViewAllAccountController();
-        viewAllAccountController.processRequest(request, response);
+        response.sendRedirect("ViewAllAccountController?page=1");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

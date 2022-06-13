@@ -14,6 +14,7 @@ package dao;
 import entity.Account;
 import entity.Account1;
 import entity.Accounts;
+import entity.Role;
 import java.util.List;
 
 /**
@@ -36,4 +37,5 @@ public interface AccountDAO {
     public Accounts getAccountById(int id);
     public Accounts getAccountByUsername(String username);
     public Accounts getAccountByEmail(String email);
+    public List<Role> getAllRoles();
 }

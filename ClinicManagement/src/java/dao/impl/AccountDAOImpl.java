@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import dao.AccountDAO;
 import entity.Account1;
 import entity.Accounts;
+import entity.Role;
 import entity.SQLCommands;
 import java.sql.SQLException;
 
@@ -194,6 +195,7 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
             pre.setDate(9, a.getDob());
             pre.setBoolean(10, a.isGender());
             pre.setString(11, a.getPassword());
+            pre.setInt(12, a.getRoleID());
             pre.executeUpdate();
             
         } catch (SQLException ex) {
@@ -239,7 +241,8 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
             pre.setString(8, a.getPhone());
             pre.setDate(9, a.getDob());
             pre.setBoolean(10, a.isGender());
-            pre.setInt(11, a.getId());
+            pre.setInt(11, a.getRoleID());
+            pre.setInt(12, a.getId());
             pre.executeUpdate();
             
         } catch (SQLException ex) {
@@ -514,9 +517,57 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
                 a.setStreet(rs.getString("Street"));
                 a.setCity(rs.getString("City"));
                 a.setCountry(rs.getString("Country"));
+                a.setRoleID(rs.getInt("role_id"));
+                a.setRoleName(rs.getString("role_name"));
                 accountsList.add(a);
             }
             return accountsList;
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(rs!=null){
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(pre!=null){
+                try {
+                    pre.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(conn!=null){
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public List<Role> getAllRoles() {
+        DBContext db=new DBContext();
+        Connection conn= null;
+        PreparedStatement pre= null;
+        ResultSet rs = null;
+        try {
+            List<Role> roleList= new ArrayList<>();
+            conn=db.getConnection();
+            pre=conn.prepareStatement(SQLCommands.GET_ALL_ROLES);
+            rs=pre.executeQuery();
+            while(rs.next()){
+                Role role=new Role();
+                role.setRoleId(rs.getInt("role_id"));
+                role.setRoleName(rs.getString("role_name"));
+                roleList.add(role);
+            }
+            return roleList;
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

@@ -32,10 +32,10 @@
                         <div style="color: red">
                             ${message}
                         </div>
-                        <form class="form-inline" action="GetAllAccountController" method="GET">
-                            <input class="form-control mr-sm-2"name="search" type="search" placeholder="Search" aria-label="Search" value="${search}">
+<!--                        <form class="form-inline" action="GetAllAccountController" method="GET">
+                            <input class="form-control mr-sm-2"name="search" type="search" placeholder="Search" aria-label="Search" value="">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                        </form>
+                        </form>-->
                     </nav>
                     <table id="datatable" class="table table-striped table-bordered mx-auto" cellspacing="0" width="70%">
                         <tr>
@@ -46,6 +46,7 @@
                             <th>Sinh nhật</th>
                             <th>Address</th>
                             <th>Giới tính</th>
+                            <th>Chức vụ</th>
                             <th>Update</th>
                             <th>Delete</th>
                         </tr>
@@ -58,6 +59,7 @@
                                 <td>${a.dob}</td>
                                 <td>${a.street} ${a.city} ${a.country}</td>
                                 <td>${a.gender == "true" ? "Nam" : "Nữ"}</td>
+                                <td>${a.roleName}</td>
                                 <td>
                                     <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#edit${a.id}" >
                                         <i class="fa-solid fa-pen"></i>
@@ -116,6 +118,14 @@
                     <div class="modal-body">
                         <form action="AddAccountController" method="POST">
                             <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputRole">Chức vụ</label>
+                                    <select id="inputRole" class="form-control" name="roleId">
+                                        <c:forEach items="${listRole}" var="r">
+                                            <option value="${r.roleId}">${r.roleName}</option>
+                                        </c:forEach>
+                                    </select>                                    
+                                </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputAccount">Tài khoản</label>
                                     <input type="text" class="form-control" name="username" required maxlength="20">
@@ -228,6 +238,14 @@
                             </div>
                             <div class="modal-body">
                                 <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputRole">Chức vụ</label>
+                                        <select id="inputRole" class="form-control" name="roleId">
+                                        <c:forEach items="${listRole}" var="r">
+                                            <option value="${r.roleId}" ${a.roleID == r.roleId ? "selected" : ""}>${r.roleName}</option>
+                                        </c:forEach>
+                                        </select> 
+                                    </div>
                                     <div class="form-group col-md-6">
                                         <label for="inputAccount">Tài khoản</label>
                                         <input type="text" class="form-control" required maxlength="20" name="username" value="${a.username}">
