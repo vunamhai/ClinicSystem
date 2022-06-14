@@ -44,7 +44,7 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
         try {
             connecion = getConnection();
             // Get data
-            preparedStatement = connecion.prepareStatement("select a.ID , a.UserName, a.Password, r.role_id from Accounts a join Account_Roles r on a.ID = r.ID where UserName = ? "
+            preparedStatement = connecion.prepareStatement("select a.ID , a.UserName, a.Password, r.role_id from Accounts a join Account_Roles r on a.role_id = r.role_id where UserName = ? "
                     + "and BINARY_CHECKSUM(Password) = BINARY_CHECKSUM(?)");
             preparedStatement.setNString(1, username);
             preparedStatement.setNString(2, password);
