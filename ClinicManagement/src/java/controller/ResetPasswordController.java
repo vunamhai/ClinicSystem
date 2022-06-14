@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Administrator
+ * @author TuDA
  */
 public class ResetPasswordController extends HttpServlet {
 
