@@ -58,6 +58,10 @@
                         <div class="avatar">
                             <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" alt="avatar">
                         </div>
+                         <form action="SearchService" method="POST">
+                            <input type="text" placeholder="Search.." name="search">
+                            <button type="submit">Submit</button>
+                        </form>
                     </div>
                 </div>
             </nav>

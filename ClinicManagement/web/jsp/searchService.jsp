@@ -5,7 +5,7 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-05-27      1.0                 UYENNP         Controller Service Management List
+ * 2022-05-12      1.0                 TuDA         Controller Service Management List
 -->
 
 <!doctype html>
@@ -58,7 +58,7 @@
                         <div class="avatar">
                             <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" alt="avatar">
                         </div>
-                         <form action="SearchService" method="POST">
+                        <form action="SearchService" method="POST">
                             <input type="text" placeholder="Search.." name="search">
                             <button type="submit">Submit</button>
                         </form>
@@ -88,7 +88,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${services}" var="service" >
+                        <c:forEach items="${searchList}" var="service" >
                             <tr>
                                 <th scope="row">${counter.count}</th>
                                 <td>${service.serviceId}</td>
@@ -96,12 +96,8 @@
                                 <td class="service-desc">${service.serviceDescription}</td>
                                 <td>
                                     <div class="action">
-                                        <button class="bi bi-pencil-fill" data-toggle="modal" onclick=""
-                                                data-target="#myModal">View</button> 
-                                        <button class="bi bi-pencil-fill" data-toggle="modal" onclick="openModalUpdateService(${service.serviceId})"
-                                                data-target="#myModal">Edit</button> 
-<!--                                        <button class="bi bi-trash-fill" data-toggle="modal" onclick=""
-                                                data-target="#myModal">Delete</button>-->
+                                        <a class="bi bi-pencil-fill" href="UpdateService?id=${service.serviceId}"></a> 
+                                        <a class="bi bi-trash-fill" href="DeleteService?id=${service.serviceId}"></a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -112,53 +108,37 @@
 
                     <script>
                         function openModalUpdateService(idService) {
-                        $.ajax({
-                        type: "get",
+                            $.ajax({
+                                type: "get",
                                 url: "/ClinicManagement/UpdateService",
                                 data: {
-                                idService: idService
+                                    idService: idService
                                 }, // serializes the form's elements.
                                 success: function (data)
                                 {
-                                var formUpdate = document.getElementById("modal-update");
-                                formUpdate.innerHTML += data;
+                                    var formUpdate = document.getElementById("modal-update");
+                                    formUpdate.innerHTML += data;
                                 }
-                        });
-                        document.getElementById("modal-update").style.display = "flex";
+                            });
+                            document.getElementById("modal-update").style.display = "flex";
                         }
                     </script>
-                    <script>
-                        function openModalViewService(idService) {
-                         $.ajax({
-                        type: "get",
-                                url: "/ClinicManagement/ViewService",
-                                data: {
-                                idService: idService
-                                }, // serializes the form's elements.
-                                success: function (data)
-                                {
-                                var formUpdate = document.getElementById("modal-update");
-                                formUpdate.innerHTML += data;
-                                }
-                        });
-                        document.getElementById("modal-update").style.display = "flex";
-                        }
-                    </script>
+
                     <script>
                         function openModalDeleteService(idService) {
-                        $.ajax({
-                        type: "get",
+                            $.ajax({
+                                type: "get",
                                 url: "/ClinicManagement/DeleteService",
                                 data: {
-                                idService: idService
+                                    idService: idService
                                 }, // serializes the form's elements.
                                 success: function (data)
                                 {
-                                var formUpdate = document.getElementById("modal-update");
-                                formUpdate.innerHTML += data;
+                                    var formUpdate = document.getElementById("modal-update");
+                                    formUpdate.innerHTML += data;
                                 }
-                        });
-                        document.getElementById("modal-update").style.display = "flex";
+                            });
+                            document.getElementById("modal-update").style.display = "flex";
                         }
                     </script>
 
@@ -216,16 +196,16 @@
                     </div>
 
                     <!-- Add Service Modal -->
-                  
+
 
 
                 </div>
 
                 <!-- Select Doctor Modal -->
-                
+
 
                 <!-- Delete Service Modal -->
-              
+
 
 
             </div>
@@ -241,7 +221,7 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
 
             <script src="./index.js"></script>
-            
+
 
     </body>
 

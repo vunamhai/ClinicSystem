@@ -272,6 +272,47 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
 
         return 0;
     }
+    
+     public ArrayList<Service> searchServices(String search) throws SQLException {
+        ArrayList<Service> result = new ArrayList<>();
+        String sql = "SELECT [service_id]\n"
+                + "    ,[service_name]\n"
+                + " ,[description]\n"
+                + "  FROM services where [service_name] like '%" + search + "%'";
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        ResultSet rs = null;
+        try {
+            con = getConnection(); //get connection
+            ps = con.prepareStatement(sql);
+
+            rs = ps.executeQuery();
+            /**
+             * set attributes for services from result set then add its to
+             * result list
+             */
+            while (rs.next()) {
+                Service service = new Service(rs.getInt("service_id"), rs.getString("service_name"), rs.getString("description"));
+                result.add(service);
+            }
+        } catch (SQLException ex) {
+//            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        } catch (Exception ex) {
+//            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            /**
+             * close result set, prepared statement and connection by
+             * corresponding order
+             */
+        } finally {
+            this.closeResultSet(rs);
+            this.closePreparedStatement(ps);
+            this.closeConnection(con);
+        }
+        return result;
+    }
+
 
     @Override
     public int getIdInserted() {
