@@ -68,6 +68,10 @@
         <servlet-name>SearchService</servlet-name>
         <servlet-class>controller.SearchService</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewService</servlet-name>
+        <servlet-class>controller.ViewService</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -123,6 +127,10 @@
     <servlet-mapping>
         <servlet-name>SearchService</servlet-name>
         <url-pattern>/SearchService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewService</servlet-name>
+        <url-pattern>/ViewService</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

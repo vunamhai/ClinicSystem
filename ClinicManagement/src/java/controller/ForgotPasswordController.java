@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author TuDA
+ * @author Administrator
  */
 public class ForgotPasswordController extends HttpServlet {
 

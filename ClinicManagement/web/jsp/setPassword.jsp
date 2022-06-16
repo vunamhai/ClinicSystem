@@ -1,8 +1,3 @@
-<%-- 
-    Document   : Register
-    Created on : May 26, 2022, 8:49:23 AM
-    Author     : TuDA
---%>
 
 <!DOCTYPE html>
 <html>
