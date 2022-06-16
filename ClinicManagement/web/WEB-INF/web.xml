@@ -76,6 +76,14 @@
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ViewAllBlog</servlet-name>
+        <servlet-class>controller.ViewAllBlog</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ViewAllBlog</servlet-name>
+        <url-pattern>/ViewAllBlog</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>GetAllAccountController</servlet-name>
         <url-pattern>/GetAllAccountController</url-pattern>

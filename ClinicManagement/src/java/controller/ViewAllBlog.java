@@ -34,7 +34,7 @@ public class ViewAllBlog extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      BlogDAOImpl blog =new BlogDAOImpl();
+        BlogDAOImpl blog =new BlogDAOImpl();
         ArrayList<Blog> listBlog =  blog.getAllBlogs() ;
         request.setAttribute("listBlog", listBlog);
         request.getRequestDispatcher("./jsp/ViewAllBlog.jsp").forward(request, response);
