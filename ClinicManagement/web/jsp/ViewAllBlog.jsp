@@ -27,7 +27,7 @@
     <body>
         <div class="container-fluid">
             <div class="row">
-                <h2 class="col-lg-10 mx-auto justify-content-end" >Blog MManagement</h2>
+                <h2 class="col-lg-10 mx-auto justify-content-end" >Blog Management</h2>
             </div>
 
             <div class="row">
