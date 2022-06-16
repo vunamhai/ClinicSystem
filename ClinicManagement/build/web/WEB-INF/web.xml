@@ -72,6 +72,10 @@
         <servlet-name>DeleteService</servlet-name>
         <servlet-class>controller.DeleteService</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchService</servlet-name>
+        <servlet-class>controller.SearchService</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -139,6 +143,10 @@
     <servlet-mapping>
         <servlet-name>DeleteService</servlet-name>
         <url-pattern>/DeleteService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchService</servlet-name>
+        <url-pattern>/SearchService</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
