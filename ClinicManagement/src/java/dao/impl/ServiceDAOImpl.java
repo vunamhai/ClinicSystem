@@ -14,6 +14,7 @@ import dao.ServiceDAO;
 //import entity.ServiceDTO;
 //import entity.Pagination;
 import entity.Service;
+import entity.ViewServiceX;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -339,6 +340,47 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
         }
         return 0;
     }
+    
+    public ArrayList<ViewServiceX> viewServices(int id) throws SQLException {
+        ArrayList<ViewServiceX> result = new ArrayList<>();
+        String sql = "select s.service_id, s.service_name,Description, firstname, lastname\n"
+                + "from Services s join Accounts acc on s.service_id = acc.service_id\n"
+                + "where s.service_id = ?";
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = getConnection(); //get connection
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            /**
+             * set attributes for services from result set then add its to
+             * result list
+             */
+            while (rs.next()) {
+                ViewServiceX viewService = new ViewServiceX(rs.getInt("service_id"), 
+                        rs.getString("service_name"), rs.getString("description"), rs.getString("firstname"),
+                rs.getString("lastname"));
+                result.add(viewService);
+            }
+        } catch (SQLException ex) {
+//            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        } catch (Exception ex) {
+//            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            /**
+             * close result set, prepared statement and connection by
+             * corresponding order
+             */
+        } finally {
+            this.closeResultSet(rs);
+            this.closePreparedStatement(ps);
+            this.closeConnection(con);
+        }
+        return result;
+    }
+
 
     @Override
     public void updateService(Service service) {
