@@ -321,7 +321,26 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
             closeConnection(connecion);
         }
     }
-
+public void updateService(int id, String name, String description) {
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try {
+            connecion = getConnection();
+            // Get data
+            preparedStatement = connecion.prepareStatement("update services set service_name = ? , description = ? where service_id = ?");
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, description);
+            preparedStatement.setInt(3, id);
+            preparedStatement.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+//            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
+    }
     @Override
     public void removeAllDoctor(int id) {
         Connection connecion = null;
@@ -342,7 +361,7 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
         }
     }
 
-    @Override
+ @Override
     public void deleteService(int id) {
         Connection connecion = null;
         PreparedStatement preparedStatement = null;
@@ -350,7 +369,7 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
         try {
             connecion = getConnection();
             // Get data
-            preparedStatement = connecion.prepareStatement("update services set isActive = 0 where service_id = ?");
+            preparedStatement = connecion.prepareStatement("delete from services where service_id = ?");
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (Exception ex) {
