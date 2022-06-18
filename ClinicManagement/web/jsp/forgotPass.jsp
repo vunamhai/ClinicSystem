@@ -24,7 +24,7 @@
                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/img3.webp" class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;" alt="Sample photo">
                             <div class="card-body p-4 p-md-5">
                                 <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Quên mật khẩu</h3>
-                                <form class="px-md-2" action="../ForgotPasswordController" method="get">
+                                <form class="px-md-2" action="../ClinicManagement/ForgotPasswordController" method="get">
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example1q">Email<span class="text-danger"> *</span></label>
                                         <input type="text" id="form3Example1q" name="email" class="form-control"  maxlength="30" required />
