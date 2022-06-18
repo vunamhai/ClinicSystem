@@ -134,7 +134,7 @@
 
                             <div class="form-group">
                                 <label for="inputAccount">password</label>
-                                <input type="text" class="form-control" name="password" required maxlength="20">
+                                <input type="password" class="form-control" name="password" required maxlength="20">
                             </div>
 
                             <div class="form-group">
@@ -195,6 +195,7 @@
             <form action="DeleteAccountController">
                 <div hidden>
                     <input name="id" value="${a.id}">
+                    <input name="page" value="${currentPage}">
                 </div>
                 <div class="modal fade" id="delete${a.id}">
                     <div class="modal-dialog">

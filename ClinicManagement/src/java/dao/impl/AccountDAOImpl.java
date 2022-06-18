@@ -13,6 +13,8 @@ import java.util.logging.Logger;
 import dao.AccountDAO;
 import entity.Account1;
 import entity.Accounts;
+import entity.Booking;
+import entity.Feedback;
 import entity.Role;
 import entity.SQLCommands;
 import java.sql.SQLException;
@@ -220,7 +222,33 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
 
     @Override
     public void deleteAccounts(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        DBContext db=new DBContext();
+        Connection conn= null;
+        PreparedStatement pre= null;
+        try {
+            conn=db.getConnection();
+            pre=conn.prepareStatement(SQLCommands.DELETE_ACCOUNTS_BY_ID);
+            pre.setInt(1, id);
+            pre.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(pre!=null){
+                try {
+                    pre.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(conn!=null){
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
 
     @Override
@@ -568,6 +596,321 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
                 roleList.add(role);
             }
             return roleList;
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(rs!=null){
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(pre!=null){
+                try {
+                    pre.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(conn!=null){
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void deleteBookingDetailsByBookingID(int bookingID) {
+        DBContext db=new DBContext();
+        Connection conn= null;
+        PreparedStatement pre= null;
+        try {
+            conn=db.getConnection();
+            pre=conn.prepareStatement(SQLCommands.DELETE_BOOKING_DETAILS_BY_BOOKING_ID);
+            pre.setInt(1, bookingID);
+            pre.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(pre!=null){
+                try {
+                    pre.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(conn!=null){
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void deleteReplyFeedbackByFeedbackID(int feedbackID) {
+        DBContext db=new DBContext();
+        Connection conn= null;
+        PreparedStatement pre= null;
+        try {
+            conn=db.getConnection();
+            pre=conn.prepareStatement(SQLCommands.DELETE_REPLY_FEEDBACK_BY_FEEDBACK_ID);
+            pre.setInt(1, feedbackID);
+            pre.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(pre!=null){
+                try {
+                    pre.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(conn!=null){
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void deleteFeedbacksByBookingID(int bookingID) {
+        DBContext db=new DBContext();
+        Connection conn= null;
+        PreparedStatement pre= null;
+        try {
+            conn=db.getConnection();
+            pre=conn.prepareStatement(SQLCommands.DELETE_FEEDBACKS_BY_BOOKING_ID);
+            pre.setInt(1, bookingID);
+            pre.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(pre!=null){
+                try {
+                    pre.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(conn!=null){
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void deleteBookingsByAccountID(int accountID) {
+        DBContext db=new DBContext();
+        Connection conn= null;
+        PreparedStatement pre= null;
+        try {
+            conn=db.getConnection();
+            pre=conn.prepareStatement(SQLCommands.DELETE_BOOKINGS_BY_ACCOUNT_ID);
+            pre.setInt(1, accountID);
+            pre.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(pre!=null){
+                try {
+                    pre.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(conn!=null){
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void deleteReplyFeedbackByAccountID(int accountID) {
+        DBContext db=new DBContext();
+        Connection conn= null;
+        PreparedStatement pre= null;
+        try {
+            conn=db.getConnection();
+            pre=conn.prepareStatement(SQLCommands.DELETE_REPLY_FEEDBACK_BY_ACCOUNT_ID);
+            pre.setInt(1, accountID);
+            pre.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(pre!=null){
+                try {
+                    pre.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(conn!=null){
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void deleteBlogsByAccountID(int accountID) {
+        DBContext db=new DBContext();
+        Connection conn= null;
+        PreparedStatement pre= null;
+        try {
+            conn=db.getConnection();
+            pre=conn.prepareStatement(SQLCommands.DELETE_BLOGS_BY_ACCOUNT_ID);
+            pre.setInt(1, accountID);
+            pre.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(pre!=null){
+                try {
+                    pre.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(conn!=null){
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void deleteServiceDoctorByAccountID(int accountID) {
+        DBContext db=new DBContext();
+        Connection conn= null;
+        PreparedStatement pre= null;
+        try {
+            conn=db.getConnection();
+            pre=conn.prepareStatement(SQLCommands.DELETE_SERVICE_DOCTOR_BY_ACCOUNT_ID);
+            pre.setInt(1, accountID);
+            pre.executeUpdate();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(pre!=null){
+                try {
+                    pre.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(conn!=null){
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    @Override
+    public List<Booking> getAllBookingsByAccountID(int accountID) {
+        DBContext db=new DBContext();
+        Connection conn= null;
+        PreparedStatement pre= null;
+        ResultSet rs = null;
+        try {
+            List<Booking> bookingList= new ArrayList<>();
+            conn=db.getConnection();
+            pre=conn.prepareStatement(SQLCommands.GET_ALL_BOOKINGS_BY_ACCOUNT_ID);
+            pre.setInt(1, accountID);
+            rs=pre.executeQuery();
+            while(rs.next()){
+                Booking b=new Booking();
+                b.setBookingID(rs.getInt("booking_id"));
+                b.setServicePackageID(rs.getInt("servicePackage_id"));
+                b.setPatientID(rs.getInt("patient_id"));
+                b.setBookingStatusID(rs.getInt("bookingStatus_id"));
+                bookingList.add(b);
+            }
+            return bookingList;
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(rs!=null){
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(pre!=null){
+                try {
+                    pre.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(conn!=null){
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public List<Feedback> getAllFeedbacksByBookingID(int bookingID) {
+        DBContext db=new DBContext();
+        Connection conn= null;
+        PreparedStatement pre= null;
+        ResultSet rs = null;
+        try {
+            List<Feedback> feedbackList= new ArrayList<>();
+            conn=db.getConnection();
+            pre=conn.prepareStatement(SQLCommands.GET_ALL_FEEDBACKS_BY_BOOKING_ID);
+            pre.setInt(1, bookingID);
+            rs=pre.executeQuery();
+            while(rs.next()){
+                Feedback f=new Feedback();
+                f.setFeedbackID(rs.getInt("feedback_id"));
+                f.setBookingID(rs.getInt("booking_id"));
+                f.setPatientID(rs.getInt("patient_id"));
+                f.setDescription(rs.getString("Description"));
+                feedbackList.add(f);
+            }
+            return feedbackList;
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

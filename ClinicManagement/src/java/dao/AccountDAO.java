@@ -14,6 +14,8 @@ package dao;
 import entity.Account;
 import entity.Account1;
 import entity.Accounts;
+import entity.Booking;
+import entity.Feedback;
 import entity.Role;
 import java.util.List;
 
@@ -38,4 +40,13 @@ public interface AccountDAO {
     public Accounts getAccountByUsername(String username);
     public Accounts getAccountByEmail(String email);
     public List<Role> getAllRoles();
+    public void deleteBookingDetailsByBookingID(int bookingID);
+    public void deleteReplyFeedbackByFeedbackID(int feedbackID);
+    public void deleteFeedbacksByBookingID(int bookingID);
+    public void deleteBookingsByAccountID(int accountID);
+    public void deleteReplyFeedbackByAccountID(int accountID);
+    public void deleteBlogsByAccountID(int accountID);
+    public void deleteServiceDoctorByAccountID(int accountID);
+    public List<Booking> getAllBookingsByAccountID(int accountID);
+    public List<Feedback> getAllFeedbacksByBookingID(int bookingID);
 }
