@@ -13,6 +13,7 @@ package config;
  *
  * @author Thanh Tung
  */
+//Merg nguoc lai main
 public class Configuration {
     public static final int PAGE_SIZE = 5;
 }
