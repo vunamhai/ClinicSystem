@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Nam Ngo
  */
-public class ViewAllAccountController extends HttpServlet {
+public class SearchAccountController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,25 +34,14 @@ public class ViewAllAccountController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        int page= Integer.parseInt(request.getParameter("page"));
         AccountDAOImpl ad=new AccountDAOImpl();
-        List<Accounts> listAcc=ad.getAllAccounts();
-        int size=10;
-        int totalPage;
-        if(listAcc.size()%size==0){
-            totalPage=listAcc.size()/size;
-        }
-        else{
-            totalPage= (listAcc.size()/size)+1;
-        }
-        List<Accounts> listAccounts=ad.getAccountsByPage(page, size);
+        String txtSearch= request.getParameter("search");
+        List<Accounts> listAccount=ad.searchAccount(txtSearch);
         List<Role> listRole=ad.getAllRoles();
-        request.setAttribute("listAcc", listAccounts);
-        request.setAttribute("totalPage", totalPage);
-        request.setAttribute("currentPage", page);
         request.setAttribute("listRole", listRole);
-        request.setAttribute("view", true);
-        if(listAccounts.isEmpty()){
+        request.setAttribute("listAcc", listAccount);
+        request.setAttribute("txtSearch", txtSearch);
+        if(listAccount.isEmpty()){
             request.setAttribute("message", "Không có dữ liệu");
         }
         request.getRequestDispatcher("./jsp/viewAllAccount.jsp").forward(request, response);

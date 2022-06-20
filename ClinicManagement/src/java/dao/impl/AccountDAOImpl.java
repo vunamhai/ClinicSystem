@@ -938,4 +938,73 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
         }
         return null;
     }
+
+    @Override
+    public List<Accounts> searchAccount(String strSearch) {
+        String txtSearch="%"+strSearch+"%";
+        DBContext db=new DBContext();
+        Connection conn= null;
+        PreparedStatement pre= null;
+        ResultSet rs = null;
+        try {
+            List<Accounts> accountsList= new ArrayList<>();
+            conn=db.getConnection();
+            pre=conn.prepareStatement(SQLCommands.SEARCH_ACCOUNT);
+            pre.setString(1, txtSearch);
+            pre.setString(2, txtSearch);
+            pre.setString(3, txtSearch);
+            pre.setString(4, txtSearch);
+            pre.setString(5, txtSearch);
+            pre.setString(6, txtSearch);
+            pre.setString(7, txtSearch);
+            pre.setString(8, txtSearch);
+            pre.setString(9, txtSearch);
+            pre.setString(10, txtSearch);
+            pre.setString(11, txtSearch);
+            rs=pre.executeQuery();
+            while(rs.next()){
+                Accounts a=new Accounts();
+                a.setId(rs.getInt("ID"));
+                a.setEmail(rs.getString("Email"));
+                a.setFirstname(rs.getString("FirstName"));
+                a.setLastname(rs.getString("LastName"));
+                a.setDob(rs.getDate("DoB"));
+                a.setGender(rs.getBoolean("Gender"));
+                a.setPhone(rs.getString("Phone"));
+                a.setUsername(rs.getString("UserName"));
+                a.setStreet(rs.getString("Street"));
+                a.setCity(rs.getString("City"));
+                a.setCountry(rs.getString("Country"));
+                a.setRoleID(rs.getInt("role_id"));
+                a.setRoleName(rs.getString("role_name"));
+                accountsList.add(a);
+            }
+            return accountsList;
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if(rs!=null){
+                try {
+                    rs.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(pre!=null){
+                try {
+                    pre.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(conn!=null){
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return null;
+    }
 }

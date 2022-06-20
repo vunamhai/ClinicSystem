@@ -30,4 +30,5 @@ public class SQLCommands {
     public static String GET_ALL_BOOKINGS_BY_ACCOUNT_ID="select * from Bookings where patient_id= ?";
     public static String GET_ALL_FEEDBACKS_BY_BOOKING_ID="select * from Feedbacks where booking_id= ?";
     public static String DELETE_ACCOUNTS_BY_ID="delete Accounts where ID= ?";
+    public static String SEARCH_ACCOUNT="select a.ID,a.role_id,ar.role_name,a.FirstName,a.LastName,a.DoB,a.Gender,a.Phone,a.UserName,a.Email,a.[Password],a.Street,a.City,a.Country from Accounts a, Account_Roles ar where a.role_id=ar.role_id and (ID like ? or role_name like ? or FirstName like ? or LastName like ? or DoB like ? or Phone like ? or UserName like ? or Email like ? or Street like ? or City like ? or Country like ?)";
 }

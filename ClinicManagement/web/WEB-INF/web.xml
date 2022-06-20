@@ -76,6 +76,10 @@
         <servlet-name>DeleteAccountController</servlet-name>
         <servlet-class>controller.DeleteAccountController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchAccountController</servlet-name>
+        <servlet-class>controller.SearchAccountController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -147,6 +151,10 @@
     <servlet-mapping>
         <servlet-name>DeleteAccountController</servlet-name>
         <url-pattern>/DeleteAccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchAccountController</servlet-name>
+        <url-pattern>/SearchAccountController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
