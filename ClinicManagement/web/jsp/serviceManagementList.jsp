@@ -58,9 +58,9 @@
                         <div class="avatar">
                             <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" alt="avatar">
                         </div>
-                        <form action="SearchService" method="POST">
+                        <form action="SearchServiceController" method="">
                             <input type="text" placeholder="Search.." name="search">
-                            <button type="submit">Submit</button>
+                            <button type="submit">Tìm kiếm</button>
                         </form>
                     </div>
                 </div>

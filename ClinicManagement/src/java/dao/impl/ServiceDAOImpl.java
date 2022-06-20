@@ -231,7 +231,6 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
         return 0;
     }
     
-    public 
     
      public ArrayList<Service> searchServices(String search) {
         ArrayList<Service> result = new ArrayList<>();
