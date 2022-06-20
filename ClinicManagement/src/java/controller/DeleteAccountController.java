@@ -34,7 +34,6 @@ public class DeleteAccountController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        int page= Integer.parseInt(request.getParameter("page"));
         int accountID= Integer.parseInt(request.getParameter("id"));
         AccountDAOImpl ad=new AccountDAOImpl();
         List<Booking> bookingList=ad.getAllBookingsByAccountID(accountID);
@@ -54,7 +53,14 @@ public class DeleteAccountController extends HttpServlet {
         ad.deleteBlogsByAccountID(accountID);
         ad.deleteServiceDoctorByAccountID(accountID);
         ad.deleteAccounts(accountID);
-        response.sendRedirect("ViewAllAccountController?page="+page);
+        String txtSearch= request.getParameter("txtSearch");
+        if(txtSearch.isEmpty()){
+            int page= Integer.parseInt(request.getParameter("page"));
+            response.sendRedirect("ViewAllAccountController?page="+page);
+        }
+        else{
+            response.sendRedirect("SearchAccountController?search="+txtSearch);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -87,8 +87,14 @@ public class UpdateAccountController extends HttpServlet {
         if(update){
             ad.updateAccounts(a);
         }
-        int page= Integer.parseInt(request.getParameter("page"));
-        response.sendRedirect("ViewAllAccountController?page="+page);
+        String txtSearch= request.getParameter("txtSearch");
+        if(txtSearch.isEmpty()){
+            int page= Integer.parseInt(request.getParameter("page"));
+            response.sendRedirect("ViewAllAccountController?page="+page);
+        }
+        else{
+            response.sendRedirect("SearchAccountController?search="+txtSearch);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

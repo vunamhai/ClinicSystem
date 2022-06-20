@@ -29,13 +29,11 @@
                     <nav class="navbar navbar-light bg-light justify-content-between">
                         <button class="btn btn-primary btn-xs" data-title="Add" data-toggle="modal" data-target="#add" >Thêm tài khoản
                         </button>
-                        <div style="color: red">
-                            ${message}
-                        </div>
-<!--                        <form class="form-inline" action="GetAllAccountController" method="GET">
-                            <input class="form-control mr-sm-2"name="search" type="search" placeholder="Search" aria-label="Search" value="">
+                        
+                        <form class="form-inline" action="SearchAccountController" method="GET">
+                            <input class="form-control mr-sm-2"name="search" type="search" placeholder="Search" aria-label="Search" value="${txtSearch}" required>
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                        </form>-->
+                        </form>
                     </nav>
                     <table id="datatable" class="table table-striped table-bordered mx-auto" cellspacing="0" width="70%">
                         <tr>
@@ -75,7 +73,11 @@
                         </c:forEach>
 
                     </table>
-                    <nav aria-label="Page navigation example">
+                    <div style="color: red">
+                            ${message}
+                    </div>
+                    <c:if test="${view}">
+                        <nav aria-label="Page navigation example">
                         <c:if test="${totalPage > 1}">
                             <div class="row">
                                 <div class="col-12 text-center">
@@ -99,6 +101,7 @@
                             </div>
                         </c:if>
                     </nav>
+                    </c:if>
                 </div>
             </div>
         </div>
@@ -194,8 +197,8 @@
         <c:forEach var="a" items="${listAcc}">
             <form action="DeleteAccountController">
                 <div hidden>
+                    <input name="txtSearch" value="${txtSearch}">
                     <input name="id" value="${a.id}">
-                    <input name="page" value="${currentPage}">
                 </div>
                 <div class="modal fade" id="delete${a.id}">
                     <div class="modal-dialog">
@@ -227,6 +230,7 @@
                 <div class="modal-dialog">
                     <form action="UpdateAccountController" method="POST">
                         <div hidden>
+                            <input name="txtSearch" value="${txtSearch}">
                             <input name="id" value="${a.id}">
                             <input name="page" value="${currentPage}">
                         </div>

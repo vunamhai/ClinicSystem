@@ -49,4 +49,5 @@ public interface AccountDAO {
     public void deleteServiceDoctorByAccountID(int accountID);
     public List<Booking> getAllBookingsByAccountID(int accountID);
     public List<Feedback> getAllFeedbacksByBookingID(int bookingID);
+    public List<Accounts> searchAccount(String txtSearch);
 }
