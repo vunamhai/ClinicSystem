@@ -31,27 +31,10 @@ public class ResetPasswordController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        String password = request.getParameter("password");
-        String rePassword = request.getParameter("re-password");
-
-        HttpSession session = request.getSession();
-        Accounts account = (Accounts) session.getAttribute("user");
-
-        request.setAttribute("password", password);
-        request.setAttribute("rePassword", rePassword);
-
-        if (!password.equals(rePassword)) {
-            request.setAttribute("message", "Pass word not match!!!");
-            request.getRequestDispatcher("./jsp/setPassword.jsp").forward(request, response);
-            return;
-        }
-        AccountDAO accountDAO = new AccountDAOImpl();
-        accountDAO.updatePassword(account.getUsername(), rePassword);
-        session.invalidate();
-        request.setAttribute("message", "Password update success!!!");
+        
+        request.setAttribute("message", "No message");
         request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
 
     }
@@ -64,7 +47,7 @@ public class ResetPasswordController extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     */
+//     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -82,7 +65,31 @@ public class ResetPasswordController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        response.setContentType("text/html;charset=UTF-8");
+        String password = request.getParameter("password");
+        String rePassword = request.getParameter("re-password");
+
+        HttpSession session = request.getSession();
+        Accounts account = (Accounts) session.getAttribute("user");
+
+        
+
+        if (!password.equals(rePassword)) {
+            request.setAttribute("message", "Pass word not match!!!");
+            request.getRequestDispatcher("./jsp/setPassword.jsp").forward(request, response);
+            return;
+        }
+        else
+        {   request.setAttribute("rePassword", rePassword);
+            request.setAttribute("message", "Password update success!!!");
+        }
+        AccountDAO accountDAO = new AccountDAOImpl();
+        accountDAO.updatePassword(account.getUsername(), rePassword);
+        session.invalidate();
+        //request.setAttribute("message", "Password update success!!!");
+        request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
+        
     }
 
     /**
@@ -96,5 +103,3 @@ public class ResetPasswordController extends HttpServlet {
     }// </editor-fold>
 
 }
-
-

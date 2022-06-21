@@ -25,18 +25,18 @@
                             <div class="card-body p-4 p-md-5">
                                 <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Reset mật khẩu</h3>
 
-                                <form class="px-md-2" action="../ClinicManagement/ResetPasswordController" method="get">
+                                <form class="px-md-2" action="../ClinicManagement/ResetPasswordController" method="post">
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example1q">Password<span class="text-danger"> *</span></label>
 
-                                        <input type="text" id="form3Example1q" name="password" class="form-control" value="${password}"  maxlength="30" required />
+                                        <input type="password" id="form3Example1q" name="password" class="form-control" value="${password}"  maxlength="30" required />
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example1q">Nhập lại Password<span class="text-danger"> *</span></label>
 
-                                        <input type="text" id="form3Example1q"  name="re-password" value="${rePassword}" class="form-control"  maxlength="30" required />
+                                        <input type="password" id="form3Example1q"  name="re-password" value="${rePassword}" class="form-control"  maxlength="30" required />
                                     </div>
 
                                     <button type="submit" class="btn btn-success btn-lg mb-1">Update mật khẩu</button>
