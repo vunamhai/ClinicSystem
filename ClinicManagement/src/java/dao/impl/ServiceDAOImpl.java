@@ -204,6 +204,60 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
         }
         return result;
     }
+    
+    public String getString(String msg) {
+        StringBuilder output = new StringBuilder();
+
+        String[] tempStr = msg.trim().split("\\s+");
+        for (String string : tempStr) {
+            output.append(string).append(" ");
+        }
+        output.deleteCharAt(output.length() - 1);
+        return output.toString();
+    }
+
+    public ArrayList<Service> searchServices(String search) {
+        ArrayList<Service> result = new ArrayList<>();
+        String output = getString(search);
+        String sql = "SELECT [service_id]\n"
+                + "    ,[service_name]\n"
+                + " ,[description]\n"
+                + "  FROM services where [service_name] like N'%" + output + "%'"
+                + "or [service_name] like '%" + output + "%'";
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        ResultSet rs = null;
+        try {
+            con = getConnection(); //get connection
+            ps = con.prepareStatement(sql);
+
+            rs = ps.executeQuery();
+            /**
+             * set attributes for services from result set then add its to
+             * result list
+             */
+            while (rs.next()) {
+                Service service = new Service(rs.getInt("service_id"), rs.getString("service_name"), rs.getString("description"));
+                result.add(service);
+            }
+        } catch (SQLException ex) {
+//            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (Exception ex) {
+//            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            /**
+             * close result set, prepared statement and connection by
+             * corresponding order
+             */
+        } finally {
+            this.closeResultSet(rs);
+            this.closePreparedStatement(ps);
+            this.closeConnection(con);
+        }
+        return result;
+    }
+
 
     @Override
     public int addService(Service service) {
