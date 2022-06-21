@@ -4,6 +4,9 @@
     Author     : nguye
 --%>
 
+
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -49,8 +52,9 @@
 
                                 </form>
                                 <p class="text-center">không phải thành viên? <a  href="./jsp/Register.jsp">Đăng kí</a></p>
+                                <p class="text-center"><a  href="./jsp/forgotPass.jsp">Quên mật khẩu</a></p>
                                 <c:if test="${messageLogin != null}">
-                                    <p class="text-center">Quên mật khẩu? <a  href="./jsp/forgotPass.jsp">Quên mật khẩu</a></p>
+                                    
                                 </c:if>
                                 <p style="color: red"> ${messageLogin}</p>
                             </div>
@@ -63,5 +67,14 @@
         <script src="./assets/js/popper.js"></script>
         <script src="./assets/js/bootstrap.min.js"></script>
         <script src="./assets/js/main.js"></script>
+        <c:if test="${rePassword != null}">
+            <script>
+            alert("Password update success!!");
+            </script>
+        </c:if>
+
+
+
+
     </body>
 </html>
