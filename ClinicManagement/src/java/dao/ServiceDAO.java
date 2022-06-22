@@ -11,9 +11,11 @@ package dao;
 
 //import entity.ServiceDTO;
 //import entity.Pagination;
+
 import entity.Service;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 
 /**
  * <h1>Service DAO</h1>
@@ -70,4 +72,6 @@ public interface ServiceDAO {
     public void removeAllDoctor(int id);
 
     public void deleteService(int id);
+    
+ 
 }

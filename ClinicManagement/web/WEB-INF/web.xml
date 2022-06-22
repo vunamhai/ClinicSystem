@@ -84,6 +84,10 @@
         <servlet-name>SearchServiceController</servlet-name>
         <servlet-class>controller.SearchServiceController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServiceManagementDetailController</servlet-name>
+        <servlet-class>controller.ServiceManagementDetailController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -163,6 +167,10 @@
     <servlet-mapping>
         <servlet-name>SearchServiceController</servlet-name>
         <url-pattern>/SearchServiceController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceManagementDetailController</servlet-name>
+        <url-pattern>/ServiceManagementDetailController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
