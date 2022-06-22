@@ -455,6 +455,7 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
             closeConnection(connecion);
         }
     }
+    
 
     public int updatePasswordById(int id, String pass) {
        DBContext db=new DBContext();
