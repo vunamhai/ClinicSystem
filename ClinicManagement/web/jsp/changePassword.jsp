@@ -50,8 +50,7 @@
                                     </div>
                                     <button type="submit" class="btn btn-success btn-lg mb-1">Đổi mật khẩu</button>
                                 </form>
-                                <div style="color: red"> ${requestScope.error}</div>
-                                <div style="color: green"> ${requestScope.mess}</div>
+                              
 
                             </div>
                         </div>

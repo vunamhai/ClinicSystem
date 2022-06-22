@@ -81,19 +81,29 @@ public class ChangePasswordController extends HttpServlet {
         AccountDAOImpl aOImpl = new AccountDAOImpl();
         Accounts a = aOImpl.getAccountById(id);
         try {
-            //pass
+
             String oldPassword = request.getParameter("oldPassword").trim();
+            // newpass
             String newPassword = request.getParameter("newPassword").trim();
+            // repasss
             String reNewPassword = request.getParameter("reNewPassword").trim();
             session.setAttribute("oldPassword", oldPassword);
             session.setAttribute("newPassword", newPassword);
             session.setAttribute("reNewPassword", reNewPassword);
-          
+            if (!oldPassword.equals(a.getPassword())) {
+                session.setAttribute("messageChangePass", "Old Passsword incorrect!!!");
+                response.sendRedirect("./jsp/changePass.jsp");
+                return;
+            }
+               // 
+            if (!newPassword.equals(reNewPassword)) {
+                session.setAttribute("messageChangePass", "Pass word not match!!!");
+                response.sendRedirect("./jsp/changePass.jsp");
+                return;
+            }
+
         } catch (Exception e) {
-            out.println("<script type=\"text/javascript\">\n"
-                    + "alert('Change password unsuccessfully!');\n"
-                    + "location= 'ChangePasswordController?id=" + id + "';\n"
-                    + "</script>");
+
         }
     }
 
