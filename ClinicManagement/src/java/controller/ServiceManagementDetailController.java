@@ -48,7 +48,6 @@ public class ServiceManagementDetailController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String id = request.getParameter("id");
-        System.out.println("xxxxxxxxxxxxxxxxxxxxx" + id);
         ServiceDAOImpl sdi = new ServiceDAOImpl();
         ArrayList<entity.ViewServiceX> viewService = null;
         try {
