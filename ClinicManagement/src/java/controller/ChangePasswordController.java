@@ -82,7 +82,7 @@ public class ChangePasswordController extends HttpServlet {
             request.getRequestDispatcher("./jsp/home.jsp").forward(request, response);
             return;
         }
-
+          // password
         String oldPassword = request.getParameter("oldPassword").trim();
         String newPassword = request.getParameter("newPassword").trim();
         String reNewPassword = request.getParameter("reNewPassword").trim();
