@@ -81,6 +81,7 @@ public class ChangePasswordController extends HttpServlet {
         AccountDAOImpl aOImpl = new AccountDAOImpl();
         Accounts a = aOImpl.getAccountById(id);
         try {
+            //pass
             String oldPassword = request.getParameter("oldPassword").trim();
             String newPassword = request.getParameter("newPassword").trim();
             String reNewPassword = request.getParameter("reNewPassword").trim();
