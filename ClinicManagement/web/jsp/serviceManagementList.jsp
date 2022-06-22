@@ -96,7 +96,7 @@
                                 <td class="service-desc">${service.serviceDescription}</td>
                                 <td>
                                     <div class="action">
-                                        <a class="bi bi-eye" href="ViewService?id=${service.serviceId}"></a> 
+                                        <a class="bi bi-eye" href="ServiceManagementDetailController?id=${service.serviceId}"></a> 
                                         <a class="bi bi-pencil-fill" href="UpdateService?id=${service.serviceId}"></a> 
                                         <a class="bi bi-trash-fill" href="DeleteService?id=${service.serviceId}"></a>
                                 </td>

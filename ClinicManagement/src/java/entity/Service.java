@@ -26,12 +26,13 @@ public class Service {
     private String serviceBrief;
     private String serviceDescription;
     private String serviceImage;
-
     /**
      * Creates a service with no parameter
      */
     public Service() {
     }
+
+    
 
     public Service(int serviceId, String serviceName, String serviceDescription) {
         this.serviceId = serviceId;
@@ -160,5 +161,6 @@ public class Service {
     public void setServiceImage(String serviceImage) {
         this.serviceImage = serviceImage;
     }
+    
 
 }
