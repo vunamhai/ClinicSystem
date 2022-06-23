@@ -69,6 +69,26 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
         }
         return null;
     }
+   
+    public void addDoctorForService(int doctor, int service) {
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try {
+            connecion = getConnection();
+            // Get data
+            preparedStatement = connecion.prepareStatement(" update users set service_id = ? where user_id = ? and role_id = 3");
+            preparedStatement.setInt(1, service);
+            preparedStatement.setInt(2, doctor);
+            preparedStatement.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
+    }
      @Override
     public void createAccount(Account account) {
         logger.log(Level.INFO, "Create account");
