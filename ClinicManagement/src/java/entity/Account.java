@@ -1,176 +1,245 @@
 /*
- * Copyright(C) 2022, FPT University
- * CMS
- * CLINIC MANAGEMENT SYSTEM
- *
- * Record of change:
- * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-11      1.0                 namnv           First Implement 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package entity;
 
 import java.sql.Date;
 
 /**
- * The class contains attributes and getter,setter for information of [User]
- * object <br>
- * The getter will throw an attribute of [User] object<br>
- * The setter will set an attribute of [User] object<br>
  *
- * @author nguye
+ * @author uyenc
  */
 public class Account {
 
-    private int ID;
-    private int service_id;
+    private int userId;
+    private String role;
+    private int serviceId;
     private String username;
     private String email;
     private String password;
-    private String firstname;
-    private String lastname;
-    private Date dob;
+    private String fullName;
+    private Date birthDate;
     private boolean gender;
     private String phone;
-    private String street;
-    private String city;
-    private String country;
+    private String address;
+    private String avatarImage;
 
-    public Account() {
+    /**
+     * Return the value of userId attribute of the
+     * <code>Account</code> object.
+     */
+    public int getUserId() {
+        return userId;
     }
 
-    public Account(int ID, int service_id, String username, String email, String password, String firstname, String lastname, Date dob, boolean gender, String phone, String street, String city, String country) {
-        this.ID = ID;
-        this.service_id = service_id;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.dob = dob;
-        this.gender = gender;
-        this.phone = phone;
-        this.street = street;
-        this.city = city;
-        this.country = country;
+    /**
+     * Set userId value of the <code>Account</code> object.
+     *
+     * @param userId is a <code>java.lang.int</code> this value is the id
+     * of the user.
+     */
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public Account(String username, String email, String password, String firstname, String lastname, Date dob, boolean gender, String phone, String street, String city, String country) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.dob = dob;
-        this.gender = gender;
-        this.phone = phone;
-        this.street = street;
-        this.city = city;
-        this.country = country;
-    }
-    
-
-    public int getID() {
-        return ID;
+    /**
+     * Return the value of role attribute of the
+     * <code>Account</code> object.
+     */
+    public String getRole() {
+        return role;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    /**
+     * Set role value of the <code>Account</code> object.
+     *
+     * @param role is a <code>java.lang.String</code> this value is the role
+     * of the account.
+     */
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    public int getService_id() {
-        return service_id;
+    /**
+     * Return the value of serviceId attribute of the
+     * <code>Account</code> object.
+     */
+    public int getServiceId() {
+        return serviceId;
     }
 
-    public void setService_id(int service_id) {
-        this.service_id = service_id;
+    /**
+     * Set serviceId value of the <code>Account</code> object.
+     *
+     * @param serviceId is a <code>java.lang.int</code> this value is the id
+     * of the service.
+     */
+    public void setServiceId(int serviceId) {
+        this.serviceId = serviceId;
     }
 
+    /**
+     * Return the value of username attribute of the
+     * <code>Account</code> object.
+     */
     public String getUsername() {
         return username;
     }
-
+    
+    /**
+     * Set username value of the <code>Account</code> object.
+     *
+     * @param username is a <code>java.lang.String</code> this value 
+     * is the username of account.
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * Return the value of email attribute of the
+     * <code>Account</code> object.
+     */
     public String getEmail() {
         return email;
     }
-
+    
+    /**
+     * Set email value of the <code>Account</code> object.
+     *
+     * @param email is a <code>java.lang.String</code> this value is the email
+     * of the account.
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * Return the value of password attribute of the
+     * <code>Account</code> object.
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * Set password value of the <code>Account</code> object.
+     *
+     * @param password is a <code>java.lang.String</code> this value is the 
+     * password of the account.
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getFirstname() {
-        return firstname;
+    /**
+     * Return the value of fullName attribute of the
+     * <code>Account</code> object.
+     */
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    /**
+     * Set fullName value of the <code>Account</code> object.
+     *
+     * @param fullName is a <code>java.lang.String</code> this value is the 
+     * fullname of the user.
+     */
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public String getLastname() {
-        return lastname;
+    /**
+     * Return the value of birthDate attribute of the
+     * <code>Account</code> object.
+     */
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    /**
+     * Set birthDate value of the <code>Account</code> object.
+     *
+     * @param birthDate is a <code>java.lang.Date</code> this value is the 
+     * birthday of the user.
+     */
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
-    public Date getDob() {
-        return dob;
-    }
-
-    public void setDob(Date dob) {
-        this.dob = dob;
-    }
-
+    /**
+     * Return the value of gender attribute of the
+     * <code>Account</code> object.
+     */
     public boolean isGender() {
         return gender;
     }
 
+    /**
+     * Set gender value of the <code>Account</code> object.
+     *
+     * @param gender is a <code>java.lang.Boolean</code> this value is the 
+     * gender of the user.
+     */
     public void setGender(boolean gender) {
         this.gender = gender;
     }
 
+    /**
+     * Return the value of phone attribute of the
+     * <code>Account</code> object.
+     */
     public String getPhone() {
         return phone;
     }
 
+    /**
+     * Set phone value of the <code>Account</code> object.
+     *
+     * @param phone is a <code>java.lang.String</code> this value is the 
+     * phone of the user.
+     */
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public String getStreet() {
-        return street;
+    /**
+     * Return the value of address attribute of the
+     * <code>Account</code> object.
+     */
+    public String getAddress() {
+        return address;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
+    /**
+     * Set address value of the <code>Account</code> object.
+     *
+     * @param address is a <code>java.lang.String</code> this value is the 
+     * address of the user.
+     */
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getCity() {
-        return city;
+    /**
+     * Return the value of avatarImage attribute of the
+     * <code>Account</code> object.
+     */
+    public String getAvatarImage() {
+        return avatarImage;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
+    /**
+     * Set avatarImage value of the <code>Account</code> object.
+     *
+     * @param avatarImage is a <code>java.lang.String</code> this value is the 
+     * avatar of the account.
+     */
+    public void setAvatarImage(String avatarImage) {
+        this.avatarImage = avatarImage;
     }
 
 }
