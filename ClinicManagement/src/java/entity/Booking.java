@@ -7,7 +7,7 @@ package entity;
 
 /**
  *
- * @author Nam Ngo
+ * @author uyenc
  */
 public class Booking {
     private int bookingID;

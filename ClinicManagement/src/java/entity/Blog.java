@@ -5,13 +5,12 @@
  */
 package entity;
 
-
-
 /**
  *
- * @author ADMIN
+ * @author uyenc
  */
 public class Blog {
+
     private int id;
     private int account_id;
     private String title;
@@ -20,25 +19,20 @@ public class Blog {
     public Blog() {
     }
 
+    public int getAccount_id() {
+        return account_id;
+    }
 
-//    public int getAccount_id() {
-//        return account_id;
-//    }
-//
-//    public void setAccount_id(int ccount_id) {
-//        this.account_id = ccount_id;
-//    }
+    public void setAccount_id(int ccount_id) {
+        this.account_id = ccount_id;
+    }
 
-    public Blog(int id , String title, String description) {
+    public Blog(int id, String title, String description) {
         this.id = id;
-//        this.account_id = account_id;
+        this.account_id = account_id;
         this.title = title;
         this.description = description;
     }
-
-   
-
-  
 
     public int getId() {
         return id;
@@ -47,7 +41,6 @@ public class Blog {
     public void setId(int id) {
         this.id = id;
     }
-
 
     public String getTitle() {
         return title;
@@ -70,6 +63,4 @@ public class Blog {
         this.description = description;
     }
 
-   
-    
 }

@@ -1,27 +1,14 @@
-/*
- * Copyright(C) 20022, FPT University
- * CMS:
- * Clinic Management System
- *
- * Record of change:
- * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-05-26      1.0                 UYENNP          Service DAO Implement
- */
 package entity;
 
 import java.util.List;
 
 /**
- * <h1>Pagination </h1>
- * <p>
  *
- *
- * @author UyenNP
- * @version 1.0
- * @since 2022-05-26
+ * @author uyenc
  */
 public class Pagination<T> {
-     /**
+
+    /**
      * Total item of result
      */
     private int totalItem;

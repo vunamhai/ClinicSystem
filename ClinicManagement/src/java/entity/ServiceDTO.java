@@ -10,14 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <h1>Service </h1>
- * storage data of a service
- * <p>
  *
- *
- * @author UyenNP
- * @version 1.0
- * @since 2022-05-26
+ * @author uyenc
  */
 public class ServiceDTO {
 

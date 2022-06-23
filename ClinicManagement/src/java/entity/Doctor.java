@@ -7,24 +7,15 @@ package entity;
 
 /**
  *
- * @author Administrator
+ * @author uyenc
  */
 public class Doctor {
 
+    private String image;
     private int id;
     private String name;
     private String serviceDescription;
     private int serviceId;
-
-    public Doctor() {
-    }
-
-    public Doctor(int id, String name, String serviceDescription, int serviceId) {
-        this.id = id;
-        this.name = name;
-        this.serviceDescription = serviceDescription;
-        this.serviceId = serviceId;
-    }
 
     public int getId() {
         return id;
@@ -39,7 +30,7 @@ public class Doctor {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name.trim();
     }
 
     public String getServiceDescription() {
@@ -50,6 +41,14 @@ public class Doctor {
         this.serviceDescription = serviceDescription;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public int getServiceId() {
         return serviceId;
     }
@@ -57,7 +56,5 @@ public class Doctor {
     public void setServiceId(int serviceId) {
         this.serviceId = serviceId;
     }
-    
-    
-}
 
+}

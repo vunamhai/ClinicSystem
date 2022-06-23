@@ -7,7 +7,7 @@ package entity;
 
 /**
  *
- * @author Nam Ngo
+ * @author uyenc
  */
 public class SQLCommands {
     public static String GET_ALL_ACCOUNTS="select * from Accounts";
