@@ -73,7 +73,7 @@
             <div class="wrapper">
                 <button id="add-btn" type="button" class="btn btn-light mb-3" onclick="showAddServiceModal()">
                     <i class="bi bi-plus-circle-fill"></i>
-                    Thêm dịch vụ
+                    Add Service
                 </button>
 
                 <!-- Table -->
