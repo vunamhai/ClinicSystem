@@ -88,6 +88,10 @@
         <servlet-name>ServiceManagementDetailController</servlet-name>
         <servlet-class>controller.ServiceManagementDetailController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddDoctorForService</servlet-name>
+        <servlet-class>controller.AddDoctorForService</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -171,6 +175,10 @@
     <servlet-mapping>
         <servlet-name>ServiceManagementDetailController</servlet-name>
         <url-pattern>/ServiceManagementDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddDoctorForService</servlet-name>
+        <url-pattern>/AddDoctorForService</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
