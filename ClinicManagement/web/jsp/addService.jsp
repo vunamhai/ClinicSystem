@@ -29,7 +29,7 @@
                 <th>Tóm tắt</th>
                 <th>Mô tả</th>
                 <th>Hình ảnh</th>
-                <th>Add</th>
+                <th>Thêm</th>
             </tr>
             <form action="../AddServiceController" method="POST">
                 <tr>
