@@ -74,4 +74,6 @@ public interface AccountDAO {
     List<Doctor> getDoctorByServiceId(int id);
 
     List<Doctor> getAllDoctor();
+    
+    void addDoctorForService(int doctor, int service);
 }
