@@ -80,7 +80,7 @@
                 <table class="table table-bordered align-middle" id="table-services">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">STT</th>
                             <th scope="col">Mã ID</th>
                             <th scope="col">Tên dịch vụ</th>
                             <th scope="col">Tóm tắt dịch vụ</th>
