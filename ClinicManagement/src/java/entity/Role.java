@@ -7,7 +7,7 @@ package entity;
 
 /**
  *
- * @author Thanh Tung
+ * @author uyenc
  */
 public class Role {
     private int roleId;

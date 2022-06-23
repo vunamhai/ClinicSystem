@@ -7,7 +7,7 @@ package entity;
 
 /**
  *
- * @author Administrator
+ * @author uyenc
  */
 public class ViewServiceX {
      private int service_id;

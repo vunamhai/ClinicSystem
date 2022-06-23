@@ -1,21 +1,13 @@
 /*
- * Copyright(C) 2022, FPT University
- * CMS
- * CLINIC MANAGEMENT SYSTEM
- *
- * Record of change:
- * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-05-26      1.0                 UYENNP           First Implement 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package entity;
 
 import java.sql.Date;
 
 /**
- * The class contains attributes and getter,setter for information of [User]
- * object <br>
- * The getter will throw an attribute of [User] object<br>
- * The setter will set an attribute of [User] object<br>
  *
  * @author uyenc
  */
@@ -162,6 +154,7 @@ public class User {
         this.avatarImage = avatarImage;
         this.userId = id;
     }
+
     /**
      * Create an instance of <code>User</code> object with value of attributes
      * of <code>User</code>
