@@ -14,6 +14,7 @@ import dao.AccountDAO;
 import entity.Account1;
 import entity.Accounts;
 import entity.Booking;
+import entity.Doctor;
 import entity.Feedback;
 import entity.Role;
 import entity.SQLCommands;
@@ -1006,5 +1007,73 @@ public class AccountDAOImpl extends DBContext implements AccountDAO {
             }
         }
         return null;
+    }
+
+     public List<Doctor> getDoctorByServiceId(int id) {
+        //   logger.log(Level.INFO, "Login Controller");
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        List<Doctor> doctor = new ArrayList<>();
+        try {
+            connecion = getConnection();
+            // Get data
+            preparedStatement = connecion.prepareStatement(" select distinct a.ID, a.FirstName, a.LastName, s.service_id, s.Description\n"
+                    + "from Accounts a \n"
+                    + "join Services s\n"
+                    + "on a.role_id = 3 and s.service_id = ?");
+            preparedStatement.setInt(1, id);
+            //   preparedStatement.setInt(2, id);
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Doctor account = new Doctor();
+                account.setId(rs.getInt("ID"));
+                account.setName(rs.getString("FirstName"));
+                account.setName(rs.getString("LastName"));
+                account.setId(rs.getInt("service_id"));
+                account.setServiceDescription(rs.getString("Description"));
+                doctor.add(account);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
+        return doctor;
+
+    }
+
+     @Override
+    public List<Doctor> getAllDoctor() {
+        logger.log(Level.INFO, "Login Controller");
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        List<Doctor> doctor = new ArrayList<>();
+        try {
+            connecion = getConnection();
+            // Get data
+            preparedStatement = connecion.prepareStatement("select * from Accounts where role_id = 3");
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                Doctor user = new Doctor();
+                user.setId(rs.getInt("ID"));
+                user.setName(rs.getString("FirstName"));
+                user.setName(rs.getString("LastName"));
+                user.setServiceId(rs.getInt("service_id"));
+                doctor.add(user);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(AccountDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
+        return doctor;
     }
 }

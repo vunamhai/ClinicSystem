@@ -1,23 +1,13 @@
 /*
- * Copyright(C) 20022, FPT University
- * CMS:
- * Clinic Management System
- *
- * Record of change:
- * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-05-26     1.0                 UYENNP          Service  Implement
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package entity;
 
 /**
- * <h1>Service </h1>
- * storage data of a service
- * <p>
  *
- *
- * @author UYENNP
- * @version 1.0
- * @since 2022-05-26
+ * @author uyenc
  */
 public class Service {
 
@@ -62,7 +52,6 @@ public class Service {
      * @param serviceDescription
      * @param serviceImage
      */
-
     public Service(int serviceId, String serviceName, String serviceBrief, String serviceDescription, String serviceImage) {
         this.serviceId = serviceId;
         this.serviceName = serviceName;

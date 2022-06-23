@@ -5,49 +5,79 @@
  */
 package entity;
 
+import java.sql.Date;
+
 /**
  *
- * @author Nam Ngo
+ * @author uyenc
  */
 public class Feedback {
-    private int feedbackID;
-    private int bookingID;
-    private int patientID;
-    private String description;
+
+    private int feedbackId;
+    private int customerId;
+    private int serviceId;
+    private int examinationId;
+    private String feedbackContent;
+    private Date feedbackTime;
+
+    public Feedback(int feedbackId, int customerId, int serviceId, int examinationId, String feedbackContent, Date feedbackTime) {
+        this.feedbackId = feedbackId;
+        this.customerId = customerId;
+        this.serviceId = serviceId;
+        this.examinationId = examinationId;
+        this.feedbackContent = feedbackContent;
+        this.feedbackTime = feedbackTime;
+    }
 
     public Feedback() {
     }
 
-    public int getFeedbackID() {
-        return feedbackID;
+    public int getFeedbackId() {
+        return feedbackId;
     }
 
-    public void setFeedbackID(int feedbackID) {
-        this.feedbackID = feedbackID;
+    public void setFeedbackId(int feedbackId) {
+        this.feedbackId = feedbackId;
     }
 
-    public int getBookingID() {
-        return bookingID;
+    public int getCustomerId() {
+        return customerId;
     }
 
-    public void setBookingID(int bookingID) {
-        this.bookingID = bookingID;
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
     }
 
-    public int getPatientID() {
-        return patientID;
+    public int getServiceId() {
+        return serviceId;
     }
 
-    public void setPatientID(int patientID) {
-        this.patientID = patientID;
+    public void setServiceId(int serviceId) {
+        this.serviceId = serviceId;
     }
 
-    public String getDescription() {
-        return description;
+    public int getExaminationId() {
+        return examinationId;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setExaminationId(int examinationId) {
+        this.examinationId = examinationId;
     }
-    
+
+    public String getFeedbackContent() {
+        return feedbackContent;
+    }
+
+    public void setFeedbackContent(String feedbackContent) {
+        this.feedbackContent = feedbackContent;
+    }
+
+    public Date getFeedbackTime() {
+        return feedbackTime;
+    }
+
+    public void setFeedbackTime(Date feedbackTime) {
+        this.feedbackTime = feedbackTime;
+    }
+
 }

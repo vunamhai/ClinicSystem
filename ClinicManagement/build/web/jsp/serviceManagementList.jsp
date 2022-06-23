@@ -58,9 +58,9 @@
                         <div class="avatar">
                             <img src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" alt="avatar">
                         </div>
-                        <form action="SearchService" method="POST">
+                        <form action="SearchServiceController" method="POST">
                             <input type="text" placeholder="Search.." name="search">
-                            <button type="submit">Submit</button>
+                            <button type="submit">Tìm kiếm</button>
                         </form>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                 <table class="table table-bordered align-middle" id="table-services">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">STT</th>
                             <th scope="col">Mã ID</th>
                             <th scope="col">Tên dịch vụ</th>
                             <th scope="col">Tóm tắt dịch vụ</th>
@@ -96,7 +96,7 @@
                                 <td class="service-desc">${service.serviceDescription}</td>
                                 <td>
                                     <div class="action">
-                                        <a class="bi bi-eye" href="ViewService?id=${service.serviceId}"></a> 
+                                        <a class="bi bi-eye" href="ServiceManagementDetailController?id=${service.serviceId}"></a> 
                                         <a class="bi bi-pencil-fill" href="UpdateService?id=${service.serviceId}"></a> 
                                         <a class="bi bi-trash-fill" href="DeleteService?id=${service.serviceId}"></a>
                                 </td>

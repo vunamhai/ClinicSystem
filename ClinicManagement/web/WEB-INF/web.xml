@@ -80,6 +80,22 @@
         <servlet-name>SearchAccountController</servlet-name>
         <servlet-class>controller.SearchAccountController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SearchServiceController</servlet-name>
+        <servlet-class>controller.SearchServiceController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServiceManagementDetailController</servlet-name>
+        <servlet-class>controller.ServiceManagementDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddDoctorForService</servlet-name>
+        <servlet-class>controller.AddDoctorForService</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewMyReservation</servlet-name>
+        <servlet-class>controller.ViewMyReservation</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -155,6 +171,22 @@
     <servlet-mapping>
         <servlet-name>SearchAccountController</servlet-name>
         <url-pattern>/SearchAccountController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchServiceController</servlet-name>
+        <url-pattern>/SearchServiceController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceManagementDetailController</servlet-name>
+        <url-pattern>/ServiceManagementDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddDoctorForService</servlet-name>
+        <url-pattern>/AddDoctorForService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMyReservation</servlet-name>
+        <url-pattern>/viewMyReservation</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

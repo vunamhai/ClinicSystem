@@ -5,25 +5,21 @@
  */
 package controller;
 
-import dao.ServiceDAO;
-import dao.UserDAO;
 import dao.impl.ServiceDAOImpl;
-import dao.impl.UserDAOImpl;
-import entity.Doctor;
-import entity.ServiceDTO;
-import entity.Pagination;
+import entity.Service;
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author uyenc
- */
-public class ServiceManagementList extends HttpServlet {
+
+public class ServiceManagementDetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,36 +33,6 @@ public class ServiceManagementList extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String page = request.getParameter("page");
-        if (page != null) {
-            request.getSession().setAttribute("page", page);
-        }
-        int pageIndex = 1;
-        if (page != null) {
-            try {
-                pageIndex = Integer.parseInt(page);
-                if (pageIndex == -1) {
-                    pageIndex = 1;
-                }
-            } catch (Exception e) {
-                pageIndex = 1;
-            }
-        } else {
-            pageIndex = 1;
-        }
-
-        int pageSize = 5;
-        ServiceDAO serviceDAO = new ServiceDAOImpl();
-        if (request.getSession().getAttribute("page") != null) {
-            pageIndex = Integer.parseInt(request.getSession().getAttribute("page").toString());
-        }
-        UserDAO userDAO = new UserDAOImpl();
-
-        List<Doctor> doctors = userDAO.getAllDoctor();
-
-        request.setAttribute("doctors", doctors);
-
-        request.getRequestDispatcher("./jsp/serviceManagementList.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -81,7 +47,16 @@ public class ServiceManagementList extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        String id = request.getParameter("id");
+        ServiceDAOImpl sdi = new ServiceDAOImpl();
+        ArrayList<entity.ViewServiceX> viewService = null;
+        try {
+            viewService = sdi.viewServices(Integer.parseInt(id));
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceManagementDetailController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        request.setAttribute("viewService", viewService);
+        request.getRequestDispatcher("jsp/ViewService.jsp").forward(request, response);
     }
 
     /**
@@ -109,3 +84,4 @@ public class ServiceManagementList extends HttpServlet {
     }// </editor-fold>
 
 }
+

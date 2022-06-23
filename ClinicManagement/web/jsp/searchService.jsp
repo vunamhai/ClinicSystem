@@ -1,12 +1,3 @@
-<!--
- * Copyright(C) 20022, FPT University
- * CMS:
- * Clinic Management System
- *
- * Record of change:
- * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-05-26      1.0                 UyenNP         Controller Service Management List
--->
 
 <!doctype html>
 <html lang="en">
@@ -80,7 +71,7 @@
                 <table class="table table-bordered align-middle" id="table-services">
                     <thead>
                         <tr>
-                            <th scope="col">STT</th>
+                            <th scope="col">#</th>
                             <th scope="col">Mã ID</th>
                             <th scope="col">Tên dịch vụ</th>
                             <th scope="col">Tóm tắt dịch vụ</th>
@@ -88,7 +79,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${services}" var="service" >
+                        <c:forEach items="${searchList}" var="service" >
                             <tr>
                                 <th scope="row">${counter.count}</th>
                                 <td>${service.serviceId}</td>
@@ -96,7 +87,6 @@
                                 <td class="service-desc">${service.serviceDescription}</td>
                                 <td>
                                     <div class="action">
-                                        <a class="bi bi-eye" href="ServiceManagementDetailController?id=${service.serviceId}"></a> 
                                         <a class="bi bi-pencil-fill" href="UpdateService?id=${service.serviceId}"></a> 
                                         <a class="bi bi-trash-fill" href="DeleteService?id=${service.serviceId}"></a>
                                 </td>

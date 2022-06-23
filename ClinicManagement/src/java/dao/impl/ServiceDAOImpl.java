@@ -14,6 +14,7 @@ import dao.ServiceDAO;
 //import entity.ServiceDTO;
 //import entity.Pagination;
 import entity.Service;
+import entity.ViewServiceX;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -141,13 +142,13 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
         try {
             connecion = getConnection();
             // Get data
-            preparedStatement = connecion.prepareStatement("select * from services where service_id = ?");
+            preparedStatement = connecion.prepareStatement("select * from Services where service_id = ?");
             preparedStatement.setInt(1, id);
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 service.setServiceId(rs.getInt("service_id"));
                 service.setServiceName(rs.getString("service_name"));
-                service.setServiceDescription(rs.getString("service_description"));
+                service.setServiceDescription(rs.getString("Description"));
             }
         } catch (Exception ex) {
 //            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -204,6 +205,141 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
         }
         return result;
     }
+    
+    public String getString(String msg) {
+        StringBuilder output = new StringBuilder();
+
+        String[] tempStr = msg.trim().split("\\s+");
+        for (String string : tempStr) {
+            output.append(string).append(" ");
+        }
+        output.deleteCharAt(output.length() - 1);
+        return output.toString();
+    }
+
+    public ArrayList<Service> searchServices(String search) {
+        ArrayList<Service> result = new ArrayList<>();
+        String output = getString(search);
+        String sql = "SELECT [service_id]\n"
+                + "    ,[service_name]\n"
+                + " ,[description]\n"
+                + "  FROM services where [service_name] like N'%" + output + "%'"
+                + "or [service_name] like '%" + output + "%'";
+        Connection con = null;
+        PreparedStatement ps = null;
+
+        ResultSet rs = null;
+        try {
+            con = getConnection(); //get connection
+            ps = con.prepareStatement(sql);
+
+            rs = ps.executeQuery();
+            /**
+             * set attributes for services from result set then add its to
+             * result list
+             */
+            while (rs.next()) {
+                Service service = new Service(rs.getInt("service_id"), rs.getString("service_name"), rs.getString("description"));
+                result.add(service);
+            }
+        } catch (SQLException ex) {
+//            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (Exception ex) {
+//            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            /**
+             * close result set, prepared statement and connection by
+             * corresponding order
+             */
+        } finally {
+            this.closeResultSet(rs);
+            this.closePreparedStatement(ps);
+            this.closeConnection(con);
+        }
+        return result;
+    }
+    
+//    public ArrayList<Service> viewServices(int id) throws SQLException {
+//        ArrayList<Service> result = new ArrayList<>();
+//        String sql = "select s.service_id, s.service_name,Description, firstname, lastname\n"
+//                + "from Services s join Accounts acc on s.service_id = acc.service_id\n"
+//                + "where s.service_id = ?";
+//        Connection con = null;
+//        PreparedStatement ps = null;
+//        ResultSet rs = null;
+//        try {
+//            con = getConnection(); //get connection
+//            ps = con.prepareStatement(sql);
+//            ps.setInt(1, id);
+//            rs = ps.executeQuery();
+//            /**
+//             * set attributes for services from result set then add its to
+//             * result list
+//             */
+//            while (rs.next()) {
+//                Service viewService = new Service(rs.getInt("service_id"),
+//                        rs.getString("service_name"), rs.getString("description"), rs.getString("firstname"),
+//                        rs.getString("lastname"));
+//                result.add(viewService);
+//            }
+//        } catch (SQLException ex) {
+////            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+//            throw ex;
+//        } catch (Exception ex) {
+////            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+//            /**
+//             * close result set, prepared statement and connection by
+//             * corresponding order
+//             */
+//        } finally {
+//            this.closeResultSet(rs);
+//            this.closePreparedStatement(ps);
+//            this.closeConnection(con);
+//        }
+//        return result;
+//    }
+    
+    public ArrayList<ViewServiceX> viewServices(int id) throws SQLException {
+        ArrayList<ViewServiceX> result = new ArrayList<>();
+        String sql = "select s.service_id, s.service_name,Description, firstname, lastname\n"
+                + "from Services s join Accounts acc on s.service_id = acc.service_id\n"
+                + "where s.service_id = ?";
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = getConnection(); //get connection
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            /**
+             * set attributes for services from result set then add its to
+             * result list
+             */
+            while (rs.next()) {
+                ViewServiceX viewService = new ViewServiceX(rs.getInt("service_id"), 
+                        rs.getString("service_name"), rs.getString("description"), rs.getString("firstname"),
+                rs.getString("lastname"));
+                result.add(viewService);
+            }
+        } catch (SQLException ex) {
+//            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
+        } catch (Exception ex) {
+//            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            /**
+             * close result set, prepared statement and connection by
+             * corresponding order
+             */
+        } finally {
+            this.closeResultSet(rs);
+            this.closePreparedStatement(ps);
+            this.closeConnection(con);
+        }
+        return result;
+    }
+
+
 
     @Override
     public int addService(Service service) {
