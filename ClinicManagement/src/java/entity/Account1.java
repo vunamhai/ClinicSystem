@@ -9,7 +9,7 @@ import java.sql.Date;
 
 /**
  *
- * @author ADMIN
+ * @author uyenc
  */
 public class Account1 {
 
