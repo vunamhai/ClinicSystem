@@ -25,10 +25,10 @@
     <body>
         <table style="margin-left: auto; margin-right: auto; border: 1px solid">
             <tr>
-                <th>Tên dịch vụ</th>
-                <th>Tóm tắt</th>
-                <th>Mô tả</th>
-                <th>Hình ảnh</th>
+                <th>Service Name</th>
+                <th>Summary</th>
+                <th>Description</th>
+                <th>Avatar</th>
                 <th>Add</th>
             </tr>
             <form action="../AddServiceController" method="POST">
