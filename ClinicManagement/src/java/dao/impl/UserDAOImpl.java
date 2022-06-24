@@ -432,7 +432,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         try {
             connecion = getConnection();
             // Get data
-            preparedStatement = connecion.prepareStatement("UPDATE [dbo].[Accounts]\n"
+            preparedStatement = connecion.prepareStatement("UPDATE [dbo].[users]\n"
                     + "   SET \n"
                     + "      [Password] = ?\n"
                     + "      \n"
@@ -449,6 +449,10 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             closePreparedStatement(preparedStatement);
             closeConnection(connecion);
         }
+    }
+    public static void main(String[] args) {
+        UserDAOImpl aOImpl = new UserDAOImpl();
+        aOImpl.updatePassword("huyendt", "123");
     }
    
     @Override
