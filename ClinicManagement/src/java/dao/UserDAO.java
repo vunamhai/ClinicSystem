@@ -1,12 +1,11 @@
 
 package dao;
 
-import entity.Account;
+import entity.Accounts;
 import entity.Doctor;
 import entity.Pagination;
 import entity.User;
 import java.util.List;
-
 
 public interface UserDAO {
 
@@ -21,7 +20,7 @@ public interface UserDAO {
      * -It is a <code>java.util.List</code> object
      * @throws SQLException when <code>java.sql.SQLException</code> occurs.
      */
-    Pagination<Account> getAllAccount(int pageIndex, int pageSize, String search);
+    Pagination<Accounts> getAllAccount(int pageIndex, int pageSize, String search);
 
     void deleteAccount(int id);
 
