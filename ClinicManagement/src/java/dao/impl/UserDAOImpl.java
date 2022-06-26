@@ -2,7 +2,6 @@ package dao.impl;
 
 import context.DBContext;
 import dao.UserDAO;
-import entity.Account;
 import entity.Pagination;
 import entity.User;
 import entity.Doctor;
@@ -230,6 +229,46 @@ public class UserDAOImpl extends DBContext implements UserDAO {
     }
 
     @Override
+    public User getUserByEmail(String email) {
+        logger.log(Level.INFO, "Login Controller");
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+
+        try {
+            connecion = getConnection();
+            // Get data
+            preparedStatement = connecion.prepareStatement("select * from users  where email = ?");
+            preparedStatement.setNString(1, email);
+            rs = preparedStatement.executeQuery();
+            while (rs.next()) {
+                User user = new User();
+                user.setUserId(rs.getInt("user_id"));
+                user.setRoleId(rs.getInt("role_id"));
+                user.setServiceId(rs.getInt("service_id"));
+                user.setUsername(rs.getString("username"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                user.setFullName(rs.getString("full_name"));
+                user.setBirthDate(rs.getDate("birth_date"));
+                user.setGender(rs.getBoolean("gender"));
+                user.setPhone(rs.getString("phone"));
+                user.setAddress(rs.getString("address"));
+                user.setAvatarImage(rs.getString("avatar_image"));
+                return user;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closeResultSet(rs);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
+        return null;
+    }
+
+    @Override
     public void addDoctorForService(int doctor, int service) {
         Connection connecion = null;
         PreparedStatement preparedStatement = null;
@@ -450,7 +489,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             closeConnection(connecion);
         }
     }
-   
+
     @Override
     public User getUserByEmail(String email) {
         logger.log(Level.INFO, "Login Controller");
