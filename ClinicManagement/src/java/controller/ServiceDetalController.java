@@ -5,21 +5,25 @@
  */
 package controller;
 
+import dao.PackageDAO;
+import dao.ServiceDAO;
+import dao.impl.PackageDAOImpl;
 import dao.impl.ServiceDAOImpl;
 import entity.Service;
+import entity.ServicePackage;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-public class ServiceManagementDetailController extends HttpServlet {
+/**
+ *
+ * @author Administrator
+ */
+public class ServiceDetalController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,7 +36,19 @@ public class ServiceManagementDetailController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+         response.setContentType("text/html;charset=UTF-8");
+        // get value of query string Id
+        int id = Integer.parseInt(request.getParameter("Id"));
+        ServiceDAO serviceDAO = new ServiceDAOImpl();
+        // get service by id
+        Service service = serviceDAO.getById(id);
+        // set attribute service with valuse service 
+        request.setAttribute("service", service);
+        PackageDAO packageDAO = new PackageDAOImpl();
+        List<ServicePackage> packages = packageDAO.getAllPackage();
+        request.setAttribute("packages", packages);
+        // forward request,reponse to serviceDetail.jsp
+        request.getRequestDispatcher("./jsp/serviceDetail.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -47,16 +63,7 @@ public class ServiceManagementDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
-        ServiceDAOImpl sdi = new ServiceDAOImpl();
-        ArrayList<entity.ViewServiceX> viewService = null;
-        try {
-            viewService = sdi.viewServices(Integer.parseInt(id));
-        } catch (SQLException ex) {
-            Logger.getLogger(ServiceManagementDetailController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        request.setAttribute("viewService", viewService);
-        request.getRequestDispatcher("jsp/ViewService.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -84,4 +91,3 @@ public class ServiceManagementDetailController extends HttpServlet {
     }// </editor-fold>
 
 }
-
