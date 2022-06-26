@@ -12,134 +12,233 @@ import java.sql.Date;
  * @author uyenc
  */
 public class Accounts {
-    private int id;
+     private int userId;
+    private String role;
+    private int serviceId;
     private String username;
-    private String password;
     private String email;
-    private String firstname;
-    private String lastname;
-    private int roleID;
-    private String roleName;
-    private Date dob;
+    private String password;
+    private String fullName;
+    private Date birthDate;
     private boolean gender;
-    private String street;
-    private String city;
-    private String country;
     private String phone;
+    private String address;
+    private String avatarImage;
 
-    public Accounts() {
+    /**
+     * Return the value of userId attribute of the
+     * <code>Account</code> object.
+     */
+    public int getUserId() {
+        return userId;
     }
 
-    public int getId() {
-        return id;
+    /**
+     * Set userId value of the <code>Account</code> object.
+     *
+     * @param userId is a <code>java.lang.int</code> this value is the id
+     * of the user.
+     */
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    /**
+     * Return the value of role attribute of the
+     * <code>Account</code> object.
+     */
+    public String getRole() {
+        return role;
     }
 
+    /**
+     * Set role value of the <code>Account</code> object.
+     *
+     * @param role is a <code>java.lang.String</code> this value is the role
+     * of the account.
+     */
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    /**
+     * Return the value of serviceId attribute of the
+     * <code>Account</code> object.
+     */
+    public int getServiceId() {
+        return serviceId;
+    }
+
+    /**
+     * Set serviceId value of the <code>Account</code> object.
+     *
+     * @param serviceId is a <code>java.lang.int</code> this value is the id
+     * of the service.
+     */
+    public void setServiceId(int serviceId) {
+        this.serviceId = serviceId;
+    }
+
+    /**
+     * Return the value of username attribute of the
+     * <code>Account</code> object.
+     */
     public String getUsername() {
         return username;
     }
-
+    
+    /**
+     * Set username value of the <code>Account</code> object.
+     *
+     * @param username is a <code>java.lang.String</code> this value 
+     * is the username of account.
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
+    /**
+     * Return the value of email attribute of the
+     * <code>Account</code> object.
+     */
     public String getEmail() {
         return email;
     }
-
+    
+    /**
+     * Set email value of the <code>Account</code> object.
+     *
+     * @param email is a <code>java.lang.String</code> this value is the email
+     * of the account.
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getFirstname() {
-        return firstname;
+    /**
+     * Return the value of password attribute of the
+     * <code>Account</code> object.
+     */
+    public String getPassword() {
+        return password;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    /**
+     * Set password value of the <code>Account</code> object.
+     *
+     * @param password is a <code>java.lang.String</code> this value is the 
+     * password of the account.
+     */
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getLastname() {
-        return lastname;
+    /**
+     * Return the value of fullName attribute of the
+     * <code>Account</code> object.
+     */
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    /**
+     * Set fullName value of the <code>Account</code> object.
+     *
+     * @param fullName is a <code>java.lang.String</code> this value is the 
+     * fullname of the user.
+     */
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public Date getDob() {
-        return dob;
+    /**
+     * Return the value of birthDate attribute of the
+     * <code>Account</code> object.
+     */
+    public Date getBirthDate() {
+        return birthDate;
     }
 
-    public void setDob(Date dob) {
-        this.dob = dob;
+    /**
+     * Set birthDate value of the <code>Account</code> object.
+     *
+     * @param birthDate is a <code>java.lang.Date</code> this value is the 
+     * birthday of the user.
+     */
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
+    /**
+     * Return the value of gender attribute of the
+     * <code>Account</code> object.
+     */
     public boolean isGender() {
         return gender;
     }
 
+    /**
+     * Set gender value of the <code>Account</code> object.
+     *
+     * @param gender is a <code>java.lang.Boolean</code> this value is the 
+     * gender of the user.
+     */
     public void setGender(boolean gender) {
         this.gender = gender;
     }
 
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
+    /**
+     * Return the value of phone attribute of the
+     * <code>Account</code> object.
+     */
     public String getPhone() {
         return phone;
     }
 
+    /**
+     * Set phone value of the <code>Account</code> object.
+     *
+     * @param phone is a <code>java.lang.String</code> this value is the 
+     * phone of the user.
+     */
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
-    public int getRoleID() {
-        return roleID;
+    /**
+     * Return the value of address attribute of the
+     * <code>Account</code> object.
+     */
+    public String getAddress() {
+        return address;
     }
 
-    public void setRoleID(int roleID) {
-        this.roleID = roleID;
+    /**
+     * Set address value of the <code>Account</code> object.
+     *
+     * @param address is a <code>java.lang.String</code> this value is the 
+     * address of the user.
+     */
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getRoleName() {
-        return roleName;
+    /**
+     * Return the value of avatarImage attribute of the
+     * <code>Account</code> object.
+     */
+    public String getAvatarImage() {
+        return avatarImage;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    /**
+     * Set avatarImage value of the <code>Account</code> object.
+     *
+     * @param avatarImage is a <code>java.lang.String</code> this value is the 
+     * avatar of the account.
+     */
+    public void setAvatarImage(String avatarImage) {
+        this.avatarImage = avatarImage;
     }
-    
+
 }

@@ -6,7 +6,7 @@
 package controller;
 
 import dao.impl.BlogDAOImpl;
-import entity.Account;
+import entity.Accounts;
 import entity.Blog;
 import java.io.IOException;
 import java.io.PrintWriter;

@@ -9,8 +9,6 @@
  */
 package dao;
 
-import entity.Account;
-import entity.Account1;
 import entity.Accounts;
 import entity.Booking;
 import entity.Doctor;
@@ -18,18 +16,12 @@ import entity.Feedback;
 import entity.Role;
 import java.util.List;
 
-/**
- * This is an interface contains methods of <code>User</code> object<br>
- *
- * Bugs: none
- *
- * @author Hoang Thi Thu Huong
- */
+
 public interface AccountDAO {
 
-    Account1 login(String username, String password);
+    Accounts login(String username, String password);
 
-    void createAccount(Account account);
+    void createAccount(Accounts account);
 
     public List<Accounts> getAllAccounts();
 
