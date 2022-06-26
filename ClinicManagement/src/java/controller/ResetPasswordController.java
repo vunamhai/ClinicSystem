@@ -6,8 +6,11 @@
 package controller;
 
 import dao.AccountDAO;
+import dao.UserDAO;
 import dao.impl.AccountDAOImpl;
+import dao.impl.UserDAOImpl;
 import entity.Accounts;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -31,14 +34,15 @@ public class ResetPasswordController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         String password = request.getParameter("password");
         String rePassword = request.getParameter("re-password");
 
         HttpSession session = request.getSession();
-        Accounts account = (Accounts) session.getAttribute("user");
+        User user = (User) session.getAttribute("user");
 
         request.setAttribute("password", password);
         request.setAttribute("rePassword", rePassword);
@@ -48,12 +52,11 @@ public class ResetPasswordController extends HttpServlet {
             request.getRequestDispatcher("./jsp/setPassword.jsp").forward(request, response);
             return;
         }
-        AccountDAO accountDAO = new AccountDAOImpl();
-        accountDAO.updatePassword(account.getUsername(), rePassword);
+        UserDAO userDAO = new UserDAOImpl();
+        userDAO.updatePassword(user.getUsername(), rePassword);
         session.invalidate();
-        request.setAttribute("message", "Password update success!!!");
+        request.setAttribute("messageLogin", "Password update success!!!");
         request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -96,5 +99,3 @@ public class ResetPasswordController extends HttpServlet {
     }// </editor-fold>
 
 }
-
-
