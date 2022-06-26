@@ -1,6 +1,6 @@
 <%-- 
     Document   : Register
-    Created on : Mar 8, 2022, 8:49:23 AM
+    Created on : 
     Author     : nguye
 --%>
 
@@ -31,27 +31,26 @@
                             <div class="card-body p-4 p-md-5">
                                 <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Thay đổi mật khẩu</h3>
                              
-                                <form class="px-md-2" action="ChangePasswordController" method="post" >
-                                    <input type="hidden" name="id" value="${requestScope.id}" >
+                                <form class="px-md-2" action="../ChangePasswordController" method="post" >
+                                   
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example1q">Mật khẩu hiện tại<span class="text-danger"> *</span></label>
 
-                                        <input type="password" name="oldPassword" id="form3Example1q" class="form-control"  maxlength="30" required />
+                                        <input type="text" id="form3Example1q" class="form-control"  value="${oldPassword}" name="oldPassword" maxlength="30" required />
                                     </div>
                                     <div class="form-outline mb-4">
                                         <label class="form-label"  for="form3Example1q">Mật khẩu mới<span class="text-danger"> *</span></label>
 
-                                        <input type="password" name="newPassword" id="form3Example1q" class="form-control" maxlength="30" required />
+                                        <input type="password" id="form3Example1q" class="form-control"value="${newPassword}" name="newPassword" maxlength="30" required />
                                     </div>
                                     <div class="form-outline mb-4">
                                         <label class="form-label"  for="form3Example1q">Nhập lại mật khẩu mới<span class="text-danger" > *</span></label>
 
-                                        <input type="password" name="reNewPassword" id="form3Example1q" class="form-control" required />
+                                        <input type="password" id="form3Example1q" value="${reNewPassword}" name="reNewPassword" class="form-control" required />
                                     </div>
                                     <button type="submit" class="btn btn-success btn-lg mb-1">Đổi mật khẩu</button>
                                 </form>
-                                <div style="color: red"> ${requestScope.error}</div>
-                                <div style="color: green"> ${requestScope.mess}</div>
+                               <div style="color: red"> ${messageChangePass}</div>
 
                             </div>
                         </div>

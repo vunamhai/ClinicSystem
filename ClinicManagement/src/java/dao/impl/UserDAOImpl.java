@@ -432,7 +432,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         try {
             connecion = getConnection();
             // Get data
-            preparedStatement = connecion.prepareStatement("UPDATE [dbo].[Accounts]\n"
+            preparedStatement = connecion.prepareStatement("UPDATE [dbo].[users]\n"
                     + "   SET \n"
                     + "      [Password] = ?\n"
                     + "      \n"
