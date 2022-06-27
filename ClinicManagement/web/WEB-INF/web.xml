@@ -96,6 +96,10 @@
         <servlet-name>ViewMyReservation</servlet-name>
         <servlet-class>controller.ViewMyReservation</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>editService</servlet-name>
+        <servlet-class>controller.editService</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -187,6 +191,10 @@
     <servlet-mapping>
         <servlet-name>ViewMyReservation</servlet-name>
         <url-pattern>/viewMyReservation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>editService</servlet-name>
+        <url-pattern>/editService</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
