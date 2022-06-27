@@ -3,7 +3,7 @@
  *
  * Record of change:
  * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-06-8      1.0                 TuDA         Edit Service
+ * 2022-06-8      1.0                 nguyen         Edit Service
 -->
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
