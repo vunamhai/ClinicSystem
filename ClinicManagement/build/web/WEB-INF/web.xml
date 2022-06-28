@@ -92,6 +92,14 @@
         <servlet-name>AddDoctorForService</servlet-name>
         <servlet-class>controller.AddDoctorForService</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewMyReservation</servlet-name>
+        <servlet-class>controller.ViewMyReservation</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServiceDetalController</servlet-name>
+        <servlet-class>controller.ServiceDetalController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -179,6 +187,14 @@
     <servlet-mapping>
         <servlet-name>AddDoctorForService</servlet-name>
         <url-pattern>/AddDoctorForService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMyReservation</servlet-name>
+        <url-pattern>/viewMyReservation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceDetalController</servlet-name>
+        <url-pattern>/ServiceDetalController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

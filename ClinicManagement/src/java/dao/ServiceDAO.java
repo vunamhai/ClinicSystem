@@ -15,6 +15,7 @@ package dao;
 import entity.Service;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -73,5 +74,6 @@ public interface ServiceDAO {
 
     public void deleteService(int id);
     
+    List<Service> searchServices(String search);
  
 }

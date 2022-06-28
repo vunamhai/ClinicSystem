@@ -20,10 +20,7 @@ import entity.Role;
 import entity.SQLCommands;
 import java.sql.SQLException;
 
-/**
- *
- * @author Nguyen Van Nam
- */
+
 public class AccountDAOImpl extends DBContext implements AccountDAO {
 
     /**
