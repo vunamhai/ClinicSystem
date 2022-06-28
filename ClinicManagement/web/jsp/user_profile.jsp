@@ -107,7 +107,7 @@
                             <form action="../UpdateCustomerProfileController" method="POST">
                                 <!-- Form Group (username)-->
                                 <div class="mb-3">
-                                    <label class="small mb-1" for="inputUsername">Username (how your name will appear to other users on the site)</label>
+                                    <label class="small mb-1" for="inputUsername">Username</label>
                                     <input class="form-control" id="inputUsername" type="text" placeholder="Enter your username" value="${user.username}" disabled name="username">
                                 </div>
                                 <!-- Form Row-->

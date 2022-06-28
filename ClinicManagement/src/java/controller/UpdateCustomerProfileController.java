@@ -56,7 +56,7 @@ public class UpdateCustomerProfileController extends HttpServlet {
         if (jdate.after(today)) {
             session.setAttribute("error", true);
             session.setAttribute("message", "Date invalid!!!");
-            response.sendRedirect("./jsp/user_profile.jsp");
+            response.sendRedirect("/jsp/user_profile.jsp");
             return;
         }
 
@@ -70,7 +70,7 @@ public class UpdateCustomerProfileController extends HttpServlet {
         session.setAttribute("error", false);
         session.setAttribute("user", user);
         session.setAttribute("message", "Update Success");
-        response.sendRedirect("./jsp/user_profile.jsp");
+        response.sendRedirect("/jsp/user_profile.jsp");
 
     }
 
