@@ -106,11 +106,18 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 Accounts user = new Accounts();
+                user.setUserId(rs.getInt("user_id"));
+                user.setRole(rs.getString("role_name"));
+                user.setServiceId(rs.getInt("service_id"));
                 user.setUsername(rs.getString("username"));
                 user.setEmail(rs.getString("email"));
                 user.setPassword(rs.getString("password"));
+                user.setFullName(rs.getString("full_name"));
+                user.setBirthDate(rs.getDate("birth_date"));
                 user.setGender(rs.getBoolean("gender"));
                 user.setPhone(rs.getString("phone"));
+                user.setAddress(rs.getString("address"));
+                user.setAvatarImage(rs.getString("avatar_image"));
                 users.add(user);
             }
         } catch (Exception ex) {
