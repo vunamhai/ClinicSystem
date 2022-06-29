@@ -1,12 +1,4 @@
-/*
- * Copyright(C) 2022, FPT University
- * CMS
- * CLINIC MANAGEMENT SYSTEM
- *
- * Record of change:
- * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-11      1.0                 namnv           First Implement 
- */
+
 package controller;
 
 import dao.PostDAO;
@@ -23,13 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * * -This class uses function getUser in <code>dao.impl.UserDAOImpl</code> to
- * get an <code>java.util.String</code> object that contains a series of
- * <code>entity.User</code>
- *
- * @author Nguyen Thanh Tung
- */
+
 public class HomeController extends HttpServlet {
 
     /**
