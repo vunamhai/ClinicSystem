@@ -1,100 +1,78 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 2022, FPT University
+ * CMS
+ * CLINIC MANAGEMENT SYSTEM
+ *
+ * Record of change:
+ * DATE            Version          AUTHOR           DESCRIPTION
+ * 2022-02-08      1.0              HuongHTT         First Implement 
  */
 package controller;
 
-import dao.impl.AccountDAOImpl;
-import entity.Accounts;
+import dao.UserDAO;
+import dao.impl.UserDAOImpl;
+import entity.User;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+import java.util.TimeZone;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * This class uses <code>dao.impl.UserDAOImpl</code> functions:<br>
+ * createAccount to create an account.
  *
- * @author Nam Ngo
+ * Bugs: none
+ *
+ * @author Hoang Thi Thu Huong
  */
 public class UpdateAccountController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
-        boolean update=true;
-        int roleId= Integer.parseInt(request.getParameter("roleId"));
-        int id= Integer.parseInt(request.getParameter("id"));
-        String username=request.getParameter("username");
-        String firstname=request.getParameter("firstname");
-        String lastname=request.getParameter("lastname");
-        String email=request.getParameter("email");
-        String street=request.getParameter("street");
-        String city=request.getParameter("city");
-        String country=request.getParameter("country");
-        String phone=request.getParameter("phone");
+        int userId = Integer.parseInt(request.getParameter("userId"));
+        int roleId = Integer.parseInt(request.getParameter("roleId"));
+        String username = request.getParameter("username");
+        String email = request.getParameter("email");
+        String fullName = request.getParameter("fullName");
+
+        String sDate = request.getParameter("date");
+       DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
+        java.util.Date date = format.parse(sDate);
+         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+
         int gender = Integer.parseInt(request.getParameter("gender"));
-        Date dob=Date.valueOf(request.getParameter("dob"));
-        Accounts a=new Accounts();
-        a.setRoleID(roleId);
-        a.setId(id);
-        a.setUsername(username);
-        a.setFirstname(firstname);
-        a.setLastname(lastname);
-        a.setEmail(email);
-        a.setStreet(street);
-        a.setCity(city);
-        a.setCountry(country);
-        a.setPhone(phone);
-        if(gender==1){
-            a.setGender(true);
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
+
+        User u = new User();
+        u.setRoleId(roleId);
+        u.setUserId(userId);
+        u.setUsername(username);
+        u.setEmail(email);
+        u.setFullName(fullName);
+        u.setBirthDate(sqlDate);
+        if (gender == 1) {
+            u.setGender(true);
+        } else {
+            u.setGender(false);
         }
-        else{
-            a.setGender(false);
-        }
-        a.setDob(dob);
-        
-        AccountDAOImpl ad=new AccountDAOImpl();
-        Accounts acc1=ad.getAccountByEmail(email);
-        Accounts acc2=ad.getAccountByUsername(username);
-        if(acc1!=null){
-            if(acc1.getId()==id){
-                update=true;
-            }
-            else{
-                update=false;
-            }
-        }
-        if(acc2!=null&&update==true){
-            if(acc2.getId()==id){
-                update=true;
-            }
-            else{
-                update=false;
-            }
-        }
-        if(update){
-            ad.updateAccounts(a);
-        }
-        String txtSearch= request.getParameter("txtSearch");
-        if(txtSearch.isEmpty()){
-            int page= Integer.parseInt(request.getParameter("page"));
-            response.sendRedirect("ViewAllAccountController?page="+page);
-        }
-        else{
-            response.sendRedirect("SearchAccountController?search="+txtSearch);
-        }
+        u.setPhone(phone);
+        u.setAddress(address);
+
+        UserDAO userDAO = new UserDAOImpl();
+        userDAO.updateAccountByAdmin(u);
+        GetAllAccountController getAllAccountController = new GetAllAccountController();
+        getAllAccountController.processRequest(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -109,7 +87,11 @@ public class UpdateAccountController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(UpdateAccountController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -123,7 +105,11 @@ public class UpdateAccountController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(UpdateAccountController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
