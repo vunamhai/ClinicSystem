@@ -3,9 +3,7 @@
  * CMS:
  * Clinic Management System
  *
- * Record of change:
- * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-03-08     1.0                 TrangCT          Controller View Feedback List
+
  */
 package controller;
 
@@ -28,17 +26,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- * <h1>View Feedback List Controller </h1>
- * Controller to view feedback list. Method process data form ReservationDAO and
- * forward data to file view
- * <p>
- *
- *
- * @author TrangCT
- * @version 1.0
- * @since 2022-03-08
- */
+
+ 
 public class ViewFeedBackListController extends HttpServlet {
 
     /**
