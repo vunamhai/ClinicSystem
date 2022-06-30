@@ -78,6 +78,8 @@ public interface ServiceDAO {
     
     List<Service> searchServices(String search);
 
+    public Pagination<ServiceDTO> getAllService(int i, int i0);
+
   
  
 }
