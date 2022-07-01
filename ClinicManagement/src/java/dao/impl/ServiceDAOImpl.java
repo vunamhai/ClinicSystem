@@ -11,9 +11,11 @@ package dao.impl;
 
 import context.DBContext;
 import dao.ServiceDAO;
+import entity.Pagination;
 //import entity.ServiceDTO;
 //import entity.Pagination;
 import entity.Service;
+import entity.ServiceDTO;
 import entity.ViewServiceX;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -505,7 +507,7 @@ public void updateService(int id, String name, String description) {
         try {
             connecion = getConnection();
             // Get data
-            preparedStatement = connecion.prepareStatement("delete from services where service_id = ?");
+            preparedStatement = connecion.prepareStatement("update services set isActive = 0 where service_id = ?");
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (Exception ex) {
@@ -515,6 +517,11 @@ public void updateService(int id, String name, String description) {
             closePreparedStatement(preparedStatement);
             closeConnection(connecion);
         }
+    }
+
+    @Override
+    public Pagination<ServiceDTO> getAllService(int i, int i0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
