@@ -5,12 +5,17 @@
  */
 package controller;
 
+import dao.ServiceDAO;
+import dao.UserDAO;
 import dao.impl.ServiceDAOImpl;
+import dao.impl.UserDAOImpl;
+import entity.Doctor;
 import entity.Service;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -47,16 +52,19 @@ public class ServiceManagementDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
-        ServiceDAOImpl sdi = new ServiceDAOImpl();
-        ArrayList<entity.ViewServiceX> viewService = null;
-        try {
-            viewService = sdi.viewServices(Integer.parseInt(id));
-        } catch (SQLException ex) {
-            Logger.getLogger(ServiceManagementDetailController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        request.setAttribute("viewService", viewService);
-        request.getRequestDispatcher("jsp/ViewService.jsp").forward(request, response);
+         int id = Integer.parseInt(request.getParameter("Id"));
+        String page = request.getParameter("page").toString();
+        request.getSession().setAttribute("page", page);
+        ServiceDAO serviceDAO = new ServiceDAOImpl();
+        Service service = serviceDAO.getById(id);
+
+        UserDAO userDAO = new UserDAOImpl();
+        List<Doctor> doctors = userDAO.getDoctorByServiceId(service.getServiceId());
+        request.setAttribute("service", service);
+        request.setAttribute("doctors", doctors);
+        List<Doctor> allDoctors = userDAO.getAllDoctor();
+        request.setAttribute("allDoctors", allDoctors);
+        request.getRequestDispatcher("./jsp/editService.jsp").forward(request, response);
     }
 
     /**

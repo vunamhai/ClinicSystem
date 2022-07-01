@@ -505,7 +505,7 @@ public void updateService(int id, String name, String description) {
         try {
             connecion = getConnection();
             // Get data
-            preparedStatement = connecion.prepareStatement("delete from services where service_id = ?");
+            preparedStatement = connecion.prepareStatement("update users set service_id = null where service_id = ? and role_id = 3?");
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (Exception ex) {
