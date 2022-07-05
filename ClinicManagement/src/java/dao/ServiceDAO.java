@@ -12,7 +12,9 @@ package dao;
 //import entity.ServiceDTO;
 //import entity.Pagination;
 
+import entity.Pagination;
 import entity.Service;
+import entity.ServiceDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -37,7 +39,7 @@ public interface ServiceDAO {
      * @param pageSize
      * @return list services
      */
-//    Pagination<ServiceDTO> getAllService(int pageIndex, int pageSize);
+    Pagination<ServiceDTO> getAllService(int pageIndex, int pageSize);
 
     /**
      * Count total service

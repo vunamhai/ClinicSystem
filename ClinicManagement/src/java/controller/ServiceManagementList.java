@@ -60,12 +60,20 @@ public class ServiceManagementList extends HttpServlet {
         if (request.getSession().getAttribute("page") != null) {
             pageIndex = Integer.parseInt(request.getSession().getAttribute("page").toString());
         }
+        Pagination<ServiceDTO> services = serviceDAO.getAllService(pageIndex, pageSize);
         UserDAO userDAO = new UserDAOImpl();
 
         List<Doctor> doctors = userDAO.getAllDoctor();
 
+        for(ServiceDTO s : services.getData()){
+            for(Doctor d : doctors){
+                if(d.getServiceId() == s.getServiceId()){
+                    s.getDoctors().add(d);
+                }
+            }
+        }
         request.setAttribute("doctors", doctors);
-
+        request.setAttribute("services", services);
         request.getRequestDispatcher("./jsp/serviceManagementList.jsp").forward(request, response);
     }
 
