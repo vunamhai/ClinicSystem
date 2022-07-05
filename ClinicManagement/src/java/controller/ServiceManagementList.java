@@ -61,6 +61,7 @@ public class ServiceManagementList extends HttpServlet {
             pageIndex = Integer.parseInt(request.getSession().getAttribute("page").toString());
         }
         Pagination<ServiceDTO> services = serviceDAO.getAllService(pageIndex, pageSize);
+        
         UserDAO userDAO = new UserDAOImpl();
 
         List<Doctor> doctors = userDAO.getAllDoctor();
