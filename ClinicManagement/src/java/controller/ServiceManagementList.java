@@ -74,7 +74,7 @@ public class ServiceManagementList extends HttpServlet {
         }
         request.setAttribute("doctors", doctors);
         request.setAttribute("services", services);
-        request.getRequestDispatcher("./jsp/serviceManagementList.jsp").forward(request, response);
+        request.getRequestDispatcher("/jsp/serviceManagementList.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
