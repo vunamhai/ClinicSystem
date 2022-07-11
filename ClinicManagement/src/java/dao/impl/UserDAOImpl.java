@@ -267,12 +267,13 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         try {
             connecion = getConnection();
             // Get data
-            preparedStatement = connecion.prepareStatement("select * from users where role_id = 3 and is_active = 1;");
+            preparedStatement = connecion.prepareStatement("select * from users where role_id = 3");
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 Doctor user = new Doctor();
                 user.setId(rs.getInt("user_id"));
                 user.setName(rs.getString("full_name"));
+                user.setImage(rs.getString("avatar_image"));
                 user.setServiceId(rs.getInt("service_id"));
                 doctor.add(user);
             }
@@ -458,7 +459,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         }
     }
 
-      @Override
+    @Override
     public User getUserByEmail(String email) {
         logger.log(Level.INFO, "Login Controller");
         Connection connecion = null;
