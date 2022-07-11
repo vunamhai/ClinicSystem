@@ -14,17 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * <h1>View Feedback Management List Controller </h1>
- * Controller to view feedback management list. Method process data form
- * FeedbackDAO and forward data to file view
- * <p>
- *
- *
- * @author MinhVT
- * @version 1.0
- * @since 2022-03-08
- */
+
 public class ViewFeedbackManagedListController extends HttpServlet {
 
     /**

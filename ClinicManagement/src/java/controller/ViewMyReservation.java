@@ -51,7 +51,7 @@ public class ViewMyReservation extends HttpServlet {
         request.setAttribute("allDoctors", allDoctors);
         request.getRequestDispatcher("./jsp/serviceManagementDetail.jsp").forward(request, response);
         }
-    }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

@@ -2,10 +2,6 @@ package dao.impl;
 
 import context.DBContext;
 import dao.UserDAO;
-<<<<<<< HEAD
-=======
-import entity.Accounts;
->>>>>>> aa39b8d33f78fdb66e96f083a492b70267ab092e
 import entity.Pagination;
 import entity.User;
 import entity.Doctor;

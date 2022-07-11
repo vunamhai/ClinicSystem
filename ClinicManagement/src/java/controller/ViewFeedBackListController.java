@@ -1,10 +1,4 @@
-/*
- * Copyright(C) 20022, FPT University
- * CMS:
- * Clinic Management System
- *
 
- */
 package controller;
 
 import dao.FeedbackDAO;

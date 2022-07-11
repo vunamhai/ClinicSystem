@@ -5,13 +5,16 @@
  */
 package controller;
 
-import dao.AccountDAO;
-import dao.UserDAO;
-import dao.impl.UserDAOImpl;
-import entity.Accounts;
+import dao.FeedbackDAO;
+import dao.impl.FeedbackDAOImpl;
+import entity.Feedback;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +25,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Administrator
  */
-public class ForgotPasswordController extends HttpServlet {
+public class AddFeedbackController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,19 +37,32 @@ public class ForgotPasswordController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
-        String email = request.getParameter("email");
-        UserDAO userDAO = new UserDAOImpl();
-        User user = userDAO.getUserByEmail(email);
+
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
         if (user == null) {
-            request.setAttribute("message", "Email not existed !!!");
-            request.getRequestDispatcher("./jsp/forgotPass.jsp").forward(request, response);
+            request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
             return;
         }
-        HttpSession session = request.getSession();
-        session.setAttribute("user", user);
-        request.getRequestDispatcher("./jsp/setPassword.jsp").forward(request, response);
+        int serviceId = Integer.parseInt(request.getParameter("serviceId"));
+        int examinationId = Integer.parseInt(request.getParameter("examinationId"));
+        String content = request.getParameter("content");
+        
+        java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+        Feedback feedback = new Feedback();
+        feedback.setCustomerId(user.getUserId());
+        feedback.setExaminationId(examinationId);
+        feedback.setFeedbackContent(content);
+        feedback.setServiceId(serviceId);
+        feedback.setFeedbackTime(date);
+
+        FeedbackDAO feedbackDAO = new FeedbackDAOImpl();
+        feedbackDAO.addFeedback(feedback);
+        ViewFeedBackListController controller = new ViewFeedBackListController();
+        controller.processRequest(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -61,7 +77,11 @@ public class ForgotPasswordController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(AddFeedbackController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -75,7 +95,11 @@ public class ForgotPasswordController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(AddFeedbackController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -87,5 +111,4 @@ public class ForgotPasswordController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
