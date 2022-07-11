@@ -8,6 +8,10 @@
         <servlet-name>AddFeedbackController</servlet-name>
         <servlet-class>controller.AddFeedbackController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ReplyFeedbackController</servlet-name>
+        <servlet-class>controller.ReplyFeedbackController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -151,6 +155,10 @@
     <servlet-mapping>
         <servlet-name>AddFeedbackController</servlet-name>
         <url-pattern>/AddFeedbackController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReplyFeedbackController</servlet-name>
+        <url-pattern>/ReplyFeedbackController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
