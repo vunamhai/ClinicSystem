@@ -207,7 +207,7 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
         }
         return result;
     }
-    
+
     public String getString(String msg) {
         StringBuilder output = new StringBuilder();
 
@@ -260,7 +260,7 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
         }
         return result;
     }
-    
+
 //    public ArrayList<Service> viewServices(int id) throws SQLException {
 //        ArrayList<Service> result = new ArrayList<>();
 //        String sql = "select s.service_id, s.service_name,Description, firstname, lastname\n"
@@ -300,7 +300,6 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
 //        }
 //        return result;
 //    }
-    
     public ArrayList<ViewServiceX> viewServices(int id) throws SQLException {
         ArrayList<ViewServiceX> result = new ArrayList<>();
         String sql = "select s.service_id, s.service_name,Description, firstname, lastname\n"
@@ -319,9 +318,9 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
              * result list
              */
             while (rs.next()) {
-                ViewServiceX viewService = new ViewServiceX(rs.getInt("service_id"), 
+                ViewServiceX viewService = new ViewServiceX(rs.getInt("service_id"),
                         rs.getString("service_name"), rs.getString("description"), rs.getString("firstname"),
-                rs.getString("lastname"));
+                        rs.getString("lastname"));
                 result.add(viewService);
             }
         } catch (SQLException ex) {
@@ -340,8 +339,6 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
         }
         return result;
     }
-
-
 
     @Override
     public int addService(Service service) {
@@ -446,10 +443,11 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
         try {
             connecion = getConnection();
             // Get data
-            preparedStatement = connecion.prepareStatement("update services set service_name = ? , service_description = ? where service_id = ?");
+            preparedStatement = connecion.prepareStatement("update services set service_name = ? ,service_brief= ? , service_description = ? where service_id = ?");
             preparedStatement.setString(1, service.getServiceName());
-            preparedStatement.setString(2, service.getServiceDescription());
-            preparedStatement.setInt(3, service.getServiceId());
+            preparedStatement.setString(2, service.getServiceBrief());
+            preparedStatement.setString(3, service.getServiceDescription());
+            preparedStatement.setInt(4, service.getServiceId());
             preparedStatement.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -459,7 +457,8 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
             closeConnection(connecion);
         }
     }
-public void updateService(int id, String name, String description) {
+
+    public void updateService(int id, String name, String description) {
         Connection connecion = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
@@ -479,6 +478,7 @@ public void updateService(int id, String name, String description) {
             closeConnection(connecion);
         }
     }
+
     @Override
     public void removeAllDoctor(int id) {
         Connection connecion = null;
@@ -499,7 +499,7 @@ public void updateService(int id, String name, String description) {
         }
     }
 
- @Override
+    @Override
     public void deleteService(int id) {
         Connection connecion = null;
         PreparedStatement preparedStatement = null;
@@ -523,6 +523,5 @@ public void updateService(int id, String name, String description) {
     public Pagination<ServiceDTO> getAllService(int i, int i0) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
+
 }
