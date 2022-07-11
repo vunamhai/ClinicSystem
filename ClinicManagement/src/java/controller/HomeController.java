@@ -10,16 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import dao.AccountDAO;
-import dao.impl.AccountDAOImpl;
 
-
-/**
- * * -This class uses function getUser in <code>dao.impl.UserDAOImpl</code> to
- * get an <code>java.util.String</code> object that contains a series of
- * <code>entity.User</code>
- *
- * @author Nguyen Thanh Tung
- */
 public class HomeController extends HttpServlet {
 
     /**
