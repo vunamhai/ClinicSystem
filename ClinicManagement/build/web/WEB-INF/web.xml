@@ -12,6 +12,14 @@
         <servlet-name>ReplyFeedbackController</servlet-name>
         <servlet-class>controller.ReplyFeedbackController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteDoctorFromService</servlet-name>
+        <servlet-class>controller.DeleteDoctorFromService</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServiceManagementController</servlet-name>
+        <servlet-class>controller.ServiceManagementController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -72,10 +80,6 @@
         <servlet-name>GetAllAccountController</servlet-name>
         <url-pattern>/GetAllAccountController</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>ServiceManagementController</servlet-name>
-        <servlet-class>controller.ServiceManagementController</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>ServiceManagementController</servlet-name>
         <url-pattern>/ServiceManagementController</url-pattern>
@@ -159,6 +163,10 @@
     <servlet-mapping>
         <servlet-name>ReplyFeedbackController</servlet-name>
         <url-pattern>/ReplyFeedbackController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteDoctorFromService</servlet-name>
+        <url-pattern>/DeleteDoctorFromService</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
