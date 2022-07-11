@@ -1,224 +1,160 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
-        <servlet-name>HomeServletController</servlet-name>
-        <servlet-class>HomeServletController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>HomeController</servlet-name>
         <servlet-class>controller.HomeController</servlet-class>
-    </servlet>
-    <filter>
-        <filter-name>PermissionFilter</filter-name>
-        <filter-class>filter.PermissionFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>PermissionFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-    <servlet>
-        <servlet-name>GetAllAccountController</servlet-name>
-        <servlet-class>controller.GetAllAccountController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>RegisterForCustomerController</servlet-name>
-        <servlet-class>controller.RegisterForCustomerController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ForgotPasswordController</servlet-name>
-        <servlet-class>controller.ForgotPasswordController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ResetPasswordController</servlet-name>
-        <servlet-class>controller.ResetPasswordController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>CreateAccountController</servlet-name>
-        <servlet-class>controller.CreateAccountController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ServiceManagementController</servlet-name>
-        <servlet-class>controller.ServiceManagementController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ViewAllAccountController</servlet-name>
-        <servlet-class>controller.ViewAllAccountController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>UpdateAccountController</servlet-name>
-        <servlet-class>controller.UpdateAccountController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AddAccountController</servlet-name>
-        <servlet-class>controller.AddAccountController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ServiceManagementList</servlet-name>
-        <servlet-class>controller.ServiceManagementList</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AddServiceController</servlet-name>
-        <servlet-class>controller.AddServiceController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ChangePasswordController</servlet-name>
-        <servlet-class>controller.ChangePasswordController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>UpdateService</servlet-name>
-        <servlet-class>controller.UpdateService</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DeleteService</servlet-name>
-        <servlet-class>controller.DeleteService</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DeleteAccountController</servlet-name>
-        <servlet-class>controller.DeleteAccountController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>SearchAccountController</servlet-name>
-        <servlet-class>controller.SearchAccountController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>SearchServiceController</servlet-name>
-        <servlet-class>controller.SearchServiceController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ServiceManagementDetailController</servlet-name>
-        <servlet-class>controller.ServiceManagementDetailController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AddDoctorForService</servlet-name>
-        <servlet-class>controller.AddDoctorForService</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ViewMyReservation</servlet-name>
-        <servlet-class>controller.ViewMyReservation</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>ViewAllBlog</servlet-name>
-        <servlet-class>controller.ViewAllBlog</servlet-class>
+        <servlet-name>ServiceController</servlet-name>
+        <servlet-class>controller.ServiceController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>ViewAllBlog</servlet-name>
-        <url-pattern>/ViewAllBlog</url-pattern>
+        <servlet-name>ServiceController</servlet-name>
+        <url-pattern>/ServiceController</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ViewFeedBackListController</servlet-name>
+        <servlet-class>controller.ViewFeedBackListController</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>GetAllAccountController</servlet-name>
-        <url-pattern>/GetAllAccountController</url-pattern>
+        <servlet-name>ViewFeedBackListController</servlet-name>
+        <url-pattern>/ViewFeedBackListController</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>controller.LogoutController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/LogoutController</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ServiceDetailController</servlet-name>
+        <servlet-class>controller.ServiceDetailController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ServiceDetailController</servlet-name>
+        <url-pattern>/ServiceDetailController</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>LoginController</servlet-name>
+        <servlet-class>controller.LoginController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginController</servlet-name>
+        <url-pattern>/LoginController</url-pattern>
+    </servlet-mapping>
+        <servlet>
+        <servlet-name>RegisterForCustomerController</servlet-name>
+        <servlet-class>controller.RegisterForCustomerController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterForCustomerController</servlet-name>
         <url-pattern>/RegisterForCustomerController</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>GetAllAccountController</servlet-name>
+        <servlet-class>controller.GetAllAccountController</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>ForgotPasswordController</servlet-name>
-        <url-pattern>/ForgotPasswordController</url-pattern>
+        <servlet-name>GetAllAccountController</servlet-name>
+        <url-pattern>/GetAllAccountController</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ResetPasswordController</servlet-name>
-        <url-pattern>/ResetPasswordController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CreateAccountController</servlet-name>
-        <url-pattern>/CreateAccountController</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>ServiceManagementController</servlet-name>
+        <servlet-class>controller.ServiceManagementController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServiceManagementController</servlet-name>
         <url-pattern>/ServiceManagementController</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewAllAccountController</servlet-name>
-        <url-pattern>/ViewAllAccountController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UpdateAccountController</servlet-name>
-        <url-pattern>/UpdateAccountController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddAccountController</servlet-name>
-        <url-pattern>/AddAccountController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ServiceManagementList</servlet-name>
-        <url-pattern>/ServiceManagementList</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddServiceController</servlet-name>
-        <url-pattern>/AddServiceController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ChangePasswordController</servlet-name>
-        <url-pattern>/ChangePasswordController</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UpdateService</servlet-name>
-        <url-pattern>/UpdateService</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DeleteService</servlet-name>
-        <url-pattern>/DeleteService</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>DeleteAccountController</servlet-name>
+        <servlet-class>controller.DeleteAccountController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DeleteAccountController</servlet-name>
         <url-pattern>/DeleteAccountController</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>viewMyReservationController</servlet-name>
+        <servlet-class>controller.viewMyReservationController</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>SearchAccountController</servlet-name>
-        <url-pattern>/SearchAccountController</url-pattern>
+        <servlet-name>viewMyReservationController</servlet-name>
+        <url-pattern>/viewMyReservationController</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ViewServiceManagementListDetail</servlet-name>
+        <servlet-class>controller.ViewServiceManagementListDetail</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>SearchServiceController</servlet-name>
-        <url-pattern>/SearchServiceController</url-pattern>
+        <servlet-name>ViewServiceManagementListDetail</servlet-name>
+        <url-pattern>/ViewServiceManagementListDetail</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>UpdateAccountController</servlet-name>
+        <servlet-class>controller.UpdateAccountController</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>ServiceManagementDetailController</servlet-name>
-        <url-pattern>/ServiceManagementDetailController</url-pattern>
+        <servlet-name>UpdateAccountController</servlet-name>
+        <url-pattern>/UpdateAccountController</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>CreateAccountController</servlet-name>
+        <servlet-class>controller.CreateAccountController</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>AddDoctorForService</servlet-name>
-        <url-pattern>/AddDoctorForService</url-pattern>
+        <servlet-name>CreateAccountController</servlet-name>
+        <url-pattern>/CreateAccountController</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ForgotPasswordController</servlet-name>
+        <servlet-class>controller.ForgotPasswordController</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>ViewMyReservation</servlet-name>
-        <url-pattern>/viewMyReservation</url-pattern>
+        <servlet-name>ForgotPasswordController</servlet-name>
+        <url-pattern>/ForgotPasswordController</url-pattern>
     </servlet-mapping>
+        <servlet>
+        <servlet-name>ResetPasswordController</servlet-name>
+        <servlet-class>controller.ResetPasswordController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ResetPasswordController</servlet-name>
+        <url-pattern>/ResetPasswordController</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AddServiceController</servlet-name>
+        <servlet-class>controller.AddServiceController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddServiceController</servlet-name>
+        <url-pattern>/AddServiceController</url-pattern>
+    </servlet-mapping>
+        <servlet>
+        <servlet-name>DeleteServiceController</servlet-name>
+        <servlet-class>controller.DeleteServiceController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteServiceController</servlet-name>
+        <url-pattern>/DeleteServiceController</url-pattern>
+    </servlet-mapping>
+    
+    
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    <env-entry>
-        <env-entry-name>host</env-entry-name>
-        <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>localhost</env-entry-value>
-    </env-entry>
-    <env-entry>
-        <env-entry-name>port</env-entry-name>
-        <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>1433</env-entry-value>
-    </env-entry>
-    <env-entry>
-        <env-entry-name>database-name</env-entry-name>
-        <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>ClinicManagement</env-entry-value>
-    </env-entry>
-    <env-entry>
-        <env-entry-name>username</env-entry-name>
-        <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>sa</env-entry-value>
-    </env-entry>
-    <env-entry>
-        <env-entry-name>password</env-entry-name>
-        <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>12345a</env-entry-value>
-    </env-entry>
     <welcome-file-list>
-        <welcome-file>./jsp/login.jsp</welcome-file>
+        <welcome-file>
+            ./jsp/login.jsp
+        </welcome-file>
     </welcome-file-list>
 </web-app>

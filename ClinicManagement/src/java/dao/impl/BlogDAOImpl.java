@@ -7,7 +7,7 @@ package dao.impl;
 
 import dao.BlogDAO;
 import context.DBContext;
-import entity.Account;
+import entity.Accounts;
 import entity.Blog;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

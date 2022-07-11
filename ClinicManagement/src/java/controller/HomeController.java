@@ -1,15 +1,7 @@
-/*
- * Copyright(C) 2022, FPT University
- * CMS
- * CLINIC MANAGEMENT SYSTEM
- *
- * Record of change:
- * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-11      1.0                 namnv           First Implement 
- */
+
 package controller;
 
-import entity.Account;
+import entity.Accounts;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -19,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import dao.AccountDAO;
 import dao.impl.AccountDAOImpl;
-import entity.Account1;
+
 
 /**
  * * -This class uses function getUser in <code>dao.impl.UserDAOImpl</code> to

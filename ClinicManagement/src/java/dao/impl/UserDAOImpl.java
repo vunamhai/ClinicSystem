@@ -2,6 +2,10 @@ package dao.impl;
 
 import context.DBContext;
 import dao.UserDAO;
+<<<<<<< HEAD
+=======
+import entity.Accounts;
+>>>>>>> aa39b8d33f78fdb66e96f083a492b70267ab092e
 import entity.Pagination;
 import entity.User;
 import entity.Doctor;
@@ -79,13 +83,13 @@ public class UserDAOImpl extends DBContext implements UserDAO {
     * a <code>java.util.List</code> object 
      */
     @Override
-    public Pagination<Account> getAllAccount(int pageIndex, int pageSize, String search) {
-        Pagination<Account> pagination = new Pagination<>();
+    public Pagination<Accounts> getAllAccount(int pageIndex, int pageSize, String search) {
+        Pagination<Accounts> pagination = new Pagination<>();
         logger.log(Level.INFO, "Login Controller");
         Connection connecion = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
-        List<Account> users = new ArrayList<>();
+        List<Accounts> users = new ArrayList<>();
         try {
             connecion = getConnection();
             int totalItem = count(); // 
@@ -104,12 +108,19 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             preparedStatement.setInt(2, (pageIndex - 1) * pageSize + pageSize);
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                Account user = new Account();
+                Accounts user = new Accounts();
+                user.setUserId(rs.getInt("user_id"));
+                user.setRole(rs.getString("role_name"));
+                user.setServiceId(rs.getInt("service_id"));
                 user.setUsername(rs.getString("username"));
                 user.setEmail(rs.getString("email"));
                 user.setPassword(rs.getString("password"));
+                user.setFullName(rs.getString("full_name"));
+                user.setBirthDate(rs.getDate("birth_date"));
                 user.setGender(rs.getBoolean("gender"));
                 user.setPhone(rs.getString("phone"));
+                user.setAddress(rs.getString("address"));
+                user.setAvatarImage(rs.getString("avatar_image"));
                 users.add(user);
             }
         } catch (Exception ex) {
@@ -471,7 +482,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         try {
             connecion = getConnection();
             // Get data
-            preparedStatement = connecion.prepareStatement("UPDATE [dbo].[Accounts]\n"
+            preparedStatement = connecion.prepareStatement("UPDATE [dbo].[users]\n"
                     + "   SET \n"
                     + "      [Password] = ?\n"
                     + "      \n"
@@ -490,7 +501,11 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         }
     }
 
+<<<<<<< HEAD
     @Override
+=======
+      @Override
+>>>>>>> aa39b8d33f78fdb66e96f083a492b70267ab092e
     public User getUserByEmail(String email) {
         logger.log(Level.INFO, "Login Controller");
         Connection connecion = null;

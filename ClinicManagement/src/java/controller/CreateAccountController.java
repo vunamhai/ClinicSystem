@@ -13,6 +13,7 @@ import dao.UserDAO;
 import dao.impl.UserDAOImpl;
 import entity.User;
 import java.io.IOException;
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,6 +25,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * This class uses <code>dao.impl.UserDAOImpl</code> functions:<br>
@@ -33,22 +35,38 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Hoang Thi Thu Huong
  */
-public class UpdateAccountController extends HttpServlet {
+public class CreateAccountController extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
-        int userId = Integer.parseInt(request.getParameter("userId"));
         int roleId = Integer.parseInt(request.getParameter("roleId"));
         String username = request.getParameter("username");
+        String password = request.getParameter("password");
         String email = request.getParameter("email");
         String fullName = request.getParameter("fullName");
 
-        String sDate = request.getParameter("date");
-       DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        UserDAO userDAO = new UserDAOImpl();
+        if (userDAO.checkUsernameAndEmail(username.trim(), email.trim())) {
+            request.setAttribute("message", "Account existed!!!");
+            request.getRequestDispatcher("./jsp/viewAllAccount.jsp").forward(request, response);
+            return;
+        }
+
+        String birthDate = request.getParameter("date");
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
-        java.util.Date date = format.parse(sDate);
-         java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+        java.util.Date date = format.parse(birthDate);
+        java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 
         int gender = Integer.parseInt(request.getParameter("gender"));
         String phone = request.getParameter("phone");
@@ -56,9 +74,9 @@ public class UpdateAccountController extends HttpServlet {
 
         User u = new User();
         u.setRoleId(roleId);
-        u.setUserId(userId);
         u.setUsername(username);
         u.setEmail(email);
+        u.setPassword(password);
         u.setFullName(fullName);
         u.setBirthDate(sqlDate);
         if (gender == 1) {
@@ -68,14 +86,13 @@ public class UpdateAccountController extends HttpServlet {
         }
         u.setPhone(phone);
         u.setAddress(address);
+        userDAO.createAccount(u);
 
-        UserDAO userDAO = new UserDAOImpl();
-        userDAO.updateAccountByAdmin(u);
-        GetAllAccountController getAllAccountController = new GetAllAccountController();
-        getAllAccountController.processRequest(request, response);
+        GetAllAccountController accountController = new GetAllAccountController();
+        accountController.processRequest(request, response);
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -90,7 +107,7 @@ public class UpdateAccountController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ParseException ex) {
-            Logger.getLogger(UpdateAccountController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CreateAccountController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -108,7 +125,7 @@ public class UpdateAccountController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ParseException ex) {
-            Logger.getLogger(UpdateAccountController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CreateAccountController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

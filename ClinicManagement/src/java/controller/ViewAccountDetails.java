@@ -1,26 +1,31 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 2022, FPT University
+ * CMS
+ * CLINIC MANAGEMENT SYSTEM
+ *
+ * Record of change:
+ * DATE            Version          AUTHOR           DESCRIPTION
+ * 2022-06-12      1.0               TuDA         First Implement 
  */
 package controller;
 
-import dao.impl.AccountDAOImpl;
-import entity.Accounts;
-import entity.Role;
+import dao.UserDAO;
+import dao.impl.UserDAOImpl;
+import entity.User;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * This class uses <code>dao.impl.UserDAOImpl</code> functions:<br>
+ * createAccount to create an account.
  *
- * @author Nam Ngo
+ * Bugs: none
+ * @author Hoang Thi Thu Huong
  */
-public class ViewAllAccountController extends HttpServlet {
+public class ViewAccountDetails extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,28 +39,10 @@ public class ViewAllAccountController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        int page= Integer.parseInt(request.getParameter("page"));
-        AccountDAOImpl ad=new AccountDAOImpl();
-        List<Accounts> listAcc=ad.getAllAccounts();
-        int size=10;
-        int totalPage;
-        if(listAcc.size()%size==0){
-            totalPage=listAcc.size()/size;
-        }
-        else{
-            totalPage= (listAcc.size()/size)+1;
-        }
-        List<Accounts> listAccounts=ad.getAccountsByPage(page, size);
-        List<Role> listRole=ad.getAllRoles();
-        request.setAttribute("listAcc", listAccounts);
-        request.setAttribute("totalPage", totalPage);
-        request.setAttribute("currentPage", page);
-        request.setAttribute("listRole", listRole);
-        request.setAttribute("view", true);
-        if(listAccounts.isEmpty()){
-            request.setAttribute("message", "Không có dữ liệu");
-        }
-        request.getRequestDispatcher("./jsp/viewAllAccount.jsp").forward(request, response);
+        int id = Integer.parseInt(request.getParameter("id"));
+        UserDAO userDAO = new UserDAOImpl();
+        User user = userDAO.getUserById(id);
+        request.setAttribute("user", user);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

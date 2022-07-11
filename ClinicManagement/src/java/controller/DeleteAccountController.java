@@ -5,21 +5,15 @@
  */
 package controller;
 
-import dao.impl.AccountDAOImpl;
-import entity.Booking;
-import entity.Feedback;
+import dao.UserDAO;
+import dao.impl.UserDAOImpl;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Nam Ngo
- */
+
 public class DeleteAccountController extends HttpServlet {
 
     /**
@@ -34,33 +28,13 @@ public class DeleteAccountController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        int accountID= Integer.parseInt(request.getParameter("id"));
-        AccountDAOImpl ad=new AccountDAOImpl();
-        List<Booking> bookingList=ad.getAllBookingsByAccountID(accountID);
-        if(bookingList!=null){
-            for(Booking b: bookingList){
-                List<Feedback> feedbackList=ad.getAllFeedbacksByBookingID(b.getBookingID());
-                if(feedbackList!=null){
-                    for(Feedback f: feedbackList){
-                        ad.deleteReplyFeedbackByFeedbackID(f.getFeedbackID());
-                    }
-                }
-                ad.deleteFeedbacksByBookingID(b.getBookingID());
-            }
-        }
-        ad.deleteBookingsByAccountID(accountID);
-        ad.deleteReplyFeedbackByAccountID(accountID);
-        ad.deleteBlogsByAccountID(accountID);
-        ad.deleteServiceDoctorByAccountID(accountID);
-        ad.deleteAccounts(accountID);
-        String txtSearch= request.getParameter("txtSearch");
-        if(txtSearch.isEmpty()){
-            int page= Integer.parseInt(request.getParameter("page"));
-            response.sendRedirect("ViewAllAccountController?page="+page);
-        }
-        else{
-            response.sendRedirect("SearchAccountController?search="+txtSearch);
-        }
+        int id = Integer.parseInt(request.getParameter("id"));
+        UserDAO userDAO = new UserDAOImpl();
+        userDAO.deleteAccount(id);
+        GetAllAccountController accountController = new GetAllAccountController();
+        accountController.processRequest(request, response);
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
