@@ -4,6 +4,10 @@
         <servlet-name>HomeController</servlet-name>
         <servlet-class>controller.HomeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddFeedbackController</servlet-name>
+        <servlet-class>controller.AddFeedbackController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -48,7 +52,7 @@
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/LoginController</url-pattern>
     </servlet-mapping>
-        <servlet>
+    <servlet>
         <servlet-name>RegisterForCustomerController</servlet-name>
         <servlet-class>controller.RegisterForCustomerController</servlet-class>
     </servlet>
@@ -56,7 +60,6 @@
         <servlet-name>RegisterForCustomerController</servlet-name>
         <url-pattern>/RegisterForCustomerController</url-pattern>
     </servlet-mapping>
-    
     <servlet>
         <servlet-name>GetAllAccountController</servlet-name>
         <servlet-class>controller.GetAllAccountController</servlet-class>
@@ -121,7 +124,7 @@
         <servlet-name>ForgotPasswordController</servlet-name>
         <url-pattern>/ForgotPasswordController</url-pattern>
     </servlet-mapping>
-        <servlet>
+    <servlet>
         <servlet-name>ResetPasswordController</servlet-name>
         <servlet-class>controller.ResetPasswordController</servlet-class>
     </servlet>
@@ -137,7 +140,7 @@
         <servlet-name>AddServiceController</servlet-name>
         <url-pattern>/AddServiceController</url-pattern>
     </servlet-mapping>
-        <servlet>
+    <servlet>
         <servlet-name>DeleteServiceController</servlet-name>
         <servlet-class>controller.DeleteServiceController</servlet-class>
     </servlet>
@@ -145,8 +148,10 @@
         <servlet-name>DeleteServiceController</servlet-name>
         <url-pattern>/DeleteServiceController</url-pattern>
     </servlet-mapping>
-    
-    
+    <servlet-mapping>
+        <servlet-name>AddFeedbackController</servlet-name>
+        <url-pattern>/AddFeedbackController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
