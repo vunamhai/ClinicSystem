@@ -64,6 +64,14 @@
                                                   <span id='error_desc' class="text-danger d-none"></span>
                                     </div>
                                 </div>
+                                                   <div class="row mb-3">
+                                    <label for="serviceBrief" class="col-4 col-form-label">Tóm tắt dịch vụ</label>
+                                    <div class="col-8">
+                                        <textarea class="form-control" name="service_brief" id="serviceBrief"  required maxlength="250"
+                                                  rows="3">${service.serviceBrief}</textarea>
+                                        <span id='error_brief' class="text-danger d-none"></span>
+                                    </div>
+                                </div>
                             </div>
                             <div class="ps-5 col-6">
                                 <div class="row">
