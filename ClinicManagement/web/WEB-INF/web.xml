@@ -52,6 +52,10 @@
         <servlet-name>LogoutController</servlet-name>
         <servlet-class>controller.LogoutController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewMyReservationController</servlet-name>
+        <servlet-class>controller.ViewMyReservationController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LogoutController</servlet-name>
         <url-pattern>/LogoutController</url-pattern>
@@ -183,6 +187,10 @@
     <servlet-mapping>
         <servlet-name>ViewCustomerReservationsList</servlet-name>
         <url-pattern>/ViewCustomerReservationsList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMyReservationController</servlet-name>
+        <url-pattern>/ViewMyReservationController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

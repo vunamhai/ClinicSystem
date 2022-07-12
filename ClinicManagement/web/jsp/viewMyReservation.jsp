@@ -1,4 +1,3 @@
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="/WEB-INF/functions.tld" prefix="f" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -31,7 +30,7 @@
                 <div class="row justify-content-center mt-3 mr-0">
                     <h4>Lịch hẹn của tôi</h4>
                 </div>
-                <form id="myForm" action="${pageContext.request.contextPath}/viewMyReservation" method="POST">
+                <form id="myForm" action="${pageContext.request.contextPath}/ViewMyReservationController" method="POST">
                     <div class="row justify-content-end mt-3 mr-0">
                         <div class="col-lg-2 mr-5">
                             <h6 class="float-right">Hôm nay</h6>
@@ -257,7 +256,7 @@
             function openViewReservationDetailPopup(elem) {
                 var id = $(elem).attr("id");
                 $.ajax({
-                    url: "${pageContext.request.contextPath}/viewMyReservationDetail",
+                    url: "ViewMyReservationDetailController",
                     type: "post",
                     dataType: "text",
                     data: {
@@ -272,7 +271,7 @@
                 var id = $(elem).attr("id");
                 var currentPage = $(elem).val();
                 $.ajax({
-                    url: "${pageContext.request.contextPath}/viewExaminationHistory",
+                    url: "ViewExaminationHistoryController",
                     type: "post",
                     dataType: "text",
                     data: {
@@ -390,13 +389,13 @@
                 $("#" + idProperties).text("");
                 var reservationStatus = '${i.reservationStatus}';
                 if (reservationStatus === 'Đặt thành công') {
-                    $("#" + idProperties).append("<div class=\"rounded bg-primary text-white m-0 p-0\"><b>${i.customer.fullName}</b><br/><a class=\"text-white\" href=\"#viewDetailReservationPopup\" id=\"${i.reservationId}\" data-toggle=\"modal\" onClick=\"openViewReservationDetailPopup(this)\">Chi tiết</a></div>");
+                    $("#" + idProperties).append("<div class=\"rounded bg-primary text-white m-0 p-0\"><b>${i.customer.fullName}</b><br/><a class=\"text-white\" href=\"\" id=\"${i.reservationId}\" data-toggle=\"modal\" onClick=\"openViewReservationDetailPopup(this)\">Chi tiết</a></div>");
                 } else if (reservationStatus === 'Đã khám') {
                     $("#" + idProperties).append("<div class=\"rounded bg-success text-white m-0 p-0\"><b>${i.customer.fullName}</b><br/><i>${i.reservationStatus}</i></div>");
                 } else if (reservationStatus === 'Đã hủy') {
                     $("#" + idProperties).append("<div class=\"rounded bg-danger text-white m-0 p-0\"><b>${i.customer.fullName}</b><br/><i>${i.reservationStatus}</i></div>");
                 } else {
-                    $("#" + idProperties).append("<div class=\"rounded bg-secondary text-white m-0 p-0\"><b>${i.customer.fullName}</b><br/><a class=\"text-white\" href=\"#\">Chi tiết</a></div>");
+                    $("#" + idProperties).append("<div class=\"rounded bg-secondary text-white m-0 p-0\"><b>${i.customer.fullName}</b><br/><a class=\"text-white\" href=\"ViewMyReservationDetailController\" >Chi tiết</a></div>");
                 }
             </c:forEach>
             });

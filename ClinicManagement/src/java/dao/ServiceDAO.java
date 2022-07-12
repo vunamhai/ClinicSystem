@@ -1,3 +1,4 @@
+
 /*
  * Copyright(C) 20022, FPT University
  * CMS:
@@ -17,7 +18,6 @@ import entity.Service;
 import entity.ServiceDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -40,7 +40,7 @@ public interface ServiceDAO {
      * @param pageSize
      * @return list services
      */
-//    Pagination<ServiceDTO> getAllService(int pageIndex, int pageSize);
+    Pagination<ServiceDTO> getAllService(int pageIndex, int pageSize);
 
     /**
      * Count total service
@@ -76,10 +76,5 @@ public interface ServiceDAO {
 
     public void deleteService(int id);
     
-    List<Service> searchServices(String search);
-
-    public Pagination<ServiceDTO> getAllService(int i, int i0);
-
-  
  
 }
