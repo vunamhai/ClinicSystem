@@ -12,18 +12,25 @@ import dao.impl.UserDAOImpl;
 import entity.Doctor;
 import entity.Service;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * <h1>View Feedback Management List Controller </h1>
+ * Controller to view feedback management list. Method process data form
+ * FeedbackDAO and forward data to file view
+ * <p>
  *
- * @author Nguyen
+ *
+ * @author MinhVT
+ * @version 1.0
+ * @since 2022-03-08
  */
-public class ViewMyReservation extends HttpServlet {
+public class ViewServiceManagementListDetail extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,7 +44,7 @@ public class ViewMyReservation extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         int id = Integer.parseInt(request.getParameter("Id"));
+        int id = Integer.parseInt(request.getParameter("Id"));
         String page = request.getParameter("page").toString();
         request.getSession().setAttribute("page", page);
         ServiceDAO serviceDAO = new ServiceDAOImpl();
@@ -49,9 +56,8 @@ public class ViewMyReservation extends HttpServlet {
         request.setAttribute("doctors", doctors);
         List<Doctor> allDoctors = userDAO.getAllDoctor();
         request.setAttribute("allDoctors", allDoctors);
-        request.getRequestDispatcher("./jsp/serviceManagementDetail.jsp").forward(request, response);
-        }
-    
+        request.getRequestDispatcher("./jsp/viewService.jsp").forward(request, response);
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
