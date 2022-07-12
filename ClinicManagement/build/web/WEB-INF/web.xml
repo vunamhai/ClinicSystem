@@ -20,6 +20,14 @@
         <servlet-name>ServiceManagementController</servlet-name>
         <servlet-class>controller.ServiceManagementController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewAllReservationsController</servlet-name>
+        <servlet-class>controller.ViewAllReservationsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewCustomerReservationsList</servlet-name>
+        <servlet-class>controller.ViewCustomerReservationsList</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -43,6 +51,10 @@
     <servlet>
         <servlet-name>LogoutController</servlet-name>
         <servlet-class>controller.LogoutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewMyReservationController</servlet-name>
+        <servlet-class>controller.ViewMyReservationController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogoutController</servlet-name>
@@ -167,6 +179,18 @@
     <servlet-mapping>
         <servlet-name>DeleteDoctorFromService</servlet-name>
         <url-pattern>/DeleteDoctorFromService</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewAllReservationsController</servlet-name>
+        <url-pattern>/ViewAllReservationsController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewCustomerReservationsList</servlet-name>
+        <url-pattern>/ViewCustomerReservationsList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMyReservationController</servlet-name>
+        <url-pattern>/ViewMyReservationController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
