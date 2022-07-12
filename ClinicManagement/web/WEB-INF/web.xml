@@ -96,6 +96,10 @@
         <servlet-name>UpdateCustomerProfileController</servlet-name>
         <servlet-class>controller.UpdateCustomerProfileController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewMyReservationController</servlet-name>
+        <servlet-class>controller.ViewMyReservationController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -187,6 +191,10 @@
     <servlet-mapping>
         <servlet-name>UpdateCustomerProfileController</servlet-name>
         <url-pattern>/UpdateCustomerProfileController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMyReservationController</servlet-name>
+        <url-pattern>/ViewMyReservationController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
