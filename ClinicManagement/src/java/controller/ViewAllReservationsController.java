@@ -5,22 +5,28 @@
  */
 package controller;
 
-import dao.impl.AccountDAOImpl;
-import entity.Accounts;
-import entity.Role;
+import dao.ReservationDAO;
+import dao.ServiceDAO;
+import dao.impl.ReservationDAOImpl;
+import dao.impl.ServiceDAOImpl;
+import entity.Reservation;
+import entity.Service;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import util.Utils;
 
 /**
  *
- * @author Nam Ngo
+ * @author nguyen
  */
-public class SearchAccountController extends HttpServlet {
+public class ViewAllReservationsController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,18 +40,30 @@ public class SearchAccountController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        AccountDAOImpl ad=new AccountDAOImpl();
-        String txtSearch= request.getParameter("search");
-        List<Accounts> listAccount=ad.searchAccount(txtSearch);
-        List<Role> listRole=ad.getAllRoles();
-        request.setAttribute("listRole", listRole);
-        request.setAttribute("listAcc", listAccount);
-        request.setAttribute("txtSearch", txtSearch);
-        if(listAccount.isEmpty()){
-            request.setAttribute("message", "Không có dữ liệu");
+        try (PrintWriter out = response.getWriter()) {
+              HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            String viewDay = (request.getParameter("viewDay") != null) ? Utils.parseDateFormat(request.getParameter("viewDay").trim()) : Utils.getToday();
+            int serviceId = (request.getParameter("serviceId") != null) ? Integer.parseInt(request.getParameter("serviceId").trim()) : -1;
+            ServiceDAO serviceDAO = new ServiceDAOImpl(); // get serviceDAO object
+            ReservationDAO reservationDAO = (ReservationDAO) new ReservationDAOImpl();// get reservationDAO object
+            ArrayList<Service> services = serviceDAO.getServices();
+            ArrayList<User> doctors = reservationDAO.getDoctorsHasReservation(viewDay, serviceId);
+            ArrayList<Reservation> reservations = reservationDAO.getReservationsByDay(viewDay, serviceId);
+
+            request.setAttribute("viewDay", Utils.revertParseDateFormat(viewDay));
+            request.setAttribute("serviceId", serviceId);
+            request.setAttribute("doctors", doctors);
+            request.setAttribute("services", services);
+            request.setAttribute("reservations", reservations);
+            request.getRequestDispatcher("jsp/viewAllReservation.jsp").forward(request, response);
+        } catch (Exception e) {
+            request.setAttribute("errorMessage", "Không thể tải dữ liệu từ cơ sở dữ liệu");
+            request.setAttribute("exceptionMessage", e.getMessage());
+            request.getRequestDispatcher("jsp/error.jsp").forward(request, response);
         }
-        request.getRequestDispatcher("./jsp/viewAllAccount.jsp").forward(request, response);
-    }
+        }
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

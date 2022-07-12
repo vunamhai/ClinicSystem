@@ -5,21 +5,26 @@
  */
 package controller;
 
+import dao.ServiceDAO;
+import dao.UserDAO;
 import dao.impl.ServiceDAOImpl;
-import entity.Service;
+import dao.impl.UserDAOImpl;
+import entity.Doctor;
+import entity.Pagination;
+import entity.ServiceDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-public class ServiceManagementDetailController extends HttpServlet {
+/**
+ *
+ * @author Administrator
+ */
+public class ServiceManagementController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,9 +35,50 @@ public class ServiceManagementDetailController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+      protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String page = request.getParameter("page");
+
+        int pageIndex = 1;
+        if (page != null) {
+            try {
+                pageIndex = Integer.parseInt(page);
+                if (pageIndex == -1) {
+                    pageIndex = 1;
+                }
+            } catch (Exception e) {
+                pageIndex = 1;
+            }
+        } else {
+            pageIndex = 1;
+        }
+        
+        request.getSession().setAttribute("page", pageIndex);
+
+        int pageSize = 5;
+        ServiceDAO serviceDAO = new ServiceDAOImpl();
+        if (request.getSession().getAttribute("page") != null) {
+            pageIndex = Integer.parseInt(request.getSession().getAttribute("page").toString());
+        }
+        Pagination<ServiceDTO> services
+                = serviceDAO.getAllService(pageIndex, pageSize);
+        UserDAO userDAO = new UserDAOImpl();
+
+        List<Doctor> doctors = userDAO.getAllDoctor();
+
+        for (ServiceDTO s : services.getData()) {
+            for (Doctor d : doctors) {
+                if (d.getServiceId() == s.getServiceId()) {
+                    s.getDoctors().add(d);
+                }
+            }
+        }
+
+        request.setAttribute("doctors", doctors);
+        request.setAttribute("services", services);
+
+        request.getRequestDispatcher("./jsp/serviceManagementList.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -47,16 +93,7 @@ public class ServiceManagementDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
-        ServiceDAOImpl sdi = new ServiceDAOImpl();
-        ArrayList<entity.ViewServiceX> viewService = null;
-        try {
-            viewService = sdi.viewServices(Integer.parseInt(id));
-        } catch (SQLException ex) {
-            Logger.getLogger(ServiceManagementDetailController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        request.setAttribute("viewService", viewService);
-        request.getRequestDispatcher("jsp/ViewService.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -84,4 +121,3 @@ public class ServiceManagementDetailController extends HttpServlet {
     }// </editor-fold>
 
 }
-

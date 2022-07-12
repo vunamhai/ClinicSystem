@@ -1,13 +1,19 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 2022, FPT University
+ * CMS
+ * CLINIC MANAGEMENT SYSTEM
+ *
+ * Record of change:
+ * DATE            Version          AUTHOR           DESCRIPTION
+ * 2022-02-08      1.0              HuongHTT         First Implement 
  */
 package controller;
 
-import dao.impl.AccountDAOImpl;
+import dao.UserDAO;
+import dao.impl.UserDAOImpl;
 import entity.Accounts;
-import entity.Role;
+import entity.Pagination;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -17,10 +23,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * This class uses <code>dao.impl.UserDAOImpl</code> functions:<br>
+ * getAllAccount to get all account from database.
  *
- * @author Nam Ngo
+ * Bugs: none
+ *
+ * @author Hoang Thi Thu Huong
  */
-public class ViewAllAccountController extends HttpServlet {
+public class GetAllAccountController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,30 +41,37 @@ public class ViewAllAccountController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    /**
+     * Use function getAllAccount in <code>dao.impl.UserDAOImpl</code> to get a
+     * <code>java.util.List</code> object that contains a series of
+     * <code>entity.Account</code><br>
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        int page= Integer.parseInt(request.getParameter("page"));
-        AccountDAOImpl ad=new AccountDAOImpl();
-        List<Accounts> listAcc=ad.getAllAccounts();
-        int size=10;
-        int totalPage;
-        if(listAcc.size()%size==0){
-            totalPage=listAcc.size()/size;
+        String page = request.getParameter("page");
+        String search = request.getParameter("search");
+        if (search == null) {
+            search = "";
         }
-        else{
-            totalPage= (listAcc.size()/size)+1;
+        int pageIndex = 1;
+        if (page != null) {
+            try {
+                pageIndex = Integer.parseInt(page);
+                if (pageIndex == -1) {
+                    pageIndex = 1;
+                }
+            } catch (Exception e) {
+                pageIndex = 1;
+            }
+        } else {
+            pageIndex = 1;
         }
-        List<Accounts> listAccounts=ad.getAccountsByPage(page, size);
-        List<Role> listRole=ad.getAllRoles();
-        request.setAttribute("listAcc", listAccounts);
-        request.setAttribute("totalPage", totalPage);
-        request.setAttribute("currentPage", page);
-        request.setAttribute("listRole", listRole);
-        request.setAttribute("view", true);
-        if(listAccounts.isEmpty()){
-            request.setAttribute("message", "Không có dữ liệu");
-        }
+        int pageSize = 5;
+        UserDAO userDAO = new UserDAOImpl();
+        Pagination<Accounts> users = userDAO.getAllAccount(pageIndex, pageSize, search);
+        request.setAttribute("users", users);
+        request.setAttribute("search", search);
         request.getRequestDispatcher("./jsp/viewAllAccount.jsp").forward(request, response);
     }
 

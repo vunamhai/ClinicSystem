@@ -1,27 +1,12 @@
-/*
- * Copyright(C) 2022, FPT University
- * CMS
- * CLINIC MANAGEMENT SYSTEM
- *
- * Record of change:
- * DATE            Version          AUTHOR           DESCRIPTION
- * 2022-02-08      1.0              HuongHTT         First Implement 
- */
+
 package dao;
 
-import entity.Account;
+import entity.Accounts;
 import entity.Doctor;
 import entity.Pagination;
 import entity.User;
 import java.util.List;
 
-/**
- * This is an interface contains methods of <code>User</code> object<br>
- *
- * Bugs: none
- *
- * @author Hoang Thi Thu Huong
- */
 public interface UserDAO {
 
     User login(String username, String password);
@@ -35,7 +20,7 @@ public interface UserDAO {
      * -It is a <code>java.util.List</code> object
      * @throws SQLException when <code>java.sql.SQLException</code> occurs.
      */
-    Pagination<Account> getAllAccount(int pageIndex, int pageSize, String search);
+    Pagination<Accounts> getAllAccount(int pageIndex, int pageSize, String search);
 
     void deleteAccount(int id);
 

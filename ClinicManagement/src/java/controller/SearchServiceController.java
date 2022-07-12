@@ -5,11 +5,13 @@
  */
 package controller;
 
+import dao.ServiceDAO;
 import dao.impl.ServiceDAOImpl;
 import entity.Service;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,13 +36,12 @@ public class SearchServiceController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html; charset=UTF-8");
-        ServiceDAOImpl sdi = new ServiceDAOImpl();
         String search = request.getParameter("search");
-        ArrayList<Service> list = sdi.searchServices(search);
+        response.setContentType("text/html; charset=UTF-8");
+        ServiceDAO sdi = new ServiceDAOImpl();
+        List<Service> list = sdi.searchServices(search);
         request.setAttribute("searchList", list);
         request.getRequestDispatcher("jsp/searchService.jsp").forward(request, response);
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

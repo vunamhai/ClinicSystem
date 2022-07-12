@@ -1,25 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controller;
 
-import dao.impl.AccountDAOImpl;
-import entity.Accounts;
+import dao.FeedbackDAO;
+import dao.impl.FeedbackDAOImpl;
+import entity.FeedbackDTO;
+import entity.FeedbackReply;
+import entity.Pagination;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Nam Ngo
- */
-public class AddAccountController extends HttpServlet {
+
+public class ViewFeedbackManagedListController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,44 +29,44 @@ public class AddAccountController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        int roleId= Integer.parseInt(request.getParameter("roleId"));
-        String username=request.getParameter("username");
-        String firstname=request.getParameter("firstname");
-        String lastname=request.getParameter("lastname");
-        String email=request.getParameter("email");
-        String street=request.getParameter("street");
-        String city=request.getParameter("city");
-        String country=request.getParameter("country");
-        String phone=request.getParameter("phone");
-        String password=request.getParameter("password");
-        int gender = Integer.parseInt(request.getParameter("gender"));
-        Date dob=Date.valueOf(request.getParameter("dob"));
-        Accounts a=new Accounts();
-        a.setRoleID(roleId);
-        a.setUsername(username);
-        a.setFirstname(firstname);
-        a.setLastname(lastname);
-        a.setEmail(email);
-        a.setStreet(street);
-        a.setCity(city);
-        a.setCountry(country);
-        a.setPhone(phone);
-        a.setPassword(password);
-        if(gender==1){
-            a.setGender(true);
+        String page = request.getParameter("page");
+        if (page != null) {
+            request.getSession().setAttribute("pageIndex", page);
         }
-        else{
-            a.setGender(false);
+        int pageIndex = 1;
+        if (page != null) {
+            try {
+                pageIndex = Integer.parseInt(page);
+                if (pageIndex == -1) {
+                    pageIndex = 1;
+                }
+            } catch (Exception e) {
+                pageIndex = 1;
+            }
+        } else {
+            pageIndex = 1;
         }
-        a.setDob(dob);
-        
-        AccountDAOImpl ad=new AccountDAOImpl();
-        Accounts acc1=ad.getAccountByEmail(email);
-        Accounts acc2=ad.getAccountByUsername(username);
-        if(acc1==null&&acc2==null){
-            ad.addAccounts(a);
+
+        int pageSize = 5;
+
+        FeedbackDAO feedbackDAO = new FeedbackDAOImpl();
+        if (request.getSession().getAttribute("pageIndex") != null) {
+            pageIndex = Integer.parseInt(request.getSession().getAttribute("pageIndex").toString());
         }
-        response.sendRedirect("ViewAllAccountController?page=1");
+        Pagination<FeedbackDTO> feedbacks = feedbackDAO.getAllFeedback(pageIndex, pageSize, "");
+        List<FeedbackReply> feedbackReply = feedbackDAO.getAllReply();
+        for (FeedbackDTO feedback : feedbacks.getData()) {
+            List<String> listFB = new ArrayList<>();
+            for (FeedbackReply f : feedbackReply) {
+                if (f.getFeedback() == feedback.getFeedbackId()) {
+                    listFB.add(f.getContent());
+                }
+            }
+            feedback.setFeedbackReply(listFB);
+        }
+
+        request.setAttribute("feedbacks", feedbacks);
+        request.getRequestDispatcher("./jsp/feedbackManagement.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

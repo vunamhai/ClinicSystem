@@ -5,9 +5,9 @@
  */
 package controller;
 
-import dao.AccountDAO;
-import dao.impl.AccountDAOImpl;
-import entity.Account;
+import dao.UserDAO;
+import dao.impl.UserDAOImpl;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
@@ -24,55 +24,56 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Nguyen Van Nam
- */
 public class RegisterForCustomerController extends HttpServlet {
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("utf-8");
-        String firstname = request.getParameter("firstname").trim();
-         String lastname = request.getParameter("lastname").trim();
-          String username = request.getParameter("username").trim();
+        String username = request.getParameter("username").trim();
         String email = request.getParameter("email").trim();
         String password = request.getParameter("password").trim();
         String rePassword = request.getParameter("re-password").trim();
-        
+
+        String fullName = request.getParameter("fullName").trim();
+
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-        
+
         String date = request.getParameter("date").trim();
         format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
         java.util.Date jdate = format.parse(date);
         java.util.Date today = new java.util.Date();
         String phone = request.getParameter("phone").trim();
-        String street = request.getParameter("street").trim();
-        String city = request.getParameter("city").trim();
-        String country = request.getParameter("country").trim();
-       
+        String address = request.getParameter("address").trim();
+
         HttpSession session = request.getSession();
-        
-        session.setAttribute("firstname", firstname);
-        session.setAttribute("lastname", lastname);
+
+        session.setAttribute("username", username);
         session.setAttribute("username", username);
         session.setAttribute("email", email);
         session.setAttribute("password", password);
         session.setAttribute("rePassword", rePassword);
+        session.setAttribute("fullName", fullName);
         session.setAttribute("phone", phone);
-        session.setAttribute("street", street);
-        session.setAttribute("city", city);
-        session.setAttribute("country", country);
+        session.setAttribute("address", address);
         session.setAttribute("date", date);
 
-        
         session.removeAttribute("message");
         if (jdate.after(today)) {
             session.setAttribute("message", "Date invalid");
             response.sendRedirect("./jsp/Register.jsp");
             return;
         }
+
+        if (!password.equals(rePassword)) {
+            session.setAttribute("message", "Password not match");
+            response.sendRedirect("./jsp/Register.jsp");
+            return;
+        }
+
+        java.sql.Date sdate = new java.sql.Date(jdate.getTime());
+        request.setAttribute("date", sdate);
+
         int check = Integer.parseInt(request.getParameter("gender").trim());
         boolean gender;
         if (check == 1) {
@@ -80,24 +81,14 @@ public class RegisterForCustomerController extends HttpServlet {
         } else {
             gender = false;
         }
-        if (!password.equals(rePassword)) {
-            session.setAttribute("message", "Password not match");
-            response.sendRedirect("./jsp/Register.jsp");
-            return;
-        }
-        
-        java.sql.Date sdate = new java.sql.Date(jdate.getTime());
-        request.setAttribute("date", sdate);
-        
-        
-        
-        Account account = new Account(username, email, password, firstname, lastname, sdate, gender, phone, street, city, country);
-        AccountDAO userDAO = new AccountDAOImpl();
-        
+
+        User user = new User(4, 0, username, email, password, fullName, sdate, gender, phone, address, "", 0);
+        UserDAO userDAO = new UserDAOImpl();
+
         if (userDAO.login(username, password) != null) {
             session.setAttribute("message", "Username existed");
         } else {
-            userDAO.createAccount(account);
+            userDAO.createAccount(user);
             session.setAttribute("message", "Register Successfully");
         }
         response.sendRedirect("./jsp/Register.jsp");
@@ -149,6 +140,8 @@ public class RegisterForCustomerController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }
+
 
 

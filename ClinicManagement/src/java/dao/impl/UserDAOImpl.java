@@ -2,7 +2,7 @@ package dao.impl;
 
 import context.DBContext;
 import dao.UserDAO;
-import entity.Account;
+import entity.Accounts;
 import entity.Pagination;
 import entity.User;
 import entity.Doctor;
@@ -80,13 +80,13 @@ public class UserDAOImpl extends DBContext implements UserDAO {
     * a <code>java.util.List</code> object 
      */
     @Override
-    public Pagination<Account> getAllAccount(int pageIndex, int pageSize, String search) {
-        Pagination<Account> pagination = new Pagination<>();
+    public Pagination<Accounts> getAllAccount(int pageIndex, int pageSize, String search) {
+        Pagination<Accounts> pagination = new Pagination<>();
         logger.log(Level.INFO, "Login Controller");
         Connection connecion = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
-        List<Account> users = new ArrayList<>();
+        List<Accounts> users = new ArrayList<>();
         try {
             connecion = getConnection();
             int totalItem = count(); // 
@@ -105,12 +105,19 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             preparedStatement.setInt(2, (pageIndex - 1) * pageSize + pageSize);
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                Account user = new Account();
+                Accounts user = new Accounts();
+                user.setUserId(rs.getInt("user_id"));
+                user.setRole(rs.getString("role_name"));
+                user.setServiceId(rs.getInt("service_id"));
                 user.setUsername(rs.getString("username"));
                 user.setEmail(rs.getString("email"));
                 user.setPassword(rs.getString("password"));
+                user.setFullName(rs.getString("full_name"));
+                user.setBirthDate(rs.getDate("birth_date"));
                 user.setGender(rs.getBoolean("gender"));
                 user.setPhone(rs.getString("phone"));
+                user.setAddress(rs.getString("address"));
+                user.setAvatarImage(rs.getString("avatar_image"));
                 users.add(user);
             }
         } catch (Exception ex) {
@@ -260,12 +267,13 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         try {
             connecion = getConnection();
             // Get data
-            preparedStatement = connecion.prepareStatement("select * from users where role_id = 3 and is_active = 1;");
+            preparedStatement = connecion.prepareStatement("select * from users where role_id = 3");
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
                 Doctor user = new Doctor();
                 user.setId(rs.getInt("user_id"));
                 user.setName(rs.getString("full_name"));
+                user.setImage(rs.getString("avatar_image"));
                 user.setServiceId(rs.getInt("service_id"));
                 doctor.add(user);
             }
@@ -432,7 +440,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         try {
             connecion = getConnection();
             // Get data
-            preparedStatement = connecion.prepareStatement("UPDATE [dbo].[Accounts]\n"
+            preparedStatement = connecion.prepareStatement("UPDATE [dbo].[users]\n"
                     + "   SET \n"
                     + "      [Password] = ?\n"
                     + "      \n"
@@ -450,7 +458,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             closeConnection(connecion);
         }
     }
-   
+
     @Override
     public User getUserByEmail(String email) {
         logger.log(Level.INFO, "Login Controller");

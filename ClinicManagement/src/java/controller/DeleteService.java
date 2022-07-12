@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Admin
+ * @author nguyen
  */
 public class DeleteService extends HttpServlet {
 

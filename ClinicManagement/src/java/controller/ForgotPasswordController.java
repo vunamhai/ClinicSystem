@@ -6,8 +6,10 @@
 package controller;
 
 import dao.AccountDAO;
-import dao.impl.AccountDAOImpl;
+import dao.UserDAO;
+import dao.impl.UserDAOImpl;
 import entity.Accounts;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -35,15 +37,15 @@ public class ForgotPasswordController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String email = request.getParameter("email");
-        AccountDAO accountDAO = new AccountDAOImpl();
-        Accounts account = accountDAO.getAccountByEmail(email);
-        if ((account == null)) {
+        UserDAO userDAO = new UserDAOImpl();
+        User user = userDAO.getUserByEmail(email);
+        if (user == null) {
             request.setAttribute("message", "Email not existed !!!");
             request.getRequestDispatcher("./jsp/forgotPass.jsp").forward(request, response);
             return;
         }
         HttpSession session = request.getSession();
-        session.setAttribute("user", account);
+        session.setAttribute("user", user);
         request.getRequestDispatcher("./jsp/setPassword.jsp").forward(request, response);
     }
 

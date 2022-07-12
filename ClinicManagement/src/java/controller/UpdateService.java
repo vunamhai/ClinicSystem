@@ -5,10 +5,16 @@
  */
 package controller;
 
+import dao.ServiceDAO;
+import dao.UserDAO;
 import dao.impl.ServiceDAOImpl;
+import dao.impl.UserDAOImpl;
+import entity.Doctor;
 import entity.Service;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,18 +38,47 @@ public class UpdateService extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet UpdateService</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet UpdateService at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+      request.setCharacterEncoding("UTF-8");
+        
+        String serviceName = request.getParameter("service_name");
+        String serviceBrief = request.getParameter("service_brief");
+        String serviceDesc = request.getParameter("service_desc");
+        int serviceId = Integer.parseInt(request.getParameter("service_id"));
+
+        String[] ids = request.getParameter("list_doctors").split("-");
+        List<Integer> idList = new ArrayList<>();
+
+        if (!request.getParameter("list_doctors").equals("")) {
+            for (String i : ids) {
+                idList.add(Integer.parseInt(i));
+            }
         }
+        Service service = new Service();
+        service.setServiceId(serviceId);
+        service.setServiceName(serviceName);
+        service.setServiceBrief(serviceBrief);
+        service.setServiceDescription(serviceDesc);
+        ServiceDAO serviceDAO = new ServiceDAOImpl();
+        serviceDAO.removeAllDoctor(serviceId);
+        serviceDAO.updateService(service);
+
+        UserDAO userDAO = new UserDAOImpl();
+        if (idList.isEmpty()) {
+            userDAO.addDoctorForService(0, serviceId);
+        }
+        for (int k : idList) {
+            userDAO.addDoctorForService(k, serviceId);
+        }
+
+        service = serviceDAO.getById(serviceId);
+
+        List<Doctor> doctors = userDAO.getDoctorByServiceId(service.getServiceId());
+        request.setAttribute("service", service);
+        request.setAttribute("doctors", doctors);
+        List<Doctor> allDoctors = userDAO.getAllDoctor();
+        request.setAttribute("allDoctors", allDoctors);
+        request.getRequestDispatcher("./jsp/editService.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -58,12 +93,7 @@ public class UpdateService extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
-        System.out.println("xxxxxxxxxxxxxxxxxxxxx" + id);
-        ServiceDAOImpl sdi = new ServiceDAOImpl();
-        Service service = sdi.getById(Integer.parseInt(id));
-        request.setAttribute("serviceX", service);
-        request.getRequestDispatcher("jsp/updateService.jsp").forward(request, response);
+            processRequest(request, response);
     }
 
     /**
@@ -77,14 +107,7 @@ public class UpdateService extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String idService = request.getParameter("id");
-        String name = request.getParameter("serviceName");
-        String desc = request.getParameter("serviceDescription");
-        ServiceDAOImpl sdi = new ServiceDAOImpl();
-        Service service = new Service(Integer.parseInt(idService), name, desc);
-        System.out.println(idService + "               " + name + "            " + desc);
-        sdi.updateService(Integer.parseInt(idService), name, desc);
-        response.sendRedirect("ServiceManagementList");
+           processRequest(request, response);
     }
 
 

@@ -1,3 +1,12 @@
+<!--
+ * Copyright(C) 2022, FPT University
+ * CMS
+ * CLINIC MANAGEMENT SYSTEM
+ *
+ * Record of change:
+ * DATE            Version          AUTHOR           DESCRIPTION
+ * 2022-03-10      1.0              HuongHTT         First Implement 
+/-->
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -16,7 +25,7 @@
 
     </head>
     <header>
-        
+        <jsp:include page="./components/adminHeader.jsp" />
     </header>
     <body>
         <div class="container-fluid">
@@ -29,9 +38,11 @@
                     <nav class="navbar navbar-light bg-light justify-content-between">
                         <button class="btn btn-primary btn-xs" data-title="Add" data-toggle="modal" data-target="#add" >Thêm tài khoản
                         </button>
-                        
-                        <form class="form-inline" action="SearchAccountController" method="GET">
-                            <input class="form-control mr-sm-2"name="search" type="search" placeholder="Search" aria-label="Search" value="${txtSearch}" required>
+                        <div style="color: red">
+                            ${message}
+                        </div>
+                        <form class="form-inline" action="GetAllAccountController" method="GET">
+                            <input class="form-control mr-sm-2"name="search" type="search" placeholder="Search" aria-label="Search" value="${search}">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
                     </nav>
@@ -41,31 +52,31 @@
                             <th>Tài Khoản</th>
                             <th>Email</th>
                             <th>Họ tên</th>
-                            <th>Sinh nhật</th>
-                            <th>Address</th>
-                            <th>Giới tính</th>
                             <th>Chức vụ</th>
+                            <th>View</th>
                             <th>Update</th>
                             <th>Delete</th>
                         </tr>
-                        <c:forEach var="a" items="${listAcc}">
+                        <c:forEach var="user" items="${users.data}">
                             <tr>
-                                <td>${a.id}</td>
-                                <td>${a.username}</td>
-                                <td>${a.email}</td>
-                                <td>${a.firstname} ${a.lastname}</td>
-                                <td>${a.dob}</td>
-                                <td>${a.street} ${a.city} ${a.country}</td>
-                                <td>${a.gender == "true" ? "Nam" : "Nữ"}</td>
-                                <td>${a.roleName}</td>
+                                <td>${user.userId}</td>
+                                <td>${user.username}</td>
+                                <td>${user.email}</td>
+                                <td>${user.fullName}</td>
+                                <td>${user.role}</td>
                                 <td>
-                                    <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#edit${a.id}" >
+                                    <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#view${user.userId}" >
+                                        <i class="fa-solid fa-eye"></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#edit${user.userId}" >
                                         <i class="fa-solid fa-pen"></i>
                                     </button>
 
                                 </td>
                                 <td>
-                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delete${a.id}" >
+                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delete${user.userId}" >
                                         <i class="fa-solid fa-trash-can"></i>
                                     </button>
                                 </td>
@@ -73,36 +84,37 @@
                         </c:forEach>
 
                     </table>
-                    <div style="color: red">
-                            ${message}
-                    </div>
-                    <c:if test="${view}">
-                        <nav aria-label="Page navigation example">
-                        <c:if test="${totalPage > 1}">
+                    <nav aria-label="Page navigation example">
+                        <c:if test="${users.totalItem == 0}">
+                            <div class="col-12">
+                                <p class="text-center">Không có dữ liệu</p>
+                            </div>
+                        </c:if>
+                        <c:if test="${users.totalPage > 1}">
                             <div class="row">
                                 <div class="col-12 text-center">
                                     <ul>
-                                        <c:if test="${currentPage > 1}">
-                                            <a class="btn btn-light" href="ViewAllAccountController?page=${currentPage-1}">Trang trước</a>
+                                        <c:if test="${users.currentPage > 1}">
+                                            <a class="btn btn-light" href="GetAllAccountController?page=${users.currentPage-1}">Trang trước</a>
                                         </c:if>
-                                        <c:forEach var="pageNumber" begin="1" end="${totalPage}" step="1">
-                                            <c:if test="${currentPage == pageNumber}">
+                                        <c:forEach var="pageNumber" begin="1" end="${users.totalPage}" step="1">
+                                            <c:if test="${users.currentPage == pageNumber}">
                                                 <a class="btn btn-success" href="#">${pageNumber}</a>
                                             </c:if>
-                                            <c:if test="${currentPage != pageNumber}">
-                                                <a class="btn btn-light" href="ViewAllAccountController?page=${pageNumber}">${pageNumber}</a>
+                                            <c:if test="${users.currentPage != pageNumber}">
+                                                <a class="btn btn-light" href="GetAllAccountController?page=${pageNumber}">${pageNumber}</a>
                                             </c:if>
                                         </c:forEach>
-                                        <c:if test="${currentPage < totalPage}">
-                                            <a class="btn btn-light" href="ViewAllAccountController?page=${currentPage+1}">Trang sau</a>
+                                        <c:if test="${users.currentPage < users.totalPage}">
+                                            <a class="btn btn-light" href="GetAllAccountController?page=${users.currentPage+1}">Trang sau</a>
                                         </c:if>
                                     </ul>
                                 </div>
                             </div>
                         </c:if>
                     </nav>
-                    </c:if>
                 </div>
+
             </div>
         </div>
 
@@ -119,14 +131,15 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="AddAccountController" method="POST">
+                        <form action="../ClinicManagement/CreateAccountController" method="GET  ">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputRole">Chức vụ</label>
                                     <select id="inputRole" class="form-control" name="roleId">
-                                        <c:forEach items="${listRole}" var="r">
-                                            <option value="${r.roleId}">${r.roleName}</option>
-                                        </c:forEach>
+                                        <option value="1">Admin</option>
+                                        <option value="2">Manager</option>
+                                        <option value="3">Doctor</option>
+                                        <option selected value="4">Customer</option>
                                     </select>                                    
                                 </div>
                                 <div class="form-group col-md-6">
@@ -137,33 +150,21 @@
 
                             <div class="form-group">
                                 <label for="inputAccount">password</label>
-                                <input type="password" class="form-control" name="password" required maxlength="20">
+                                <input type="text" class="form-control" name="password" required maxlength="20">
                             </div>
 
+                            <div class="form-group">
+                                <label>Họ và tên</label>
+                                <input type="text" class="form-control" name="fullName" required maxlength="20">
+                            </div>
                             <div class="form-group">
                                 <label>Email</label>
                                 <input type="email" class="form-control" name="email" required maxlength="20">
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label>Họ</label>
-                                    <input type="text" class="form-control" name="firstname" required maxlength="20">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>Tên</label>
-                                    <input type="text" class="form-control" name="lastname" required maxlength="20">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>Đường/Phố</label>
-                                    <input type="text" class="form-control" name="street" required maxlength="20">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>Thành Phố</label>
-                                    <input type="text" class="form-control" name="city" required maxlength="20">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>Quốc gia</label>
-                                    <input type="text" class="form-control" name="country" required maxlength="20">
+                                    <label>Địa chỉ</label>
+                                    <input type="text" class="form-control" name="address" required maxlength="20">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Số điện thoại</label>
@@ -172,7 +173,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Ngày sinh</label>
-                                    <input type="date" class="form-control" id="inputBirthDate" name="dob" required>
+                                    <input type="date" class="form-control" id="inputBirthDate" name="date" required>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Giới tính</label>
@@ -194,13 +195,67 @@
             </div>
             <!-- /.modal-dialog --> 
         </div>
-        <c:forEach var="a" items="${listAcc}">
+        <c:forEach var="user" items="${users.data}">
+            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="view" aria-hidden="true" id="view${user.userId}">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">                   
+                            <h4 class="modal-title custom_align" id="Heading">Chi tiết tài khoản</h4>
+
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="inputRole">Chức vụ</label>
+                                        <input type="text" class="form-control" name="inputRole" value="${user.role}">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="inputAccount">Tài khoản</label>
+                                        <input type="text" class="form-control" name="inputAccount" value="${user.username}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Họ và tên</label>
+                                    <input type="text" class="form-control" name="inputName" value="${user.fullName}">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" name="inputEmail" value="${user.email}">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label>Địa chỉ</label>
+                                        <input type="text" class="form-control" name="inputAddress" value="${user.address}">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Số điện thoại</label>
+                                        <input type="text" class="form-control" name="inputPhone" value="${user.phone}">
+
+                                    </div>
+
+                                    <div class="form-group col-md-6">
+                                        <label>Giới tính</label>
+                                        <input type="text" class="form-control" id="inputGender" value="${user.gender == "true" ? "Nam" : "Nữ"}">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                    <!-- /.modal-content --> 
+                </div>
+                <!-- /.modal-dialog --> 
+            </div>
             <form action="DeleteAccountController">
                 <div hidden>
-                    <input name="txtSearch" value="${txtSearch}">
-                    <input name="id" value="${a.id}">
+                    <input name="id" value="${user.userId}">
                 </div>
-                <div class="modal fade" id="delete${a.id}">
+                <div class="modal fade" id="delete${user.userId}">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -226,14 +281,9 @@
 
 
 
-            <div class="modal fade" id="edit${a.id}">
+            <div class="modal fade" id="edit${user.userId}">
                 <div class="modal-dialog">
-                    <form action="UpdateAccountController" method="POST">
-                        <div hidden>
-                            <input name="txtSearch" value="${txtSearch}">
-                            <input name="id" value="${a.id}">
-                            <input name="page" value="${currentPage}">
-                        </div>
+                    <form action="UpdateAccountController" method="GET">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h4 class="modal-title custom_align" id="Heading">Chỉnh sửa tài khoản</h4>
@@ -246,59 +296,51 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="inputRole">Chức vụ</label>
-                                        <select id="inputRole" class="form-control" name="roleId">
-                                        <c:forEach items="${listRole}" var="r">
-                                            <option value="${r.roleId}" ${a.roleID == r.roleId ? "selected" : ""}>${r.roleName}</option>
-                                        </c:forEach>
-                                        </select> 
+                                        <select id="inputRole" class="form-control" name="roleId" value="${user.role}">
+                                            <option value="1">Admin</option>
+                                            <option value="2">Manager</option>
+                                            <option value="3">Doctor</option>
+                                            <option value="4">Customer</option>
+                                        </select>                                    
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="inputAccount">Tài khoản</label>
-                                        <input type="text" class="form-control" required maxlength="20" name="username" value="${a.username}">
+                                        <input type="text" class="form-control" required maxlength="20" name="username" value="${user.username}">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label>Họ</label>
-                                    <input type="text" class="form-control"required maxlength="20" name="firstname" value="${a.firstname}">
-                                </div>
-                                <div class="form-group">
-                                    <label>Tên</label>
-                                    <input type="text" class="form-control"required maxlength="20" name="lastname" value="${a.lastname}">
+                                    <label>Họ và tên</label>
+                                    <input type="text" class="form-control"required maxlength="20" name="fullName" value="${user.fullName}">
                                 </div>
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input type="email" class="form-control"required maxlength="30" name="email" value="${a.email}">
+                                    <input type="email" class="form-control"required maxlength="30" name="email" value="${user.email}">
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label>Đường/Phố</label>
-                                        <input type="text" class="form-control"required maxlength="30" name="street" value="${a.street}">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label>Thành phố</label>
-                                        <input type="text" class="form-control"required maxlength="30" name="city" value="${a.city}">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label>Quốc gia</label>
-                                        <input type="text" class="form-control"required maxlength="30" name="country" value="${a.country}">
+                                        <label>Địa chỉ</label>
+                                        <input type="text" class="form-control"required maxlength="30" name="address" value="${user.address}">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Số điện thoại</label>
-                                        <input type="text" class="form-control"required maxlength="15" name="phone" value="${a.phone}">
+                                        <input type="text" class="form-control"required maxlength="15" name="phone" value="${user.phone}">
 
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Ngày sinh</label>
-                                        <input type="date" class="form-control" name="dob" required id="inputBirthDate" value="${a.dob}">
+                                        <input type="date" class="form-control" name="date" required id="inputBirthDate" value="${user.birthDate}">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Giới tính</label>
-                                        <select id="inputGender" class="form-control" name="gender">
-                                            <option value="1" ${a.gender == "true" ? "selected" : ""}>Nam</option>
-                                            <option value="2" ${a.gender == "false" ? "selected" : ""}>Nữ</option>
+                                        <select id="inputGender" class="form-control" name="gender" value="${user.gender == "true" ? "Nam" : "Nữ"}">
+                                            <option value="1">Nam</option>
+                                            <option value="2">Nữ</option>
                                         </select>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="form-group col-md-6" hidden>
+                                <input type="text" class="form-control" name="userId" id="inputBirthDate" value="${user.userId}">
                             </div>
                             <div class="modal-footer ">
                                 <button type="submit" class="btn btn-primary btn-xs btn-lg col-md-6" style="width: 100%;">Lưu</button>
@@ -314,10 +356,10 @@
 
 
         </c:forEach>
-<!--        <script language="JavaScript" src="https://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>-->
+        <!--<script language="JavaScript" src="https://code.jquery.com/jquery-1.11.1.min.js" type="text/javascript"></script>-->
         <script language="JavaScript" src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js" type="text/javascript"></script>
         <script language="JavaScript" src="https://cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/3/dataTables.bootstrap.js" type="text/javascript"></script>
-<!--                        <script src="./assets/js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+        <!--                <script src="./assets/js/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
                         <script src="./assets/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>-->
     </body>
 </html>
