@@ -51,9 +51,9 @@
                     </li>
                     <!-- Links -->
                     <li><a class="dropdown-item" href="./jsp/user_profile.jsp"><i class="bi bi-person fa-fw me-2"></i>Xem thông tin cá nhân</a></li>
-                        <c:if test = "${role == 1}">
+                      
                         <li><a class="dropdown-item bg-danger-soft-hover" href="./ViewCustomerReservationsList"><i class="bi bi-power fa-fw me-2"></i>Xem danh sách đặt chỗ</a></li>
-                        </c:if>
+                      
                     <li><a class="dropdown-item" href="./jsp/changePass.jsp"><i class="bi bi-person fa-fw me-2"></i>Đổi mật khẩu</a></li>
                     <li><a class="dropdown-item bg-danger-soft-hover" href="./LogoutController"><i class="bi bi-power fa-fw me-2"></i>Đăng xuất</a></li>
                     <li> <hr class="dropdown-divider"></li>
