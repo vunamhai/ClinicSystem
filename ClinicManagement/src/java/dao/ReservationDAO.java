@@ -20,19 +20,6 @@ import java.util.List;
  */
 public interface ReservationDAO {
 
-    /**
-     * - Get full information about a reservation (such as customer information,
-     * service information, package information, all reservation information)
-     *
-     * @param viewDay is a <code>java.lang.String</code> object used to get
-     * reservation by date
-     * @param serviceId is a <code>java.lang.String</code> object used to get
-     * reservation by serviceId
-     * @return a list of <code>Reservation</code> objects. <br>
-     * -It is a <code>java.util.ArrayList</code> object
-     * @throws SQLException when <code>java.sql.SQLException</code> occurs.
-     * @throws Exception when <code>java.sql.Exception</code> occurs.
-     */
     public ArrayList<Reservation> getReservationsByDay(String viewDay, int serviceId) throws SQLException, Exception;
 
     public ArrayList<User> getDoctorsHasReservation(String viewDay, int serviceId) throws SQLException, Exception;
