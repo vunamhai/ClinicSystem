@@ -33,10 +33,11 @@ public class PostEntity {
         this.postImage = postImage;
     }
 
-    public PostEntity(int id, String title, String summary, String postImage) {
+    public PostEntity(int id, String title, String summary, String content, String postImage) {
         this.id = id;
         this.title = title;
         this.summary = summary;
+        this.content = content;
         this.postImage = postImage;
     }
 
