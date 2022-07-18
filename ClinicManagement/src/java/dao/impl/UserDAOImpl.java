@@ -2,10 +2,10 @@ package dao.impl;
 
 import context.DBContext;
 import dao.UserDAO;
-import entity.Account;
-import entity.Pagination;
-import entity.User;
-import entity.Doctor;
+import model.Account;
+import model.Pagination;
+import model.User;
+import model.Doctor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

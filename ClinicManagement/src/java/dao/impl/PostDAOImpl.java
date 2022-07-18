@@ -7,8 +7,8 @@ package dao.impl;
 
 import context.DBContext;
 import dao.PostDAO;
-import entity.PostEntity;
-import entity.ServicePackage;
+import model.PostEntity;
+import model.ServicePackage;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -118,6 +118,39 @@ public class PostDAOImpl extends DBContext implements PostDAO {
             closeConnection(connecion);
         }
         return null;
+    }
+    
+    @Override
+    public String updatePostByManager(PostEntity post) {
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try {
+            connecion = getConnection();
+            // Get data
+            preparedStatement = connecion.prepareStatement("UPDATE [dbo].[posts]\n"
+                    + "   SET\n"
+                    + "       [title] = ?\n"
+                    + "      ,[summary] = ?\n"
+                    + "      ,[content] = ?\n"
+                    + "      ,[post_images] = ?\n"
+                    + " WHERE id = ?");
+
+            preparedStatement.setString(1, post.getTitle());
+            preparedStatement.setString(2, post.getSummary());
+            preparedStatement.setString(3, post.getContent());
+            preparedStatement.setString(4, post.getPostImage());
+            preparedStatement.setInt(5, post.getId());
+
+            preparedStatement.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
+        return "success";
     }
 
 }

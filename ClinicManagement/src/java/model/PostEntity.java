@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package entity;
+package model;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -30,6 +30,13 @@ public class PostEntity {
         this.summary = summary;
         this.content = content;
         this.createDate = createDate;
+        this.postImage = postImage;
+    }
+
+    public PostEntity(int id, String title, String summary, String postImage) {
+        this.id = id;
+        this.title = title;
+        this.summary = summary;
         this.postImage = postImage;
     }
 

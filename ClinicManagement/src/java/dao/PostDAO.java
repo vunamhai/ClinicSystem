@@ -5,7 +5,7 @@
  */
 package dao;
 
-import entity.PostEntity;
+import model.PostEntity;
 import java.util.List;
 
 public interface PostDAO {
@@ -15,4 +15,6 @@ public interface PostDAO {
     List<PostEntity> searchPost(String value);
 
     PostEntity getPostById(int id);
+    
+    public String updatePostByManager(PostEntity p);
 }

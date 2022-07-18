@@ -7,9 +7,9 @@ package controller;
 
 import dao.ReservationDAO;
 import dao.impl.ReservationDAOImpl;
-import entity.CustomerReservation;
-import entity.Pagination;
-import entity.User;
+import model.CustomerReservation;
+import model.Pagination;
+import model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;

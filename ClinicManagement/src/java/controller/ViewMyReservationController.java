@@ -11,8 +11,8 @@ package controller;
 
 import dao.ReservationDAO;
 import dao.impl.ReservationDAOImpl;
-import entity.Reservation;
-import entity.User;
+import model.Reservation;
+import model.User;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
