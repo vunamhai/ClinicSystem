@@ -15,7 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
+/**
+ * * -This class uses function getUser in <code>dao.impl.UserDAOImpl</code> to
+ * get an <code>java.util.String</code> object that contains a series of
+ * <code>entity.User</code>
+ *
+ * @author Nguyen Thanh Tung
+ */
 public class HomeController extends HttpServlet {
 
     /**
@@ -29,7 +35,8 @@ public class HomeController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         if (user != null) {
