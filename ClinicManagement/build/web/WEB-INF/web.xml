@@ -40,6 +40,10 @@
         <servlet-name>DeletePostController</servlet-name>
         <servlet-class>controller.DeletePostController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddPostController</servlet-name>
+        <servlet-class>controller.AddPostController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -207,6 +211,10 @@
     <servlet-mapping>
         <servlet-name>DeletePostController</servlet-name>
         <url-pattern>/DeletePostController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddPostController</servlet-name>
+        <url-pattern>/AddPostController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
