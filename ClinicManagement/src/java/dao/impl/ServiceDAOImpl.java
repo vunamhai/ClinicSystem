@@ -168,12 +168,9 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
      * @throws SQLException
      */
     @Override
-    public ArrayList<Service> getServices() throws SQLException {
+    public ArrayList<Service> getServices() {
         ArrayList<Service> result = new ArrayList<>();
-        String sql = "SELECT [service_id]\n"
-                + "    ,[service_name]\n"
-                + " ,[description]\n"
-                + "  FROM services";
+        String sql = "SELECT * FROM [CMS01].[dbo].[services]";
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -186,12 +183,12 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
              * result list
              */
             while (rs.next()) {
-                Service service = new Service(rs.getInt("service_id"), rs.getString("service_name"), rs.getString("description"));
+                Service service = new Service(rs.getInt("service_id"), rs.getString("service_name"), rs.getString("service_brief"), rs.getString("service_description"),
+                                              rs.getString("service_image"), rs.getString("isActive"));
                 result.add(service);
             }
         } catch (SQLException ex) {
 //            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
-            throw ex;
         } catch (Exception ex) {
 //            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
             /**
@@ -204,6 +201,7 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
             this.closeConnection(con);
         }
         return result;
+
     }
     
     public String getString(String msg) {

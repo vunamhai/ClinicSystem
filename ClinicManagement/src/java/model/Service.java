@@ -16,6 +16,7 @@ public class Service {
     private String serviceBrief;
     private String serviceDescription;
     private String serviceImage;
+    private String isActive;
 
     /**
      * Creates a service with no parameter
@@ -28,6 +29,25 @@ public class Service {
         this.serviceName = serviceName;
         this.serviceDescription = serviceDescription;
     }
+
+    public String getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(String isActive) {
+        this.isActive = isActive;
+    }
+
+    public Service(int serviceId, String serviceName, String serviceBrief, String serviceDescription, String serviceImage, String isActive) {
+        this.serviceId = serviceId;
+        this.serviceName = serviceName;
+        this.serviceBrief = serviceBrief;
+        this.serviceDescription = serviceDescription;
+        this.serviceImage = serviceImage;
+        this.isActive = isActive;
+    }
+    
+    
 
     public Service(int serviceId, String serviceName) {
         this.serviceId = serviceId;
