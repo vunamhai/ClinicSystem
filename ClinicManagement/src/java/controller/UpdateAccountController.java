@@ -3,9 +3,6 @@
  * CMS
  * CLINIC MANAGEMENT SYSTEM
  *
- * Record of change:
- * DATE            Version          AUTHOR           DESCRIPTION
- * 2022-02-08      1.0              HuongHTT         First Implement 
  */
 package controller;
 
@@ -31,7 +28,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * Bugs: none
  *
- * @author Hoang Thi Thu Huong
  */
 public class UpdateAccountController extends HttpServlet {
 
@@ -40,7 +36,6 @@ public class UpdateAccountController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         int userId = Integer.parseInt(request.getParameter("userId"));
         int roleId = Integer.parseInt(request.getParameter("roleId"));
-        String username = request.getParameter("username");
         String email = request.getParameter("email");
         String fullName = request.getParameter("fullName");
 
@@ -57,7 +52,6 @@ public class UpdateAccountController extends HttpServlet {
         User u = new User();
         u.setRoleId(roleId);
         u.setUserId(userId);
-        u.setUsername(username);
         u.setEmail(email);
         u.setFullName(fullName);
         u.setBirthDate(sqlDate);

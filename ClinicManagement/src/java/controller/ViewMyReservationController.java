@@ -1,7 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 2022, FPT University
+ * CMS
+ * CLINIC MANAGEMENT SYSTEM
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR           DESCRIPTION
+ * 2022-02-08      1.0                 tungnt           First Implement 
  */
 package controller;
 
@@ -19,17 +23,28 @@ import javax.servlet.http.HttpSession;
 import util.Utils;
 
 /**
+ * * -This class uses function getMyReservations in
+ * <code>dao.impl.reservationDAOImpl</code> to get an
+ * <code>java.util.ArrayList</code> object that contains a series of
+ * <code>entity.Reservation</code>
  *
- * @author uyenc
+ * @author Nguyen Thanh Tung
  */
 public class ViewMyReservationController extends HttpServlet {
 
     /**
+     * -Use function getReservationByDoctorId in
+     * <code>dao.impl.ReservationDAOImpl</code> to get an
+     * <code>java.util.ArrayList</code> object that contains a series of
+     * <code>entity.Reservation</code><br>
+     *
+     * -Set parameters: dayOfWeek, startWeek, endWeek, viewDay, reservations<br>
+     * -Finally forward user to the <code>viewMyReservation.jsp</code> page.
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
      * @param request servlet request
-     * @param response servlet response
+     * @param response servlet response is
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */

@@ -25,8 +25,28 @@ import javax.naming.NamingException;
  */
 public class DBContext {
 
-   
-    private Connection connection;
+    private String HOST = "localhost";
+    private String PORT = "1433";
+    private String DATABASE_NAME = "CMS01";
+    private String USERNAME = "sa";
+    private String PASSWORD = "123";
+    
+    /**
+     * Lookup context parameters
+     */
+    public DBContext() {
+        try {
+            InitialContext initialContext = new InitialContext();
+            HOST = (String) initialContext.lookup("java:comp/env/host");
+            PORT = (String) initialContext.lookup("java:comp/env/port");
+            DATABASE_NAME = (String) initialContext.lookup("java:comp/env/database-name");
+            USERNAME = (String) initialContext.lookup("java:comp/env/username");
+            PASSWORD = (String) initialContext.lookup("java:comp/env/password");
+        } catch (NamingException ex) {
+            Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 
     /**
      * Create a connection to database
@@ -36,19 +56,19 @@ public class DBContext {
      * @throws Exception
      */
     public Connection getConnection() {
+        Connection connection = null;
         try {
-            //Change the username password and url to connect your own database
-            String username = "sa";
-            String password = "123";
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=ClinicManagement";
+            String url = "jdbc:sqlserver://" + HOST + ":"
+                    + PORT + ";databaseName=" + DATABASE_NAME;
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            connection = DriverManager.getConnection(url, username, password);
+            connection = DriverManager.getConnection(url, USERNAME, PASSWORD);
+            return connection;
         } catch (ClassNotFoundException | SQLException ex) {
+
             Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return connection;
     }
-
 
     /**
      * Close a connection from database
