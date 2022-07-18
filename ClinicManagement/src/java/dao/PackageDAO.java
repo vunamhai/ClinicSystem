@@ -5,7 +5,7 @@
  */
 package dao;
 
-import entity.ServicePackage;
+import model.ServicePackage;
 import java.util.List;
 
 /**

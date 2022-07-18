@@ -10,7 +10,7 @@
 package dao;
 
 import static config.Configuration.PAGE_SIZE;
-import entity.Examination;
+import model.Examination;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;

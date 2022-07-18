@@ -1,10 +1,10 @@
 
 package dao;
 
-import entity.Account;
-import entity.Doctor;
-import entity.Pagination;
-import entity.User;
+import model.Account;
+import model.Doctor;
+import model.Pagination;
+import model.User;
 import java.util.List;
 
 

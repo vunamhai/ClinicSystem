@@ -5,8 +5,8 @@
  */
 package dao;
 
-import entity.Account;
-import entity.Blog;
+import model.Account;
+import model.Blog;
 import java.util.ArrayList;
 import java.util.List;
 
