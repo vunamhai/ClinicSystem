@@ -5,6 +5,7 @@
  */
 package dao;
 
+import entity.BookScheduleDTO;
 import entity.CustomerReservation;
 import entity.Pagination;
 import entity.Reservation;
@@ -22,6 +23,8 @@ public interface ReservationDAO {
     public ArrayList<Reservation> getReservationsByDay(String viewDay, int serviceId);
 
     public Pagination<CustomerReservation> getAllCustomerReservation(int pageIndex, int pageSize, int userId, String status);
+
+    public Pagination<BookScheduleDTO> getAllReservation(int pageIndex, int pageSize);
 
     /**
      * - Get reservation information by doctor id

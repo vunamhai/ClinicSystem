@@ -7,6 +7,7 @@ package dao.impl;
 
 import context.DBContext;
 import dao.ReservationDAO;
+import entity.BookScheduleDTO;
 import entity.CustomerReservation;
 import entity.Pagination;
 import entity.Reservation;
@@ -214,6 +215,94 @@ public class ReservationDAOImpl extends DBContext implements ReservationDAO {
             if (id > 0) {
                 countPreparedStatement.setInt(1, id);
             }
+            countResultSet = countPreparedStatement.executeQuery();
+            if (countResultSet.next()) {
+                // get and return count total services
+                return countResultSet.getInt(1);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            closeResultSet(countResultSet);
+            closePreparedStatement(countPreparedStatement);
+            closeConnection(connecion);
+        }
+        return 0;
+    }
+
+    @Override
+    public Pagination<BookScheduleDTO> getAllReservation(int pageIndex, int pageSize) {
+       Pagination<BookScheduleDTO> pagination = new Pagination<>();
+        List<BookScheduleDTO> bookScheduleDTOs = new ArrayList<>();
+        String sql = "SELECT *\n"
+                + "                    FROM (SELECT ROW_NUMBER() OVER ( ORDER BY full_name )\n"
+                + "                    AS RowNum, u.full_name, s.service_name, p.package_title, r.reservation_id, r.request_examination_date, r.reservation_date, r.medical_request, r.reservation_status from reservations r\n"
+                + "				  join users u\n"
+                + "				  on r.customer_id = u.user_id\n"
+                + "				  join services s\n"
+                + "				  on r.service_id = s.service_id\n"
+                + "				  join packages p\n"
+                + "				  on r.package_id = p.package_id\n"
+                + "				  where r.reservation_status = N'Chờ duyệt') \n"
+                + "                    AS RowConstrainedResult\n"
+                + "                    WHERE   RowNum >= ?\n"
+                + "                        AND RowNum <= ?\n"
+                + "                    ORDER BY RowNum";
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = getConnection(); //get connection
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, (pageIndex - 1) * pageSize);
+            ps.setInt(2, (pageIndex - 1) * pageSize + pageSize);
+            rs = ps.executeQuery();
+            /**
+             * set attributes for doctors from result set then add its to result
+             * list
+             */
+            int totalItem = countReservation();
+            pagination.setCurrentPage(pageIndex);
+            pagination.setItemPerPage(pageSize);
+            pagination.setTotalItem(totalItem);
+            while (rs.next()) {
+                BookScheduleDTO reservation = new BookScheduleDTO();
+                reservation.setReservationId(rs.getInt("reservation_id"));
+                reservation.setPatientName(rs.getString("full_name"));
+                reservation.setService(rs.getString("service_name"));
+                reservation.setPackageService(rs.getString("package_title"));
+                reservation.setRequestDate(rs.getDate("request_examination_date"));
+                reservation.setConfirmDate(rs.getDate("reservation_date"));
+                reservation.setMedicalRequest(rs.getString("medical_request"));
+                reservation.setStatus(rs.getString("reservation_status"));
+                bookScheduleDTOs.add(reservation);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(ReservationDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            /**
+             * close result set, prepared statement and connection by
+             * corresponding order
+             */
+        } finally {
+            this.closeResultSet(rs);
+            this.closePreparedStatement(ps);
+            this.closeConnection(con);
+        }
+        pagination.setData(bookScheduleDTOs);
+        return pagination;
+    }
+
+    private int countReservation() {
+      Connection connecion = null;
+        PreparedStatement countPreparedStatement = null;
+        ResultSet countResultSet = null;
+        try {
+            connecion = getConnection();
+            String sql = "select COUNT(*) from reservations  where reservation_status = N'Chờ duyệt'";
+            countPreparedStatement = connecion.prepareStatement(sql);
+
             countResultSet = countPreparedStatement.executeQuery();
             if (countResultSet.next()) {
                 // get and return count total services
