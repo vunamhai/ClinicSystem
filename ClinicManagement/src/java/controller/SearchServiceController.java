@@ -7,7 +7,7 @@ package controller;
 
 import dao.ServiceDAO;
 import dao.impl.ServiceDAOImpl;
-import model.Service;
+import entity.Service;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;

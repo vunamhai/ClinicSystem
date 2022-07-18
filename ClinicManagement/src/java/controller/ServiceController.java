@@ -7,8 +7,8 @@ package controller;
 
 import dao.ServiceDAO;
 import dao.impl.ServiceDAOImpl;
-import model.Pagination;
-import model.ServiceDTO;
+import entity.Pagination;
+import entity.ServiceDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;

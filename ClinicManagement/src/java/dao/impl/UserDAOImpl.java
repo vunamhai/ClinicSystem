@@ -2,10 +2,10 @@ package dao.impl;
 
 import context.DBContext;
 import dao.UserDAO;
-import model.Account;
-import model.Pagination;
-import model.User;
-import model.Doctor;
+import entity.Account;
+import entity.Pagination;
+import entity.User;
+import entity.Doctor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.DoctorDTO;
 
 
 public class UserDAOImpl extends DBContext implements UserDAO {
@@ -576,9 +575,5 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             closePreparedStatement(preparedStatement);
             closeConnection(connecion);
         }
-    }
-    
-    public static void main(String[] args) {
-      
     }
 }

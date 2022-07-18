@@ -3,7 +3,7 @@ package dao.impl;
 
 import context.DBContext;
 import dao.FeedbackReplyDAO;
-import model.FeedbackReply;
+import entity.FeedbackReply;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

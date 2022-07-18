@@ -11,7 +11,7 @@ package controller;
 
 import dao.UserDAO;
 import dao.impl.UserDAOImpl;
-import model.User;
+import entity.User;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

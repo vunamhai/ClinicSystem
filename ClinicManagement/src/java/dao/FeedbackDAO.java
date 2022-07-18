@@ -1,9 +1,9 @@
 package dao;
 
-import model.FeedbackDTO;
-import model.Feedback;
-import model.FeedbackReply;
-import model.Pagination;
+import entity.FeedbackDTO;
+import entity.Feedback;
+import entity.FeedbackReply;
+import entity.Pagination;
 import java.sql.Date;
 import java.util.List;
 

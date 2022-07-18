@@ -13,9 +13,9 @@ package dao;
 //import entity.ServiceDTO;
 //import entity.Pagination;
 
-import model.Pagination;
-import model.Service;
-import model.ServiceDTO;
+import entity.Pagination;
+import entity.Service;
+import entity.ServiceDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

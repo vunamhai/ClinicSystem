@@ -7,9 +7,9 @@ package controller;
 
 import dao.UserDAO;
 import dao.impl.UserDAOImpl;
-import model.Account;
-import model.Pagination;
-import model.User;
+import entity.Account;
+import entity.Pagination;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;

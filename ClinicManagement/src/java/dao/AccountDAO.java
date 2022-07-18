@@ -9,11 +9,11 @@
  */
 package dao;
 
-import model.Accounts;
-import model.Booking;
-import model.Doctor;
-import model.Feedback;
-import model.Role;
+import entity.Accounts;
+import entity.Booking;
+import entity.Doctor;
+import entity.Feedback;
+import entity.Role;
 import java.util.List;
 
 

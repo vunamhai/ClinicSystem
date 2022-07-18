@@ -7,7 +7,7 @@ package controller;
 
 import dao.FeedbackReplyDAO;
 import dao.impl.FeedbackReplyDAOImpl;
-import model.FeedbackReply;
+import entity.FeedbackReply;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;

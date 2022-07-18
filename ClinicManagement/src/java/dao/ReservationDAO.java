@@ -1,12 +1,12 @@
 
 package dao;
 
-import model.BookScheduleDTO;
-import model.CustomerReservation;
-import model.Pagination;
-import model.Reservation;
-import model.ReservationDTO;
-import model.User;
+import entity.BookScheduleDTO;
+import entity.CustomerReservation;
+import entity.Pagination;
+import entity.Reservation;
+import entity.ReservationDTO;
+import entity.User;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;

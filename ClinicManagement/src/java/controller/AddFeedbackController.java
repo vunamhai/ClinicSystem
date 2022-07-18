@@ -7,8 +7,8 @@ package controller;
 
 import dao.FeedbackDAO;
 import dao.impl.FeedbackDAOImpl;
-import model.Feedback;
-import model.User;
+import entity.Feedback;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;

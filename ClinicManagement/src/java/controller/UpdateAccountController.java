@@ -8,7 +8,7 @@ package controller;
 
 import dao.UserDAO;
 import dao.impl.UserDAOImpl;
-import model.User;
+import entity.User;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;

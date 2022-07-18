@@ -5,28 +5,23 @@
  */
 package controller;
 
-import dao.ReservationDAO;
-import dao.ServiceDAO;
-import dao.impl.ReservationDAOImpl;
-import dao.impl.ServiceDAOImpl;
-import entity.Reservation;
-import entity.Service;
-import entity.User;
+import dao.impl.BlogDAOImpl;
+import entity.Blog;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import util.Utils;
 
 /**
  *
- * @author nguyen
+ * @author ADMIN
  */
-public class ViewAllReservationsController extends HttpServlet {
+
+public class ViewAllBlog extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,29 +34,10 @@ public class ViewAllReservationsController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-              HttpSession session = request.getSession();
-            User user = (User) session.getAttribute("user");
-            String viewDay = (request.getParameter("viewDay") != null) ? Utils.parseDateFormat(request.getParameter("viewDay").trim()) : Utils.getToday();
-            int serviceId = (request.getParameter("serviceId") != null) ? Integer.parseInt(request.getParameter("serviceId").trim()) : -1;
-            ServiceDAO serviceDAO = new ServiceDAOImpl(); // get serviceDAO object
-            ReservationDAO reservationDAO = (ReservationDAO) new ReservationDAOImpl();// get reservationDAO object
-            ArrayList<Service> services = serviceDAO.getServices();
-            ArrayList<User> doctors = reservationDAO.getDoctorsHasReservation(viewDay, serviceId);
-            ArrayList<Reservation> reservations = reservationDAO.getReservationsByDay(viewDay, serviceId);
-
-            request.setAttribute("viewDay", Utils.revertParseDateFormat(viewDay));
-            request.setAttribute("serviceId", serviceId);
-            request.setAttribute("doctors", doctors);
-            request.setAttribute("services", services);
-            request.setAttribute("reservations", reservations);
-            request.getRequestDispatcher("jsp/viewAllReservation.jsp").forward(request, response);
-        } catch (Exception e) {
-            request.setAttribute("errorMessage", "Không thể tải dữ liệu từ cơ sở dữ liệu");
-            request.setAttribute("exceptionMessage", e.getMessage());
-            request.getRequestDispatcher("jsp/error.jsp").forward(request, response);
-        }
+        BlogDAOImpl blog =new BlogDAOImpl();
+        ArrayList<Blog> listBlog =  blog.getAllBlogs() ;
+        request.setAttribute("listBlog", listBlog);
+        request.getRequestDispatcher("./jsp/ViewAllBlog.jsp").forward(request, response);
         }
     
 
@@ -105,3 +81,4 @@ public class ViewAllReservationsController extends HttpServlet {
     }// </editor-fold>
 
 }
+

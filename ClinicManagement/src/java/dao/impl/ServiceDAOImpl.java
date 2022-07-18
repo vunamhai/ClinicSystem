@@ -11,10 +11,12 @@ package dao.impl;
 
 import context.DBContext;
 import dao.ServiceDAO;
-import model.Pagination;
-import model.Service;
-import model.ServiceDTO;
-import model.ViewServiceX;
+import entity.Pagination;
+//import entity.ServiceDTO;
+//import entity.Pagination;
+import entity.Service;
+import entity.ServiceDTO;
+import entity.ViewServiceX;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

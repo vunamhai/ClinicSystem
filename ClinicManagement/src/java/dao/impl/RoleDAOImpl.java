@@ -7,8 +7,8 @@ package dao.impl;
 
 import context.DBContext;
 import dao.RoleDAO;
-import model.Role;
-import model.User;
+import entity.Role;
+import entity.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
