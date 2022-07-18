@@ -6,6 +6,7 @@ import model.Doctor;
 import model.Pagination;
 import model.User;
 import java.util.List;
+import model.DoctorDTO;
 
 
 public interface UserDAO {
@@ -47,4 +48,6 @@ public interface UserDAO {
     void updatePassword(String username, String password);
 
     User getUserByEmail(String email);
+    
+    public Pagination<DoctorDTO> getAllDoctors(int pageIndex, int pageSize, String search);
 }

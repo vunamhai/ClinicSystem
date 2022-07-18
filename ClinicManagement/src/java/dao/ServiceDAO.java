@@ -64,7 +64,7 @@ public interface ServiceDAO {
      * -It is a <code>java.util.ArrayList</code> object
      * @throws SQLException when <code>java.sql.SQLException</code> occurs.
      */
-    public ArrayList<Service> getServices() throws SQLException;
+    public ArrayList<Service> getServices();
 
     public int addService(Service service);
 
