@@ -1,20 +1,25 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 2022, FPT University
+ * CMS
+ * CLINIC MANAGEMENT SYSTEM
+ *
  */
 package entity;
 
 import java.sql.Date;
 
 /**
+ * The class contains attributes and getter,setter for information of [User]
+ * object <br>
+ * The getter will throw an attribute of [User] object<br>
+ * The setter will set an attribute of [User] object<br>
  *
- * @author uyenc
  */
 public class User {
 
     private int userId;
     private int roleId;
+    private String role;
     private int serviceId;
     private String username;
     private String email;
@@ -25,6 +30,7 @@ public class User {
     private String phone;
     private String address;
     private String avatarImage;
+    private boolean isActive;
 
     /**
      * Create an instance of <code>User</code> object
@@ -154,7 +160,6 @@ public class User {
         this.avatarImage = avatarImage;
         this.userId = id;
     }
-
     /**
      * Create an instance of <code>User</code> object with value of attributes
      * of <code>User</code>
@@ -371,4 +376,21 @@ public class User {
     public void setAvatarImage(String avatarImage) {
         this.avatarImage = avatarImage;
     }
+
+    public boolean isIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+    
 }
