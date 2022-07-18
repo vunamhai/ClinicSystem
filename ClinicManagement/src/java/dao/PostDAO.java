@@ -5,8 +5,9 @@
  */
 package dao;
 
-import entity.PostEntity;
+import model.PostEntity;
 import java.util.List;
+import model.Pagination;
 
 public interface PostDAO {
 
@@ -15,4 +16,6 @@ public interface PostDAO {
     List<PostEntity> searchPost(String value);
 
     PostEntity getPostById(int id);
+
+    public Pagination<PostEntity> getAllPosts(int pageIndex, int pageSize, String search);
 }

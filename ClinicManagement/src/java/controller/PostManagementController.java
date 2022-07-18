@@ -5,22 +5,23 @@
  */
 package controller;
 
-import dao.BlogDAO;
-import dao.impl.BlogDAOImpl;
+import dao.PostDAO;
+import dao.impl.PostDAOImpl;
+import model.Pagination;
+import model.PostEntity;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author ADMIN
+ * @author Administrator
  */
-
-public class DeleteBlogController extends HttpServlet {
+public class PostManagementController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,11 +34,43 @@ public class DeleteBlogController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         response.setContentType("text/html;charset=UTF-8");
-        int id = Integer.parseInt(request.getParameter("id"));
-        BlogDAO BlogDAO = new BlogDAOImpl();
-        BlogDAO.deleteBlog(id);
-       request.getRequestDispatcher("./jsp/viewAllBlog.jsp").forward(request, response);
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        
+        String page = request.getParameter("page");
+        String search = request.getParameter("search");
+        if (search == null) {
+            search = "";
+        }
+
+        int pageIndex = 1;
+        if (page != null) {
+            try {
+                pageIndex = Integer.parseInt(page);
+                if (pageIndex == -1) {
+                    pageIndex = 1;
+                }
+            } catch (Exception e) {
+                pageIndex = 1;
+            }
+        } else {
+            pageIndex = 1;
+        }
+
+        request.getSession().setAttribute("page", pageIndex);
+
+        int pageSize = 5;
+        PostDAO postDAO = new PostDAOImpl();
+        if (request.getSession().getAttribute("page") != null) {
+            pageIndex = Integer.parseInt(request.getSession().getAttribute("page").toString());
+        }
+        Pagination<PostEntity> post = postDAO.getAllPosts(pageIndex, pageSize, search);
+       
+
+        request.setAttribute("post", post);
+        request.setAttribute("search", search);
+
+        request.getRequestDispatcher("./jsp/postManagementList.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -67,6 +100,7 @@ public class DeleteBlogController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
     }
 
     /**

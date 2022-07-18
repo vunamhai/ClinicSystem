@@ -7,7 +7,7 @@ package controller;
 
 import dao.UserDAO;
 import dao.impl.UserDAOImpl;
-import entity.User;
+import model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;

@@ -5,7 +5,7 @@
  */
 package dao;
 
-import entity.Role;
+import model.Role;
 import java.util.List;
 
 /**

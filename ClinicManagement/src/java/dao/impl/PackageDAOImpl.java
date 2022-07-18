@@ -7,9 +7,9 @@ package dao.impl;
 
 import context.DBContext;
 import dao.PackageDAO;
-import entity.Pagination;
-import entity.Service;
-import entity.ServicePackage;
+import model.Pagination;
+import model.Service;
+import model.ServicePackage;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

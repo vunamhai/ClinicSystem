@@ -1,10 +1,10 @@
 
 package dao;
 
-import entity.Account;
-import entity.Doctor;
-import entity.Pagination;
-import entity.User;
+import model.Account;
+import model.Doctor;
+import model.Pagination;
+import model.User;
 import java.util.List;
 
 
@@ -22,6 +22,7 @@ public interface UserDAO {
      * @throws SQLException when <code>java.sql.SQLException</code> occurs.
      */
     Pagination<User> getAllActiveAccount(int pageIndex, int pageSize, String search);
+    
     Pagination<User> getAllAccount(int pageIndex, int pageSize, String search);
 
     void deleteAccount(int id);

@@ -1,5 +1,5 @@
 
-package entity;
+package model;
 
 import java.sql.Date;
 
