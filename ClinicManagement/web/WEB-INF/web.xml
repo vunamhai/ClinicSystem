@@ -36,6 +36,10 @@
         <servlet-name>UpdatePostController</servlet-name>
         <servlet-class>controller.UpdatePostController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeletePostController</servlet-name>
+        <servlet-class>controller.DeletePostController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -199,6 +203,10 @@
     <servlet-mapping>
         <servlet-name>UpdatePostController</servlet-name>
         <url-pattern>/UpdatePostController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletePostController</servlet-name>
+        <url-pattern>/DeletePostController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

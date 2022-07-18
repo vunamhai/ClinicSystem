@@ -153,4 +153,26 @@ public class PostDAOImpl extends DBContext implements PostDAO {
         return "success";
     }
 
+    @Override
+    public void deletePostById(int id) {
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try {
+            connecion = getConnection();
+            // Get data
+            preparedStatement
+                    = connecion.prepareStatement(" DELETE FROM [dbo].[posts]\n"
+                            + "      WHERE id = ?");
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
+    }
+
 }

@@ -17,4 +17,6 @@ public interface PostDAO {
     PostEntity getPostById(int id);
     
     public String updatePostByManager(PostEntity p);
+
+    public void deletePostById(int id);
 }
