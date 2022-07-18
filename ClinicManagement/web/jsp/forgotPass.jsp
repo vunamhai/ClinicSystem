@@ -27,11 +27,20 @@
                                 <form class="px-md-2" action="/ClinicManagement/ForgotPasswordController" method="get">
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="form3Example1q">Email<span class="text-danger"> *</span></label>
-                                        <input type="text" id="form3Example1q" name="email" class="form-control"  maxlength="30" required />
+                                        <input type="text" id="form3Example1q" name="email" class="form-control"  maxlength="30" required />                                        
+                                        <c:if test="${message != null}"> 
+                                            <div style="color: red"> ${message}</div>
+                                        </c:if>
                                     </div>
-                                    <button type="submit" class="btn btn-success btn-lg mb-1">Đổi mật khẩu</button>
+
+                                    <button type="submit" class="btn btn-success btn-lg mb-1" style="margin-left: 125px;">Đổi mật khẩu</button>
+
                                 </form>
-                                <div style="color: red"> ${message}</div>
+
+                                <c:if test="${message != null}"> 
+                                    <p class="text-center"> Bệnh nhân mới?<a  href="jsp/Register.jsp">Đăng ký</a></p>
+                                </c:if>
+
                             </div>
                         </div>
                     </div>
