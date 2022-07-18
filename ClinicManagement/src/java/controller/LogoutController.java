@@ -1,11 +1,7 @@
 /*
- * Copyright(C) 2022, FPT University
- * CMS
- * CLINIC MANAGEMENT SYSTEM
- *
- * Record of change:
- * DATE            Version             AUTHOR           DESCRIPTION
- * 2022-02-11      1.0                 namnv           First Implement 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller;
 
@@ -19,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author nguye
+ * @author uyenc
  */
 public class LogoutController extends HttpServlet {
 
@@ -38,7 +34,6 @@ public class LogoutController extends HttpServlet {
         HttpSession session = request.getSession();
         session.invalidate();
         request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
