@@ -1,29 +1,24 @@
 /*
- * Copyright(C) 2022, FPT University
- * CMS
- * CLINIC MANAGEMENT SYSTEM
- *
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller;
 
-import dao.RoleDAO;
 import dao.UserDAO;
-import dao.impl.RoleDAOImpl;
 import dao.impl.UserDAOImpl;
-import entity.Account;
-import entity.Pagination;
-import entity.Role;
-import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-public class GetAllAccountController extends HttpServlet {
+/**
+ *
+ * @author Nam Ngo
+ */
+public class UpdateStatusAccountController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,47 +29,15 @@ public class GetAllAccountController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    /**
-     * Use function getAllAccount in <code>dao.impl.UserDAOImpl</code> to get a
-     * <code>java.util.List</code> object that contains a series of
-     * <code>entity.Account</code><br>
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String page = request.getParameter("page");
-        String search = request.getParameter("search");
-        boolean isSearch=false;
-        if (search == null||search=="") {
-            search = "";
-            isSearch=false;
-        }
-        else{
-            isSearch=true;
-        }
-        int pageIndex = 1;
-        if (page != null) {
-            try {
-                pageIndex = Integer.parseInt(page);
-                if (pageIndex == -1) {
-                    pageIndex = 1;
-                }
-            } catch (Exception e) {
-                pageIndex = 1;
-            }
-        } else {
-            pageIndex = 1;
-        }
-        int pageSize = 5;
+        int userId = Integer.parseInt(request.getParameter("userId"));
+        boolean status=Boolean.parseBoolean(request.getParameter("status"));
         UserDAO userDAO = new UserDAOImpl();
-        RoleDAO roleDAO = new RoleDAOImpl();
-        List<Role> roles= roleDAO.getAllRole();
-        Pagination<User> users = userDAO.getAllActiveAccount(pageIndex, pageSize, search);
-        request.setAttribute("roles", roles);
-        request.setAttribute("users", users);
-        request.setAttribute("search", search);
-        request.setAttribute("isSearch", isSearch);
-        request.getRequestDispatcher("./jsp/viewAllAccount.jsp").forward(request, response);
+        userDAO.updateStatusAccount(userId, status);
+        ViewStatusAccountController viewStatusAccountController = new ViewStatusAccountController();
+        viewStatusAccountController.processRequest(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

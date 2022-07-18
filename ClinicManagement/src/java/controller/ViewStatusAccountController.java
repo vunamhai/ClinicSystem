@@ -1,29 +1,27 @@
 /*
- * Copyright(C) 2022, FPT University
- * CMS
- * CLINIC MANAGEMENT SYSTEM
- *
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller;
 
-import dao.RoleDAO;
 import dao.UserDAO;
-import dao.impl.RoleDAOImpl;
 import dao.impl.UserDAOImpl;
 import entity.Account;
 import entity.Pagination;
-import entity.Role;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-public class GetAllAccountController extends HttpServlet {
+/**
+ *
+ * @author Nam Ngo
+ */
+public class ViewStatusAccountController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,11 +31,6 @@ public class GetAllAccountController extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     */
-    /**
-     * Use function getAllAccount in <code>dao.impl.UserDAOImpl</code> to get a
-     * <code>java.util.List</code> object that contains a series of
-     * <code>entity.Account</code><br>
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -67,14 +60,11 @@ public class GetAllAccountController extends HttpServlet {
         }
         int pageSize = 5;
         UserDAO userDAO = new UserDAOImpl();
-        RoleDAO roleDAO = new RoleDAOImpl();
-        List<Role> roles= roleDAO.getAllRole();
-        Pagination<User> users = userDAO.getAllActiveAccount(pageIndex, pageSize, search);
-        request.setAttribute("roles", roles);
+        Pagination<User> users = userDAO.getAllAccount(pageIndex, pageSize, search);
         request.setAttribute("users", users);
         request.setAttribute("search", search);
         request.setAttribute("isSearch", isSearch);
-        request.getRequestDispatcher("./jsp/viewAllAccount.jsp").forward(request, response);
+        request.getRequestDispatcher("./jsp/viewStatusAccount.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
