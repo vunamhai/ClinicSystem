@@ -7,6 +7,7 @@ package dao;
 
 import model.PostEntity;
 import java.util.List;
+import model.Pagination;
 
 public interface PostDAO {
 
@@ -17,4 +18,10 @@ public interface PostDAO {
     PostEntity getPostById(int id);
     
     public String updatePostByManager(PostEntity p);
+
+    public void deletePostById(int id);
+
+     public int addPost(PostEntity post);
+
+    public Pagination<PostEntity> getAllPosts(int pageIndex, int pageSize, String search);
 }
