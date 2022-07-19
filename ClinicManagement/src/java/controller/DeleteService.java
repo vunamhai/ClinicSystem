@@ -5,6 +5,7 @@
  */
 package controller;
 
+import dao.ServiceDAO;
 import dao.impl.ServiceDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author nguyen
+ * @author uyenc
  */
 public class DeleteService extends HttpServlet {
 
@@ -31,11 +32,12 @@ public class DeleteService extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        String idService = request.getParameter("id");
-        ServiceDAOImpl sdi = new ServiceDAOImpl();
-        sdi.deleteService(Integer.parseInt(idService));
-        response.sendRedirect("ServiceManagementList");
+        int id = Integer.parseInt(request.getParameter("service_id"));
+        
+        ServiceDAO serviceDAO = new ServiceDAOImpl();
+        serviceDAO.deleteService(id);
+        ServiceManagementController controller = new ServiceManagementController();
+        controller.processRequest(request, response);
 
     } 
 
