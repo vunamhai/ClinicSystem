@@ -52,6 +52,14 @@
         <servlet-name>ConfirmReservationController</servlet-name>
         <servlet-class>controller.ConfirmReservationController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PackageManagementController</servlet-name>
+        <servlet-class>controller.PackageManagementController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdatePackageServiceManagementController</servlet-name>
+        <servlet-class>controller.UpdatePackageServiceManagementController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -231,6 +239,14 @@
     <servlet-mapping>
         <servlet-name>ConfirmReservationController</servlet-name>
         <url-pattern>/ConfirmReservationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PackageManagementController</servlet-name>
+        <url-pattern>/PackageManagementController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdatePackageServiceManagementController</servlet-name>
+        <url-pattern>/UpdatePackageServiceManagementController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
