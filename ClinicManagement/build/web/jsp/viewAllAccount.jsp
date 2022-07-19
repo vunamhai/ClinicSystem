@@ -1,12 +1,4 @@
-<!--
- * Copyright(C) 2022, FPT University
- * CMS
- * CLINIC MANAGEMENT SYSTEM
- *
- * Record of change:
- * DATE            Version          AUTHOR           DESCRIPTION
- * 2022-03-10      1.0              HuongHTT         First Implement 
-/-->
+
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -25,7 +17,7 @@
 
     </head>
     <header>
-        <jsp:include page="./components/adminHeader.jsp" />
+        <jsp:include page="./components/adminHeader.jsp"/>
     </header>
     <body>
         <div class="container-fluid">
@@ -90,7 +82,8 @@
                                 <p class="text-center">Không có dữ liệu</p>
                             </div>
                         </c:if>
-                        <c:if test="${users.totalPage > 1}">
+                        <c:if test="${isSearch==false}">
+                            <c:if test="${users.totalPage > 1}">
                             <div class="row">
                                 <div class="col-12 text-center">
                                     <ul>
@@ -111,6 +104,31 @@
                                     </ul>
                                 </div>
                             </div>
+                        </c:if>
+                        </c:if>
+                        <c:if test="${isSearch}">
+                            <c:if test="${users.totalPage > 1}">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <ul>
+                                        <c:if test="${users.currentPage > 1}">
+                                            <a class="btn btn-light" href="GetAllAccountController?search=${search}&&page=${users.currentPage-1}">Trang trước</a>
+                                        </c:if>
+                                        <c:forEach var="pageNumber" begin="1" end="${users.totalPage}" step="1">
+                                            <c:if test="${users.currentPage == pageNumber}">
+                                                <a class="btn btn-success" href="#">${pageNumber}</a>
+                                            </c:if>
+                                            <c:if test="${users.currentPage != pageNumber}">
+                                                <a class="btn btn-light" href="GetAllAccountController?search=${search}&&page=${pageNumber}">${pageNumber}</a>
+                                            </c:if>
+                                        </c:forEach>
+                                        <c:if test="${users.currentPage < users.totalPage}">
+                                            <a class="btn btn-light" href="GetAllAccountController?search=${search}&&page=${users.currentPage+1}">Trang sau</a>
+                                        </c:if>
+                                    </ul>
+                                </div>
+                            </div>
+                        </c:if>
                         </c:if>
                     </nav>
                 </div>
@@ -136,10 +154,9 @@
                                 <div class="form-group col-md-6">
                                     <label for="inputRole">Chức vụ</label>
                                     <select id="inputRole" class="form-control" name="roleId">
-                                        <option value="1">Admin</option>
-                                        <option value="2">Manager</option>
-                                        <option value="3">Doctor</option>
-                                        <option selected value="4">Customer</option>
+                                        <c:forEach items="${roles}" var="r">
+                                            <option value="${r.roleId}">${r.roleName}</option>
+                                        </c:forEach>
                                     </select>                                    
                                 </div>
                                 <div class="form-group col-md-6">
@@ -150,7 +167,7 @@
 
                             <div class="form-group">
                                 <label for="inputAccount">password</label>
-                                <input type="text" class="form-control" name="password" required maxlength="20">
+                                <input type="password" class="form-control" name="password" required maxlength="20" pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" title="Password minimum eight characters, at least one letter and one number">
                             </div>
 
                             <div class="form-group">
@@ -159,7 +176,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="email" class="form-control" name="email" required maxlength="20">
+                                <input type="email" class="form-control" name="email" required maxlength="20" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="email must be in the following: characters@characters.domain">
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
@@ -168,7 +185,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Số điện thoại</label>
-                                    <input type="text" class="form-control" name="phone" required maxlength="20">
+                                    <input type="text" class="form-control" name="phone" required maxlength="20" pattern="[0-9]{10}" title="Phone must be 10 digit">
 
                                 </div>
                                 <div class="form-group col-md-6">
@@ -212,35 +229,35 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="inputRole">Chức vụ</label>
-                                        <input type="text" class="form-control" name="inputRole" value="${user.role}">
+                                        <input type="text" class="form-control" name="inputRole" value="${user.role}" disabled>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="inputAccount">Tài khoản</label>
-                                        <input type="text" class="form-control" name="inputAccount" value="${user.username}">
+                                        <input type="text" class="form-control" name="inputAccount" value="${user.username}" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label>Họ và tên</label>
-                                    <input type="text" class="form-control" name="inputName" value="${user.fullName}">
+                                    <input type="text" class="form-control" name="inputName" value="${user.fullName}" disabled>
                                 </div>
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input type="email" class="form-control" name="inputEmail" value="${user.email}">
+                                    <input type="email" class="form-control" name="inputEmail" value="${user.email}" disabled>
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label>Địa chỉ</label>
-                                        <input type="text" class="form-control" name="inputAddress" value="${user.address}">
+                                        <input type="text" class="form-control" name="inputAddress" value="${user.address}" disabled>
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Số điện thoại</label>
-                                        <input type="text" class="form-control" name="inputPhone" value="${user.phone}">
+                                        <input type="text" class="form-control" name="inputPhone" value="${user.phone}" disabled>
 
                                     </div>
 
                                     <div class="form-group col-md-6">
                                         <label>Giới tính</label>
-                                        <input type="text" class="form-control" id="inputGender" value="${user.gender == "true" ? "Nam" : "Nữ"}">
+                                        <input type="text" class="form-control" id="inputGender" value="${user.gender == "true" ? "Nam" : "Nữ"}" disabled>
                                     </div>
                                 </div>
                             </form>
@@ -296,16 +313,15 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="inputRole">Chức vụ</label>
-                                        <select id="inputRole" class="form-control" name="roleId" value="${user.role}">
-                                            <option value="1">Admin</option>
-                                            <option value="2">Manager</option>
-                                            <option value="3">Doctor</option>
-                                            <option value="4">Customer</option>
+                                        <select id="inputRole" class="form-control" name="roleId">
+                                            <c:forEach items="${roles}" var="r">
+                                                <option value="${r.roleId}" ${user.roleId==r.roleId?"selected":""}>${r.roleName}</option>
+                                            </c:forEach>
                                         </select>                                    
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="inputAccount">Tài khoản</label>
-                                        <input type="text" class="form-control" required maxlength="20" name="username" value="${user.username}">
+                                        <input type="text" class="form-control" required maxlength="20" name="username" value="${user.username}" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -314,7 +330,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input type="email" class="form-control"required maxlength="30" name="email" value="${user.email}">
+                                    <input type="email" class="form-control"required maxlength="30" name="email" value="${user.email}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="email must be in the following: characters@characters.domain">
                                 </div>
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
@@ -323,7 +339,7 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label>Số điện thoại</label>
-                                        <input type="text" class="form-control"required maxlength="15" name="phone" value="${user.phone}">
+                                        <input type="text" class="form-control"required maxlength="15" name="phone" value="${user.phone}" pattern="[0-9]{10}" title="Phone must be 10 digit">
 
                                     </div>
                                     <div class="form-group col-md-6">

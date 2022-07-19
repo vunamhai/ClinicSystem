@@ -1,8 +1,3 @@
-<%-- 
-    Document   : login.jsp
-    Created on : Feb 11, 2022, 9:03:56 PM
-    Author     : nguye
---%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

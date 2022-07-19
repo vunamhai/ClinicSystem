@@ -3,16 +3,16 @@
  * CMS
  * CLINIC MANAGEMENT SYSTEM
  *
- * Record of change:
- * DATE            Version          AUTHOR           DESCRIPTION
- * 2022-02-08      1.0              HuongHTT         First Implement 
  */
 package controller;
 
+import dao.RoleDAO;
 import dao.UserDAO;
+import dao.impl.RoleDAOImpl;
 import dao.impl.UserDAOImpl;
-import entity.Accounts;
+import entity.Account;
 import entity.Pagination;
+import entity.Role;
 import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,14 +22,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * This class uses <code>dao.impl.UserDAOImpl</code> functions:<br>
- * getAllAccount to get all account from database.
- *
- * Bugs: none
- *
- * @author Hoang Thi Thu Huong
- */
+
 public class GetAllAccountController extends HttpServlet {
 
     /**
@@ -51,8 +44,13 @@ public class GetAllAccountController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String page = request.getParameter("page");
         String search = request.getParameter("search");
-        if (search == null) {
+        boolean isSearch=false;
+        if (search == null||search=="") {
             search = "";
+            isSearch=false;
+        }
+        else{
+            isSearch=true;
         }
         int pageIndex = 1;
         if (page != null) {
@@ -69,9 +67,13 @@ public class GetAllAccountController extends HttpServlet {
         }
         int pageSize = 5;
         UserDAO userDAO = new UserDAOImpl();
-        Pagination<Accounts> users = userDAO.getAllAccount(pageIndex, pageSize, search);
+        RoleDAO roleDAO = new RoleDAOImpl();
+        List<Role> roles= roleDAO.getAllRole();
+        Pagination<User> users = userDAO.getAllActiveAccount(pageIndex, pageSize, search);
+        request.setAttribute("roles", roles);
         request.setAttribute("users", users);
         request.setAttribute("search", search);
+        request.setAttribute("isSearch", isSearch);
         request.getRequestDispatcher("./jsp/viewAllAccount.jsp").forward(request, response);
     }
 

@@ -5,15 +5,13 @@
  */
 package controller;
 
-import dao.ServiceDAO;
 import dao.UserDAO;
-import dao.impl.ServiceDAOImpl;
 import dao.impl.UserDAOImpl;
-import entity.Doctor;
-import entity.Service;
+import entity.Account;
+import entity.Pagination;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,9 +19,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Nguyen
+ * @author Nam Ngo
  */
-public class ViewMyReservation extends HttpServlet {
+public class ViewStatusAccountController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,21 +35,37 @@ public class ViewMyReservation extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         int id = Integer.parseInt(request.getParameter("Id"));
-        String page = request.getParameter("page").toString();
-        request.getSession().setAttribute("page", page);
-        ServiceDAO serviceDAO = new ServiceDAOImpl();
-        Service service = serviceDAO.getById(id);
-
-        UserDAO userDAO = new UserDAOImpl();
-        List<Doctor> doctors = userDAO.getDoctorByServiceId(service.getServiceId());
-        request.setAttribute("service", service);
-        request.setAttribute("doctors", doctors);
-        List<Doctor> allDoctors = userDAO.getAllDoctor();
-        request.setAttribute("allDoctors", allDoctors);
-        request.getRequestDispatcher("./jsp/serviceManagementDetail.jsp").forward(request, response);
+        String page = request.getParameter("page");
+        String search = request.getParameter("search");
+        boolean isSearch=false;
+        if (search == null||search=="") {
+            search = "";
+            isSearch=false;
         }
-    
+        else{
+            isSearch=true;
+        }
+        int pageIndex = 1;
+        if (page != null) {
+            try {
+                pageIndex = Integer.parseInt(page);
+                if (pageIndex == -1) {
+                    pageIndex = 1;
+                }
+            } catch (Exception e) {
+                pageIndex = 1;
+            }
+        } else {
+            pageIndex = 1;
+        }
+        int pageSize = 5;
+        UserDAO userDAO = new UserDAOImpl();
+        Pagination<User> users = userDAO.getAllAccount(pageIndex, pageSize, search);
+        request.setAttribute("users", users);
+        request.setAttribute("search", search);
+        request.setAttribute("isSearch", isSearch);
+        request.getRequestDispatcher("./jsp/viewStatusAccount.jsp").forward(request, response);
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
