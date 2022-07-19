@@ -3,7 +3,7 @@ package controller;
 
 import dao.ReservationDAO;
 import dao.impl.ReservationDAOImpl;
-import entity.Reservation;
+import model.Reservation;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

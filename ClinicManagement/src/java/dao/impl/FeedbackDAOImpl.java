@@ -2,11 +2,11 @@ package dao.impl;
 
 import context.DBContext;
 import dao.FeedbackDAO;
-import entity.Account;
-import entity.FeedbackDTO;
-import entity.Feedback;
-import entity.FeedbackReply;
-import entity.Pagination;
+import model.Account;
+import model.FeedbackDTO;
+import model.Feedback;
+import model.FeedbackReply;
+import model.Pagination;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;

@@ -5,8 +5,9 @@
  */
 package dao;
 
-import entity.ServicePackage;
+import model.ServicePackage;
 import java.util.List;
+import model.Pagination;
 
 /**
  *
@@ -14,4 +15,14 @@ import java.util.List;
  */
 public interface PackageDAO {
     List<ServicePackage> getAllPackage();
+     public Pagination<ServicePackage> getPackageService(int pageIndex, int pageSize);
+      public void updatePackageService(ServicePackage sp);
+
+    public void getById(int serviceId);
+
+    public void deletePackageService(int id);
+
+    public ServicePackage getByIdPackage(int id);
+    
+     public void addPackageService(ServicePackage sp);
 }
