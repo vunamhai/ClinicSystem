@@ -42,7 +42,7 @@ public class ServiceDAOImpl extends DBContext implements ServiceDAO {
     /**
      * Logger for system
      */
-//    private static Logger logger = Logger.getLogger(UserDAOImpl.class.getName());
+    private static Logger logger = Logger.getLogger(UserDAOImpl.class.getName());
     /**
      * Method: Get All Service
      *
@@ -497,18 +497,19 @@ public void updateService(int id, String name, String description) {
 
  @Override
     public void deleteService(int id) {
+        logger.log(Level.INFO, "Delete services with id");
         Connection connecion = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
         try {
             connecion = getConnection();
             // Get data
-            preparedStatement = connecion.prepareStatement("update services set isActive = 0 where service_id = ?");
+            preparedStatement = connecion.prepareStatement(" update services set isActive = 0 where service_id = ?");
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
-//            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             closePreparedStatement(preparedStatement);
             closeConnection(connecion);
