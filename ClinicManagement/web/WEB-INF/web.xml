@@ -80,6 +80,10 @@
         <servlet-name>CancelPendingReservationController</servlet-name>
         <servlet-class>controller.CancelPendingReservationController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateDoctorProfileController</servlet-name>
+        <servlet-class>controller.UpdateDoctorProfileController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -287,6 +291,10 @@
     <servlet-mapping>
         <servlet-name>CancelPendingReservationController</servlet-name>
         <url-pattern>/CancelPendingReservationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateDoctorProfileController</servlet-name>
+        <url-pattern>/UpdateDoctorProfileController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
