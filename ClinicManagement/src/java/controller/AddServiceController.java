@@ -9,7 +9,7 @@ import dao.ServiceDAO;
 import dao.UserDAO;
 import dao.impl.ServiceDAOImpl;
 import dao.impl.UserDAOImpl;
-import entity.Service;
+import model.Service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

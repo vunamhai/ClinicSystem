@@ -11,7 +11,7 @@ package controller;
 
 import dao.UserDAO;
 import dao.impl.UserDAOImpl;
-import entity.User;
+import model.User;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.DateFormat;

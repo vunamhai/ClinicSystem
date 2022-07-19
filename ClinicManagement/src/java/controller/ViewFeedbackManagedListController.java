@@ -3,9 +3,9 @@ package controller;
 
 import dao.FeedbackDAO;
 import dao.impl.FeedbackDAOImpl;
-import entity.FeedbackDTO;
-import entity.FeedbackReply;
-import entity.Pagination;
+import model.FeedbackDTO;
+import model.FeedbackReply;
+import model.Pagination;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
 
 package dao;
 
-import entity.FeedbackReply;
+import model.FeedbackReply;
 
 public interface FeedbackReplyDAO {
     

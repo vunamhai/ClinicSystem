@@ -13,9 +13,9 @@ package dao;
 //import entity.ServiceDTO;
 //import entity.Pagination;
 
-import entity.Pagination;
-import entity.Service;
-import entity.ServiceDTO;
+import model.Pagination;
+import model.Service;
+import model.ServiceDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -64,7 +64,7 @@ public interface ServiceDAO {
      * -It is a <code>java.util.ArrayList</code> object
      * @throws SQLException when <code>java.sql.SQLException</code> occurs.
      */
-    public ArrayList<Service> getServices() throws SQLException;
+    public ArrayList<Service> getServices();
 
     public int addService(Service service);
 
