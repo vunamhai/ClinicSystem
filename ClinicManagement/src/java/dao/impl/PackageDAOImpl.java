@@ -183,7 +183,24 @@ public class PackageDAOImpl extends DBContext implements PackageDAO {
 
     @Override
     public void deletePackageService(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        logger.log(Level.INFO, "Delete services with id");
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try {
+            connecion = getConnection();
+            // Get data
+            preparedStatement = connecion.prepareStatement(" DELETE FROM [dbo].[packages]\n"
+                    + "      WHERE package_id=?");
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(PackageDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
     }
 
     @Override
@@ -193,7 +210,24 @@ public class PackageDAOImpl extends DBContext implements PackageDAO {
 
     @Override
     public void addPackageService(ServicePackage sp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Connection connecion = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        try {
+            connecion = getConnection();
+            // Get data
+            preparedStatement = connecion.prepareStatement("insert into packages (package_title, examination_duration, price) values ( ? , ? ,?);");
+            preparedStatement.setString(1, sp.getPackageTitle());
+            preparedStatement.setString(2, sp.getExaminationDuration());
+            preparedStatement.setFloat(3, sp.getPrice());
+            preparedStatement.executeUpdate();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Logger.getLogger(PackageDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closePreparedStatement(preparedStatement);
+            closeConnection(connecion);
+        }
     }
     
 }

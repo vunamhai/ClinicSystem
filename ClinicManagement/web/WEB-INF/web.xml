@@ -60,6 +60,14 @@
         <servlet-name>UpdatePackageServiceManagementController</servlet-name>
         <servlet-class>controller.UpdatePackageServiceManagementController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddNewPackageController</servlet-name>
+        <servlet-class>controller.AddNewPackageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeletePackageServiceController</servlet-name>
+        <servlet-class>controller.DeletePackageServiceController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -247,6 +255,14 @@
     <servlet-mapping>
         <servlet-name>UpdatePackageServiceManagementController</servlet-name>
         <url-pattern>/UpdatePackageServiceManagementController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewPackageController</servlet-name>
+        <url-pattern>/AddNewPackageController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletePackageServiceController</servlet-name>
+        <url-pattern>/DeletePackageServiceController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

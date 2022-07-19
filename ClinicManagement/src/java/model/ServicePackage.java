@@ -28,7 +28,11 @@ public class ServicePackage {
         this.packageTitle = packageTitle;
         this.examinationDuration = examinationDuration;
     }
-
+  public ServicePackage(String packageTitle, String examinationDuration, float price) {
+        this.packageTitle = packageTitle;
+        this.examinationDuration = examinationDuration;
+        this.price = price;
+    }
     public ServicePackage(int packageId, String packageTitle, String examinationDuration, float price) {
         this.packageId = packageId;
         this.packageTitle = packageTitle;
