@@ -97,7 +97,9 @@
                                 <td>
                                     <div class="action">
                                         <a class="bi bi-eye" href="ServiceManagementDetailController?id=${service.serviceId}"></a> 
-                                        <a class="bi bi-pencil-fill" href="UpdateService?id=${service.serviceId}"></a> 
+                                        <button class="btn-only-ic" data-bs-target="#editServiceModal">
+                                            <a href="ServiceManagementDetailController?Id=${service.serviceId}&page=${page}" class="bi bi-pencil-fill"></a>
+                                        </button>
                                         <a class="bi bi-trash-fill" href="DeleteService?id=${service.serviceId}"></a>
                                 </td>
                             </tr>
@@ -203,7 +205,28 @@
                 </div>
 
                 <!-- Select Doctor Modal -->
-
+   <div class="modal fade" id="selectDoctorModal" data-bs-keyboard="false" tabindex="-1"
+                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-doctor">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div class="non-block"></div>
+                            <h5 class="modal-title" id="staticBackdropLabel">Chọn bác sĩ</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="list-doctors">
+                                <div class="list-doctors-scroll">
+                                </div>
+                            </div>
+                            <div class="col-auto mx-auto text-center">
+                                <button id="addDoc" type="button" class="btn btn-primary">Thêm</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
                 <!-- Delete Service Modal -->
 
@@ -221,7 +244,208 @@
             crossorigin="anonymous"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
 
-            <script src="./index.js"></script>
+            <script> function renderDoctorListView (doctors, from) {
+                                                            $(from + ' .list-doctors-scroll').html('')
+                                                                    doctors?.length > 0 && doctors.forEach(doctor => {
+                                                                    let doctorCard = document.createElement('div')
+                                                                            doctorCard.setAttribute('class', 'doctor-card px0')
+                                                                            doctorCard.setAttribute('id', doctor?.username)
+
+                                                                            let imgCover = document.createElement('div')
+                                                                            imgCover.setAttribute('class', 'img-cover')
+                                                                            let img = document.createElement('img')
+                                                                            img.src = doctor?.image
+                                                                            img.alt = ''
+                                                                            imgCover.appendChild(img)
+
+                                                                            let divName = document.createElement('div')
+                                                                            divName.setAttribute('class', 'd-flex flex-column my-2 mx-3')
+                                                                            divName.innerHTML = doctor.name + '<br/>' + ' Id ' + doctor.username
+                                                                            let button = document.createElement('button')
+                                                                            button.setAttribute('type', 'button')
+                                                                            button.setAttribute('class', 'btn-only-ic')
+                                                                            button.onclick = function() {
+                                                                            showDeleteDoctorModal({doctor, from})
+                                                                            }
+                                                                    let icon = document.createElement('i')
+                                                                            icon.setAttribute('class', 'bi bi-dash-circle-fill')
+                                                                            button.appendChild(icon)
+
+                                                                            doctorCard.appendChild(imgCover)
+                                                                            doctorCard.appendChild(divName)
+                                                                            doctorCard.appendChild(button)
+
+                                                                            $(from + ' .list-doctors-scroll').append(doctorCard)
+                                                                    })
+                                                            }
+
+                                                            function showSelectDoctorModal(from) {
+                                                            const selectDoc = new bootstrap.Modal(document.getElementById('selectDoctorModal'), {})
+                                                                    console.log('123')
+
+                                                                    let doctors = [];
+            <c:forEach items="${doctors}" var="doctor"  varStatus="counter" >
+                                                            doctors.push({
+                                                            name: '${doctor.name}',
+                                                                    username: '${doctor.id}',
+                                                                    image: '${doctor.image}'
+                                                            });
+            </c:forEach>
+
+
+                                                            let doctorCards = $(from + ' .list-doctors-scroll > .doctor-card')
+                                                                    let listId = []
+                                                                    if (doctorCards?.length > 0) {
+                                                            for (let i = 0; i < doctorCards?.length; i++) {
+                                                            listId.push(doctorCards[i].id)
+                                                            }
+                                                            }
+                                                            renderDoctorListSelect(doctors, from, listId)
+                                                                    const buttonAddDoc = $('#selectDoctorModal #addDoc')
+                                                                    buttonAddDoc[0].onclick = function() {
+                                                            console.log(doctors);
+                                                            addDoctorBackToList(doctors, from)
+                                                                    selectDoc.hide()
+                                                            }
+                                                            selectDoc.show()
+                                                            }
+
+                                                            function renderDoctorListSelect (doctors, from, listActive) {
+                                                            console.log(listActive)
+                                                                    $('#selectDoctorModal .list-doctors-scroll').html('')
+                                                                    setTimeout(() => {
+                                                                    doctors?.length > 0 && doctors.forEach(doctor => {
+                                                                    let doctorCard = document.createElement('div')
+                                                                            doctorCard.setAttribute('class', 'doctor-card px0')
+                                                                            if (listActive.includes(doctor.username)) doctorCard.classList.add('active')
+                                                                            doctorCard.setAttribute('id', doctor?.username)
+                                                                            doctorCard.onclick = function () {
+                                                                            selectDoctor(doctor?.username)
+                                                                            }
+
+                                                                    let imgCover = document.createElement('div')
+                                                                            imgCover.setAttribute('class', 'img-cover')
+                                                                            let img = document.createElement('img')
+                                                                            img.src = doctor?.image
+                                                                            img.alt = ''
+                                                                            imgCover.appendChild(img)
+
+                                                                            let divName = document.createElement('div')
+                                                                            let doctornameSpan = document.createElement('span')
+                                                                            let usernameSpan = document.createElement('span')
+                                                                            divName.setAttribute('class', 'd-flex flex-column my-2 mx-3')
+                                                                            doctornameSpan.innerHTML = doctor?.name
+                                                                            usernameSpan.innerHTML = 'Id ' + doctor.username
+                                                                            divName.appendChild(doctornameSpan)
+                                                                            divName.appendChild(usernameSpan)
+
+                                                                            let button = document.createElement('button')
+                                                                            button.setAttribute('type', 'button')
+                                                                            button.setAttribute('class', 'btn-checked')
+
+                                                                            let icon = document.createElement('i')
+                                                                            icon.setAttribute('class', 'bi bi-check-circle-fill')
+                                                                            button.appendChild(icon)
+
+                                                                            doctorCard.appendChild(imgCover)
+                                                                            doctorCard.appendChild(divName)
+                                                                            doctorCard.appendChild(button)
+
+                                                                            $('#selectDoctorModal .list-doctors-scroll').append(doctorCard)
+                                                                    })
+                                                                    }, 100)
+                                                            }
+                                                            function showDeleteServiceModal(id, serviceName) {
+                                                            $('#deleteServiceModal #service_name').html(serviceName)
+                                                                    const deleteModal = new bootstrap.Modal(document.getElementById('deleteServiceModal'), {})
+                                                                    deleteModal.show()
+                                                                    const button = $('#deleteServiceModal #delete-btn')[0].onclick = function () {
+                                                            deleteServiceSubmit(id)
+                                                            }
+                                                            }
+
+                                                            function showDeleteDoctorModal({doctor, from}) {
+                                                            $('#deleteDoctorModal .doctor-name').html(doctor?.name)
+                                                                    $('#deleteDoctorModal .btn-confirm')[0].onclick = function() {
+                                                            deleteDoctor(doctor?.username, from)
+                                                            }
+                                                            const deleteDocModal = new bootstrap.Modal(document.getElementById('deleteDoctorModal'), {})
+                                                                    deleteDocModal.show()
+                                                            }
+                                                            
+                                                            const setError = (element, message) => {
+                                                                const inputControl = element.parentElement;
+                                                                const errorDisplay = inputControl.querySelector('.error');
+
+                                                                errorDisplay.innerText = message;
+                                                                inputControl.classList.add('error');
+                                                                inputControl.classList.remove('success')
+                                                            }
+                                                                         function editServiceSubmit () {
+                                                            const idModal = '#editServiceModal'
+                                                                    const service_id = $(idModal + ' #serviceCode').val()
+                                                                    const service_name = $(idModal + ' #serviceName').val()
+                                                                    const service_desc = $(idModal + ' #serviceDesc').val()
+
+                                                                    let doctorCards = $(idModal + ' .list-doctors-scroll > .doctor-card')
+                                                                    let listId = []
+                                                                    if (doctorCards?.length > 0) {
+                                                            for (let i = 0; i < doctorCards?.length; i++) {
+                                                            listId.push(doctorCards[i].id)
+                                                            }
+                                                            }
+                                                            const body = {
+                                                            service_id,
+                                                                    service_name,
+                                                                    service_desc,
+                                                                    doctors: listId
+                                                            }
+                                                            const stringListId = listId.join('-')
+                                                                    window.location.href = 'UpdateServiceController?service_name=' + service_name +
+                                                                    '&service_id=' + service_id +
+                                                                    '&service_desc=' + service_desc +
+                                                                    '&list_doctors=' + stringListId
+                                                                    const modal = new bootstrap.Modal(document.getElementById('editServiceModal'), {})
+                                                                    modal.hide()
+                                                            }
+                                                          function selectDoctor(username) {
+                                                            const selectingDoctor = $('#selectDoctorModal .list-doctors-scroll > .doctor-card#' + username)
+                                                                    if (selectingDoctor.length <= 0) return;
+                                                            console.log('abcxz')
+                                                                    if (selectingDoctor[0].classList.contains('active')) {
+                                                            selectingDoctor[0].classList.remove('active')
+                                                            } else {
+                                                            selectingDoctor[0].classList.add('active')
+                                                            }
+
+                                                            const activeDoctors = $('#selectDoctorModal .active')
+                                                                    const buttonAddDoc = $('#selectDoctorModal #addDoc')
+                                                                    if (activeDoctors.length === 0) {
+                                                            buttonAddDoc[0].setAttribute('disabled', true)
+                                                            } else {
+                                                            buttonAddDoc[0].removeAttribute('disabled')
+                                                            }
+                                                            }
+                                                            function deleteDoctor(username, from) {
+                                                            $(from + ' .list-doctors-scroll > .doctor-card#' + username).remove()
+                                                            }
+
+                                                            function addDoctorBackToList(doctors, from) {
+                                                            const activeDoctors = $('#selectDoctorModal .active')
+                                                                    let listId = []
+                                                                    if (activeDoctors?.length > 0) {
+                                                            for (let i = 0; i < activeDoctors?.length; i++) {
+                                                            listId.push(activeDoctors[i].id)
+                                                            }
+                                                            }
+                                                            let tempList = doctors.filter(item => {
+                                                            return listId.includes(item.username)
+                                                            })
+                                                                    console.log()
+                                                                    renderDoctorListView(tempList, from)
+                                                            }
+
+</script>
 
 
     </body>
