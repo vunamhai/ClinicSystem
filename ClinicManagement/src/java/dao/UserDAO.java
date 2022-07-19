@@ -1,12 +1,11 @@
 
 package dao;
 
-import model.Account;
-import model.Doctor;
-import model.Pagination;
-import model.User;
+import entity.Account;
+import entity.Doctor;
+import entity.Pagination;
+import entity.User;
 import java.util.List;
-import model.DoctorDTO;
 
 
 public interface UserDAO {
@@ -44,10 +43,9 @@ public interface UserDAO {
     User getUserById(int id);
 
     boolean checkUsernameAndEmail(String username, String email);
+    boolean checkUsername(String username);
 
     void updatePassword(String username, String password);
 
     User getUserByEmail(String email);
-    
-    public Pagination<DoctorDTO> getAllDoctors(int pageIndex, int pageSize, String search);
 }
