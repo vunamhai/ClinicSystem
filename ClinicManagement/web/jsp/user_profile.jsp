@@ -1,4 +1,3 @@
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -107,7 +106,7 @@
                             <form action="../UpdateCustomerProfileController" method="POST">
                                 <!-- Form Group (username)-->
                                 <div class="mb-3">
-                                    <label class="small mb-1" for="inputUsername">Username</label>
+                                    <label class="small mb-1" for="inputUsername">Username (how your name will appear to other users on the site)</label>
                                     <input class="form-control" id="inputUsername" type="text" placeholder="Enter your username" value="${user.username}" disabled name="username">
                                 </div>
                                 <!-- Form Row-->
