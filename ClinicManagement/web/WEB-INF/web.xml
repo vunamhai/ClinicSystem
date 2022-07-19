@@ -24,7 +24,10 @@
         <servlet-name>ViewAllReservationsController</servlet-name>
         <servlet-class>controller.ViewAllReservationsController</servlet-class>
     </servlet>
-    <servlet>
+<servlet>
+        <servlet-name>BookReservationController</servlet-name>
+        <servlet-class>controller.BookReservationController</servlet-class>
+    </servlet>
         <servlet-name>ServiceController</servlet-name>
         <servlet-class>controller.ServiceController</servlet-class>
     </servlet>
@@ -221,6 +224,10 @@
         <url-pattern>/ViewMyReservationController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>BookReservationController</servlet-name>
+        <url-pattern>/BookReservationController</url-pattern>
+        </servlet-mapping>
+        <servlet-mapping>
         <servlet-name>ServiceController</servlet-name>
         <url-pattern>/ServiceController</url-pattern>
     </servlet-mapping>
