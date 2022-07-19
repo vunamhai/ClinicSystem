@@ -28,6 +28,10 @@
         <servlet-name>ViewCustomerReservationsList</servlet-name>
         <servlet-class>controller.ViewCustomerReservationsList</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BookReservationController</servlet-name>
+        <servlet-class>controller.BookReservationController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/HomeController</url-pattern>
@@ -191,6 +195,10 @@
     <servlet-mapping>
         <servlet-name>ViewMyReservationController</servlet-name>
         <url-pattern>/ViewMyReservationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookReservationController</servlet-name>
+        <url-pattern>/BookReservationController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
