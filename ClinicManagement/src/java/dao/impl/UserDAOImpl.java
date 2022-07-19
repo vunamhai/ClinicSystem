@@ -2,10 +2,10 @@ package dao.impl;
 
 import context.DBContext;
 import dao.UserDAO;
-import model.Account;
-import model.Pagination;
-import model.User;
-import model.Doctor;
+import entity.Account;
+import entity.Pagination;
+import entity.User;
+import entity.Doctor;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.DoctorDTO;
 
 
 public class UserDAOImpl extends DBContext implements UserDAO {
@@ -87,7 +86,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         List<User> users = new ArrayList<>();
         try {
             connecion = getConnection();
-            int totalItem = count(); // 
+            int totalItem = countActiveAccount(); // 
             pagination.setCurrentPage(pageIndex);
             pagination.setItemPerPage(pageSize);
             pagination.setTotalItem(totalItem);
@@ -131,13 +130,34 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         return pagination;
     }
 
-    public int count() {
+    public int countActiveAccount() {
         Connection connecion = null;
         PreparedStatement countPreparedStatement = null;
         ResultSet countResultSet = null;
         try {
             connecion = getConnection();
             countPreparedStatement = connecion.prepareStatement("SELECT COUNT(user_id) AS id FROM users where is_active = 1");
+            countResultSet = countPreparedStatement.executeQuery();
+            if (countResultSet.next()) {
+                // get and return count total services
+                return countResultSet.getInt(1);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            closeResultSet(countResultSet);
+            closePreparedStatement(countPreparedStatement);
+            closeConnection(connecion);
+        }
+        return 0;
+    }
+    public int countAllAccount() {
+        Connection connecion = null;
+        PreparedStatement countPreparedStatement = null;
+        ResultSet countResultSet = null;
+        try {
+            connecion = getConnection();
+            countPreparedStatement = connecion.prepareStatement("SELECT COUNT(user_id) AS id FROM users");
             countResultSet = countPreparedStatement.executeQuery();
             if (countResultSet.next()) {
                 // get and return count total services
@@ -508,7 +528,7 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         List<User> users = new ArrayList<>();
         try {
             connecion = getConnection();
-            int totalItem = count(); // 
+            int totalItem = countAllAccount(); // 
             pagination.setCurrentPage(pageIndex);
             pagination.setItemPerPage(pageSize);
             pagination.setTotalItem(totalItem);
@@ -577,52 +597,22 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             closeConnection(connecion);
         }
     }
-    
-     public String getString(String msg) {
-        StringBuilder output = new StringBuilder();
 
-        String[] tempStr = msg.trim().split("\\s+");
-        for (String string : tempStr) {
-            output.append(string).append(" ");
-        }
-        output.deleteCharAt(output.length() - 1);
-        return output.toString();
-    }
-    
-     public Pagination<DoctorDTO> getAllDoctors(int pageIndex, int pageSize, String msg) {
-        Pagination<DoctorDTO> pagination = new Pagination<>();
+    @Override
+    public boolean checkUsername(String username) {
         logger.log(Level.INFO, "Login Controller");
         Connection connecion = null;
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
-        List<DoctorDTO> doctors = new ArrayList<>();
-        String search = getString(msg);
+
         try {
             connecion = getConnection();
-            int totalItem = countDoctor(); // 
-            pagination.setCurrentPage(pageIndex);
-            pagination.setItemPerPage(pageSize);
-            pagination.setTotalItem(totalItem);
             // Get data
-            preparedStatement = connecion.prepareStatement("SELECT * \n"
-                    + "FROM  ( SELECT  ROW_NUMBER() OVER ( ORDER BY  c.user_id ) AS RowNum,  c.user_id, c.full_name, c.is_active, s.service_name\n"
-                    + "FROM services s join users c  on c.service_id = s.service_id and c.is_active = 1 and c.role_id = 3 and (c.full_name like N'%" + search + "%' or s.service_name like N'%" + search + "%'))\n"
-                    + "AS RowConstrainedResult\n"
-                    + "WHERE   RowNum >= ?\n"
-                    + "AND RowNum <= ?\n"
-                    + "ORDER BY RowNum");
-            preparedStatement.setInt(1, (pageIndex - 1) * pageSize);
-            preparedStatement.setInt(2, (pageIndex - 1) * pageSize + pageSize);
+            preparedStatement = connecion.prepareStatement("select * from users where username = ?");
+            preparedStatement.setNString(1, username);
             rs = preparedStatement.executeQuery();
             while (rs.next()) {
-                DoctorDTO user = new DoctorDTO();
-                user.setUserId(rs.getInt("user_id"));
-                user.setFullName(rs.getString("full_name"));
-                user.setIs_active(rs.getInt("is_active"));
-                user.setServicename(rs.getString("service_name"));
-                user.setUserId(rs.getInt("user_id"));
-
-                doctors.add(user);
+                return true;
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -632,29 +622,6 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             closePreparedStatement(preparedStatement);
             closeConnection(connecion);
         }
-        pagination.setData(doctors);
-        return pagination;
-    }
-
-    public int countDoctor() {
-        Connection connecion = null;
-        PreparedStatement countPreparedStatement = null;
-        ResultSet countResultSet = null;
-        try {
-            connecion = getConnection();
-            countPreparedStatement = connecion.prepareStatement("SELECT COUNT(user_id) AS id FROM users where is_active = 1 and role_id = 3");
-            countResultSet = countPreparedStatement.executeQuery();
-            if (countResultSet.next()) {
-                // get and return count total services
-                return countResultSet.getInt(1);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            closeResultSet(countResultSet);
-            closePreparedStatement(countPreparedStatement);
-            closeConnection(connecion);
-        }
-        return 0;
+        return false;
     }
 }
