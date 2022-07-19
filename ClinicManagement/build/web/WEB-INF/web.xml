@@ -25,10 +25,6 @@
         <servlet-class>controller.ViewAllReservationsController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewCustomerReservationsList</servlet-name>
-        <servlet-class>controller.ViewCustomerReservationsList</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ServiceController</servlet-name>
         <servlet-class>controller.ServiceController</servlet-class>
     </servlet>
@@ -47,6 +43,14 @@
     <servlet>
         <servlet-name>DoctorManagementController</servlet-name>
         <servlet-class>controller.DoctorManagementController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BookScheduleController</servlet-name>
+        <servlet-class>controller.BookScheduleController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConfirmReservationController</servlet-name>
+        <servlet-class>controller.ConfirmReservationController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
@@ -197,10 +201,6 @@
         <url-pattern>/ViewAllReservationsController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ViewCustomerReservationsList</servlet-name>
-        <url-pattern>/ViewCustomerReservationsList</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ViewMyReservationController</servlet-name>
         <url-pattern>/ViewMyReservationController</url-pattern>
     </servlet-mapping>
@@ -223,6 +223,14 @@
     <servlet-mapping>
         <servlet-name>DoctorManagementController</servlet-name>
         <url-pattern>/DoctorManagementController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BookScheduleController</servlet-name>
+        <url-pattern>/BookScheduleController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfirmReservationController</servlet-name>
+        <url-pattern>/ConfirmReservationController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

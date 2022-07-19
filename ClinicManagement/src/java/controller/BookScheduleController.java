@@ -6,23 +6,27 @@
 package controller;
 
 import dao.ReservationDAO;
+import dao.UserDAO;
 import dao.impl.ReservationDAOImpl;
-import model.CustomerReservation;
-import model.Pagination;
-import model.User;
+import dao.impl.UserDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.BookScheduleDTO;
+import model.Doctor;
+import model.Pagination;
+import model.User;
 
 /**
  *
- * @author nguyen
+ * @author Admin
  */
-public class ViewCustomerReservationsList extends HttpServlet {
+public class BookScheduleController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,39 +42,29 @@ public class ViewCustomerReservationsList extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
-        if (user == null) {
-            request.getRequestDispatcher("./jsp/login.jsp").forward(request, response);
-        } else {
-            String page = (request.getParameter("page") == null) ? "1" : request.getParameter("page");
-            int pageIndex = 1;
-            if (page != null) {// check page if not null
-                try {
-                    //convert page(string) to pageIndex(int)
-                    pageIndex = Integer.parseInt(page);
-                    if (pageIndex == -1) {
-                        pageIndex = 0;
-                    }
-                } catch (NumberFormatException e) {
-                    //default pageIndex = 1
+
+        String page = (request.getParameter("page") == null) ? "1" : request.getParameter("page");
+        int pageIndex = 1;
+        if (page != null) {// check page if not null
+            try {
+                //convert page(string) to pageIndex(int)
+                pageIndex = Integer.parseInt(page);
+                if (pageIndex == -1) {
                     pageIndex = 0;
                 }
-
-                String status = request.getParameter("status");
-                if (status == null || status.equals("Tất cả")) {
-                    status = "";
-                }
-
-                int pageSize = 5; // default page size
-                ReservationDAO reservationDAO = new ReservationDAOImpl();
-                Pagination<CustomerReservation> reservations = reservationDAO.getAllCustomerReservation(pageIndex, pageSize, user.getUserId(), status);
-                request.setAttribute("reservations", reservations);
-                if(status == ""){
-                    status = "Tất cả";
-                }
-                request.setAttribute("status", status);
-                request.getRequestDispatcher("./jsp/viewAllCustomerReservation.jsp").forward(request, response);
+            } catch (NumberFormatException e) {
+                //default pageIndex = 1
+                pageIndex = 0;
             }
         }
+        int pageSize = 5;
+        ReservationDAO reservationDAO = new ReservationDAOImpl();
+        Pagination<BookScheduleDTO> reservations = reservationDAO.getAllReservation(pageIndex, pageSize);
+        UserDAO userDAO = new UserDAOImpl();
+        List<Doctor> doctors = userDAO.getAllDoctor();
+        request.setAttribute("reservations", reservations);
+        request.setAttribute("doctors", doctors);
+        request.getRequestDispatcher("./jsp/showReservation.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
