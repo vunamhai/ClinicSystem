@@ -16,17 +16,18 @@
                     <li class="nav-item active">
                         <a class="nav-link py-3" href="/viewAllReservation">Xem tất danh sách đặt chỗ<span class="sr-only">(current)</span></a>
                     </li>
+                    
+                    <li class=nav-item">
+                        <a class="nav-link py-3" href="../ClinicManagement/ServiceManagementController?page=${pageIndex}">Quản lý dịch vụ</a>
+                    </li>
                     <li class="nav-item active">
-                        <a class="nav-link py-3" href="#">Xác nhận lịch đặt chỗ</a>
+                        <a class="nav-link py-3" href="../ClinicManagement/PackageManagementController?page=${pageIndex}">Gói dịch vụ</a>
                     </li>
                     <li class=nav-item">
-                        <a class="nav-link py-3" href="#">Quản lý dịch vụ</a>
+                        <a class="nav-link py-3" href="../ClinicManagement/ViewFeedbackManagedListController">Quản lý Phản hồi</a>
                     </li>
                     <li class=nav-item">
-                        <a class="nav-link py-3" href="#">Quản lý Phản hồi</a>
-                    </li>
-                    <li class=nav-item">
-                        <a class="nav-link py-3" href="#">Duyệt lịch đặt chỗ</a>
+                        <a class="nav-link py-3" href="../ClinicManagement/BookScheduleController">Duyệt lịch đặt chỗ</a>
                     </li>
                 </ul>
             </div>
