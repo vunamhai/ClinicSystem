@@ -44,8 +44,7 @@ public class ViewMyReservationController extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("user");
-            if (user != null) {
-                String viewDay = (request.getParameter("viewDay") != null) ? Utils.parseDateFormat(request.getParameter("viewDay").trim()) : Utils.getToday();
+         Day = (request.getParameter("viewDay") != null) ? Utils.parseDateFormat(request.getParameter("viewDay").trim()) : Utils.getToday();
                 String startWeek = (request.getParameter("startWeek") != null) ? (request.getParameter("startWeek").trim()) : Utils.getMondayOfThisWeek();
                 String endWeek = (request.getParameter("endWeek") != null) ? (request.getParameter("endWeek").trim()) : Utils.getSundayOfThisWeek();
                 ReservationDAO reservationDAO = new ReservationDAOImpl();
