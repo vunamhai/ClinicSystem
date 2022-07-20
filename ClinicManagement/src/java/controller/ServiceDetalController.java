@@ -50,9 +50,7 @@ public class ServiceDetalController extends HttpServlet {
         List<Doctor> doctors = userDAO.getDoctorByServiceId(service.getServiceId());
         request.setAttribute("service", service);
         request.setAttribute("doctors", doctors);
-        List<Doctor> allDoctors = userDAO.getAllDoctor();
-        request.setAttribute("allDoctors", allDoctors);
-        request.getRequestDispatcher("./jsp/editService.jsp").forward(request, response);
+      
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
