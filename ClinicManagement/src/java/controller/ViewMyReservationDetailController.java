@@ -35,9 +35,7 @@ public class ViewMyReservationDetailController extends HttpServlet {
             ReservationDAO reservationDAO = new ReservationDAOImpl();
             Reservation reservation = reservationDAO.getReservationById(reservationId);
             request.setAttribute("reservation", reservation);
-            request.getRequestDispatcher("jsp/components/viewReservationDetailPopup.jsp").forward(request, response);
-        } catch (Exception e) {
-            request.setAttribute("errorMessage", "Không thể tải dữ liệu từ cơ sở dữ liệu");
+            request.getRequestDispatcher("jsp/components/viewReservationDeta   request.setAttribute("errorMessage", "Không thể tải dữ liệu từ cơ sở dữ liệu");
             request.setAttribute("exceptionMessage", e.getMessage());
             request.getRequestDispatcher("jsp/error.jsp").forward(request, response);
         }
