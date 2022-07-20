@@ -161,23 +161,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
 
 
-        <script>
-                                            function showDeleteServiceModal(id, serviceName) {
-                                                $('#deleteServiceModal #service_name').html(serviceName)
-                                                const deleteModal = new bootstrap.Modal(document.getElementById('deleteServiceModal'), {})
-                                                deleteModal.show()
-                                                const button = $('#deleteServiceModal #delete-btn')[0].onclick = function () {
-                                                    deleteServiceSubmit(id)
-                                                }
-                                            }
-                                            function deleteServiceSubmit(id) {
-                                                window.location.href = 'DeletePackageServiceController?service_id=' + id
-                                            }
-
-
-
-
-        </script>
+   
 
     </body>
 

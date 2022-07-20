@@ -18,6 +18,7 @@ import model.Service;
 import model.ServiceDTO;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -75,6 +76,8 @@ public interface ServiceDAO {
     public void removeAllDoctor(int id);
 
     public void deleteService(int id);
+
+    public List<Service> searchServices(String search);
     
  
 }
