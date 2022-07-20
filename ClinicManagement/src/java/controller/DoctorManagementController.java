@@ -47,19 +47,7 @@ public class DoctorManagementController extends HttpServlet {
             search = "";
         }
 
-        int pageIndex = 1;
-        if (page != null) {
-            try {
-                pageIndex = Integer.parseInt(page);
-                if (pageIndex == -1) {
-                    pageIndex = 1;
-                }
-            } catch (Exception e) {
-                pageIndex = 1;
-            }
-        } else {
-            pageIndex = 1;
-        }
+   
 
         request.getSession().setAttribute("page", pageIndex);
 
