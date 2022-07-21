@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,10 +33,12 @@ public class UpdateStatusAccountController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session=request.getSession();
         int userId = Integer.parseInt(request.getParameter("userId"));
         boolean status=Boolean.parseBoolean(request.getParameter("status"));
         UserDAO userDAO = new UserDAOImpl();
         userDAO.updateStatusAccount(userId, status);
+        session.setAttribute("message", "Change successful");
         ViewStatusAccountController viewStatusAccountController = new ViewStatusAccountController();
         viewStatusAccountController.processRequest(request, response);
     }
