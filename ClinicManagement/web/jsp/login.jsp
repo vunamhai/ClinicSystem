@@ -1,5 +1,11 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%-- 
+    Document   : login.jsp
+    Created on : Feb 11, 2022, 9:03:56 PM
+    Author     : nguye
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -28,7 +34,7 @@
                                         <h3 class="mb-4">Đăng nhập</h3>
                                     </div>
                                 </div>
-                                <form action="HomeController" method="POST" class="signin-form">
+                                <form action="LoginController" method="POST" class="signin-form">
                                     <div class="form-group mt-3">
                                         <input type="text" class="form-control" required name="username" maxlength="15">
                                         <label class="form-control-placeholder" for="username">Tên đăng nhập...</label>
@@ -43,8 +49,11 @@
                                     </div>
 
                                 </form>
-                                <p class="text-center">không phải thành viên? <a  href="./jsp/Register.jsp">Đăng kí</a></p>
+                                <p class="text-center">không phải thành viên? <a  href="RegisterController">Đăng kí</a></p>
+                                <c:if test="${message != null}">
                                     <p class="text-center"><a  href="./jsp/forgotPass.jsp">Quên mật khẩu</a></p>
+                                </c:if>
+                              
                             </div>
                         </div>
                     </div>
@@ -55,10 +64,10 @@
         <script src="./assets/js/popper.js"></script>
         <script src="./assets/js/bootstrap.min.js"></script>
         <script src="./assets/js/main.js"></script>
-         <c:if test="${message != null}">
-        <script>
-            alert("Password update success!!");
-        </script>
+        <c:if test="${messageLogin != null}">
+            <script>
+                alert("Password update success!!");
+            </script>
         </c:if>
     </body>
 </html>
