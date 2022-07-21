@@ -86,7 +86,13 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         List<User> users = new ArrayList<>();
         try {
             connecion = getConnection();
-            int totalItem = countActiveAccount(); // 
+            int totalItem;
+            if(search.equals("")){
+                totalItem=countActiveAccount();
+            }
+            else {
+                totalItem=countSearchActiveAccount(search);
+            }
             pagination.setCurrentPage(pageIndex);
             pagination.setItemPerPage(pageSize);
             pagination.setTotalItem(totalItem);
@@ -161,6 +167,46 @@ public class UserDAOImpl extends DBContext implements UserDAO {
             countResultSet = countPreparedStatement.executeQuery();
             if (countResultSet.next()) {
                 // get and return count total services
+                return countResultSet.getInt(1);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            closeResultSet(countResultSet);
+            closePreparedStatement(countPreparedStatement);
+            closeConnection(connecion);
+        }
+        return 0;
+    }
+    public int countSearchActiveAccount(String search) {
+        Connection connecion = null;
+        PreparedStatement countPreparedStatement = null;
+        ResultSet countResultSet = null;
+        try {
+            connecion = getConnection();
+            countPreparedStatement = connecion.prepareStatement("SELECT COUNT(user_id) AS id FROM users where username like N'%" + search + "%' or email like N'%" + search + "%' or full_name like N'%" + search + "%' and is_active = 1");
+            countResultSet = countPreparedStatement.executeQuery();
+            if (countResultSet.next()) {
+                return countResultSet.getInt(1);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            closeResultSet(countResultSet);
+            closePreparedStatement(countPreparedStatement);
+            closeConnection(connecion);
+        }
+        return 0;
+    }
+    public int countSearchAllAccount(String search) {
+        Connection connecion = null;
+        PreparedStatement countPreparedStatement = null;
+        ResultSet countResultSet = null;
+        try {
+            connecion = getConnection();
+            countPreparedStatement = connecion.prepareStatement("SELECT COUNT(user_id) AS id FROM users where username like N'%" + search + "%' or email like N'%" + search + "%' or full_name like N'%" + search + "%'");
+            countResultSet = countPreparedStatement.executeQuery();
+            if (countResultSet.next()) {
                 return countResultSet.getInt(1);
             }
         } catch (Exception ex) {
@@ -528,7 +574,13 @@ public class UserDAOImpl extends DBContext implements UserDAO {
         List<User> users = new ArrayList<>();
         try {
             connecion = getConnection();
-            int totalItem = countAllAccount(); // 
+            int totalItem;
+            if(search.equals("")){
+                totalItem=countAllAccount();
+            }
+            else {
+                totalItem=countSearchAllAccount(search);
+            }
             pagination.setCurrentPage(pageIndex);
             pagination.setItemPerPage(pageSize);
             pagination.setTotalItem(totalItem);
