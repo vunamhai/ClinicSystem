@@ -190,7 +190,7 @@
 
             <div class="modal fade" id="edit${user.userId}">
                 <div class="modal-dialog">
-                    <form action="UpdateStatusAccountController" method="GET">
+                    <form action="UpdateStatusAccountController" method="post">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h4 class="modal-title custom_align" id="Heading">Chỉnh sửa trạng thái</h4>
