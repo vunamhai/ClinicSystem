@@ -8,7 +8,7 @@ package controller;
 
 import dao.UserDAO;
 import dao.impl.UserDAOImpl;
-import model.User;
+import entity.User;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -21,6 +21,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * This class uses <code>dao.impl.UserDAOImpl</code> functions:<br>
@@ -34,6 +35,7 @@ public class UpdateAccountController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session= request.getSession();
         int userId = Integer.parseInt(request.getParameter("userId"));
         int roleId = Integer.parseInt(request.getParameter("roleId"));
         String email = request.getParameter("email");
@@ -65,6 +67,7 @@ public class UpdateAccountController extends HttpServlet {
 
         UserDAO userDAO = new UserDAOImpl();
         userDAO.updateAccountByAdmin(u);
+        session.setAttribute("successMessage", "Update successful!");
         GetAllAccountController getAllAccountController = new GetAllAccountController();
         getAllAccountController.processRequest(request, response);
     }
