@@ -7,15 +7,16 @@ package controller;
 
 import dao.UserDAO;
 import dao.impl.UserDAOImpl;
-import model.Account;
-import model.Pagination;
-import model.User;
+import entity.Account;
+import entity.Pagination;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,6 +36,11 @@ public class ViewStatusAccountController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session=request.getSession();
+        if(session.getAttribute("message")!=null){
+            request.setAttribute("message", "Change successful!");
+        }
+        session.removeAttribute("message");
         String page = request.getParameter("page");
         String search = request.getParameter("search");
         boolean isSearch=false;
@@ -58,7 +64,7 @@ public class ViewStatusAccountController extends HttpServlet {
         } else {
             pageIndex = 1;
         }
-        int pageSize = 5;
+        int pageSize = 10;
         UserDAO userDAO = new UserDAOImpl();
         Pagination<User> users = userDAO.getAllAccount(pageIndex, pageSize, search);
         request.setAttribute("users", users);

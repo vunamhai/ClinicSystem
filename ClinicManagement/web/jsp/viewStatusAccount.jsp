@@ -29,10 +29,10 @@
             <div class="row">
                 <div class="col-md-10 mx-auto">
                     <nav class="navbar navbar-light bg-light justify-content-between">
-                        <div style="color: red">
+                        <div style="color: green">
                             ${message}
                         </div>
-                        <form class="form-inline" action="ViewStatusAccountController" method="GET">
+                        <form class="form-inline" action="ViewStatusAccountController" method="post">
                             <input class="form-control mr-sm-2"name="search" type="search" placeholder="Search" aria-label="Search" value="${search}">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
