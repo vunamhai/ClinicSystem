@@ -31,9 +31,12 @@
                         <button class="btn btn-primary btn-xs" data-title="Add" data-toggle="modal" data-target="#add" >Thêm tài khoản
                         </button>
                         <div style="color: red">
-                            ${message}
+                            ${errorMessage}
                         </div>
-                        <form class="form-inline" action="GetAllAccountController" method="GET">
+                        <div style="color: greenyellow">
+                            ${successMessage}
+                        </div>
+                        <form class="form-inline" action="GetAllAccountController" method="POST">
                             <input class="form-control mr-sm-2"name="search" type="search" placeholder="Search" aria-label="Search" value="${search}">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
@@ -185,7 +188,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Số điện thoại</label>
-                                    <input type="text" class="form-control" name="phone" required maxlength="20" pattern="[0-9]{10}" title="Phone must be 10 digit">
+                                    <input type="text" class="form-control" name="phone" required maxlength="20" pattern="[0][0-9]{9}" title="Phone must be 10 digit">
 
                                 </div>
                                 <div class="form-group col-md-6">

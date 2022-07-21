@@ -10,10 +10,10 @@ import dao.RoleDAO;
 import dao.UserDAO;
 import dao.impl.RoleDAOImpl;
 import dao.impl.UserDAOImpl;
-import model.Account;
-import model.Pagination;
-import model.Role;
-import model.User;
+import entity.Account;
+import entity.Pagination;
+import entity.Role;
+import entity.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -21,6 +21,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 public class GetAllAccountController extends HttpServlet {
@@ -42,6 +43,15 @@ public class GetAllAccountController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session= request.getSession();
+        if(session.getAttribute("errorMessage")!=null){
+            request.setAttribute("errorMessage", session.getAttribute("errorMessage"));
+        }
+        if(session.getAttribute("successMessage")!=null){
+            request.setAttribute("successMessage", session.getAttribute("successMessage"));
+        }
+        session.removeAttribute("errorMessage");
+        session.removeAttribute("successMessage");
         String page = request.getParameter("page");
         String search = request.getParameter("search");
         boolean isSearch=false;
@@ -56,16 +66,13 @@ public class GetAllAccountController extends HttpServlet {
         if (page != null) {
             try {
                 pageIndex = Integer.parseInt(page);
-                if (pageIndex == -1) {
-                    pageIndex = 1;
-                }
             } catch (Exception e) {
                 pageIndex = 1;
             }
         } else {
             pageIndex = 1;
         }
-        int pageSize = 5;
+        int pageSize = 10;
         UserDAO userDAO = new UserDAOImpl();
         RoleDAO roleDAO = new RoleDAOImpl();
         List<Role> roles= roleDAO.getAllRole();

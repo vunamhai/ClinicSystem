@@ -1,17 +1,9 @@
-/*
- * Copyright(C) 2022, FPT University
- * CMS
- * CLINIC MANAGEMENT SYSTEM
- *
- * Record of change:
- * DATE            Version          AUTHOR           DESCRIPTION
- * 2022-02-08      1.0              HuongHTT         First Implement 
- */
+
 package controller;
 
 import dao.UserDAO;
 import dao.impl.UserDAOImpl;
-import model.User;
+import entity.User;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.DateFormat;
@@ -31,9 +23,6 @@ import javax.servlet.http.HttpSession;
  * This class uses <code>dao.impl.UserDAOImpl</code> functions:<br>
  * createAccount to create an account.
  *
- * Bugs: none
- *
- * @author Hoang Thi Thu Huong
  */
 public class CreateAccountController extends HttpServlet {
 
@@ -49,6 +38,7 @@ public class CreateAccountController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session= request.getSession();
         int roleId = Integer.parseInt(request.getParameter("roleId"));
         String username = request.getParameter("username");
         String password = request.getParameter("password");
@@ -56,11 +46,6 @@ public class CreateAccountController extends HttpServlet {
         String fullName = request.getParameter("fullName");
 
         UserDAO userDAO = new UserDAOImpl();
-        if (userDAO.checkUsernameAndEmail(username.trim(), email.trim())) {
-            request.setAttribute("message", "Account existed!!!");
-            request.getRequestDispatcher("./jsp/viewAllAccount.jsp").forward(request, response);
-            return;
-        }
 
         String birthDate = request.getParameter("date");
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
@@ -86,7 +71,13 @@ public class CreateAccountController extends HttpServlet {
         }
         u.setPhone(phone);
         u.setAddress(address);
-        userDAO.createAccount(u);
+        if(userDAO.checkUsername(username)){
+            session.setAttribute("errorMessage", "User already exist! Add failed");
+        }
+        else{
+            session.setAttribute("successMessage", "Add successful!");
+            userDAO.createAccount(u);
+        }
 
         GetAllAccountController accountController = new GetAllAccountController();
         accountController.processRequest(request, response);
